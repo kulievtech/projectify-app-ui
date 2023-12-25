@@ -1,4 +1,4 @@
-import { Button, Typography } from "./design-system";
+import { Button, Typography, Input } from "./design-system";
 
 const App = () => {
     return (
@@ -13,6 +13,37 @@ const App = () => {
             <Button size="sm" color="danger" shape="circle">
                 Welcome To TypeScript
             </Button>
+            <form onSubmit={() => alert("submitted")}>
+                <Input
+                    type="email"
+                    placeholder="Email"
+                    size="md"
+                    shape="rounded"
+                    labelText="Email"
+                />
+                <Input
+                    placeholder="First Name"
+                    size="md"
+                    shape="rounded"
+                    labelText="First Name"
+                />
+                <Input
+                    placeholder="Last Name"
+                    size="md"
+                    shape="rounded"
+                    labelText="Last Name"
+                />
+                <Input
+                    placeholder="About You"
+                    size="lg"
+                    type="textarea"
+                    shape="rounded"
+                    labelText="Tell us about yourself"
+                    hintMessage="This is for your password"
+                />
+
+                <Button>Submit</Button>
+            </form>
         </div>
     );
 };
