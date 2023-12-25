@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import "./Button.css";
+import { sizeClassNames, shapeClassNames, colorClassNames } from "./classnames";
 
 type ButtonSize = "sm" | "md" | "lg";
 type ButtonShape = "rounded" | "circle";
@@ -14,24 +15,6 @@ type ButtonProps = {
     children: React.ReactNode;
 };
 
-const sizeClassNames = {
-    sm: "btn-small",
-    md: "btn-medium",
-    lg: "btn-large"
-};
-
-const shapeClassNames = {
-    rounded: "btn-rounded",
-    circle: "btn-circle"
-};
-
-const colorClassNames = {
-    primary: "btn-primary",
-    secondary: "btn-secondary",
-    text: "btn-tertiary",
-    danger: "btn-danger"
-};
-
 const Button: FC<ButtonProps> = (props) => {
     const { size, shape, color, disabled, className, children } = props;
 
@@ -41,7 +24,10 @@ const Button: FC<ButtonProps> = (props) => {
 
     const colorClassName = color !== undefined ? colorClassNames[color] : "";
 
-    const finalClassNames = `btn ${colorClassName} ${sizeClassName} ${shapeClassName} ${className}`;
+    const finalClassNames =
+        `btn ${colorClassName} ${sizeClassName} ${shapeClassName} ${
+            className || ""
+        }`.trim();
 
     return (
         <button className={finalClassNames} disabled={disabled}>
