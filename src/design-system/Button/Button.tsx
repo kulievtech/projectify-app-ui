@@ -10,6 +10,7 @@ type ButtonVariant = "contained" | "outlined" | "text";
 type ButtonProps = {
     size?: ButtonSize;
     shape?: ButtonShape;
+    fullWidth?: boolean;
     color?: ButtonColor;
     variant?: ButtonVariant;
     disabled?: boolean;
@@ -46,6 +47,7 @@ const Button: FC<ButtonProps> = (props) => {
     const {
         size,
         shape,
+        fullWidth,
         color,
         variant,
         disabled,
@@ -62,8 +64,9 @@ const Button: FC<ButtonProps> = (props) => {
 
     const variantClassName =
         variant !== undefined ? variantClassNames[variant] : "";
+    const fullWidthClassName = fullWidth ? "btn-full-width" : "";
 
-    const finalClassNames = `btn ${colorClassName} ${sizeClassName} ${shapeClassName} ${variantClassName} ${
+    const finalClassNames = `btn ${colorClassName} ${sizeClassName} ${shapeClassName} ${fullWidthClassName} ${variantClassName} ${
         className || ""
     }`;
 
