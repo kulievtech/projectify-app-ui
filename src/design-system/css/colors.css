@@ -157,4 +157,5 @@
 
     --black: #000000;
     --white: #ffffff;
+    --overlay-40: rgba(0, 0, 0, 0.4);
 }
