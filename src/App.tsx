@@ -1,47 +1,40 @@
-import { useState, useId } from "react";
-import { Button, Typography, Input, Label } from "./design-system";
+import { useState } from "react";
+import { Button, Typography, Input, Modal } from "./design-system";
 
 const App = () => {
-    const [value, setValue] = useState<string>("");
-    const [text, setText] = useState<string>("");
+    const [showModal, setShowModal] = useState<boolean>(false);
 
-    const handleOnChange = (value: string) => {
-        console.log(value);
-        setValue(value);
-    };
-
-    const handleOnChangeTextarea = (value: string) => {
-        setText(value);
-    };
     return (
         <div style={{ padding: "100px" }}>
-            <Typography variant="h5">Hello</Typography>
+            <Button onClick={() => setShowModal(true)}>Open Modal</Button>
+            <Modal show={showModal} position="right">
+                <span onClick={() => setShowModal(false)}>X</span>
+                <form
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "15px"
+                    }}
+                >
+                    <Typography variant="h6">Hello</Typography>
+                    <Input
+                        placeholder="Email"
+                        type="email"
+                        value=""
+                        onChange={(char) => console.log(char)}
+                        shape="rounded"
+                        size="lg"
+                    />
 
-            <form onSubmit={() => alert(`${value} ${text}`)} noValidate>
-                <Input
-                    type="email"
-                    placeholder="Email"
-                    size="md"
-                    shape="rounded"
-                    labelText="Email"
-                    onChange={handleOnChange}
-                    value={value}
-                />
-
-                <Input
-                    type="textarea"
-                    placeholder="About me"
-                    size="md"
-                    shape="rounded"
-                    labelText="Email"
-                    onChange={handleOnChangeTextarea}
-                    value={text}
-                />
-
-                <Button color="primary" shape="rounded">
-                    Submit
-                </Button>
-            </form>
+                    <Button
+                        color="primary"
+                        shape="rounded"
+                        onClick={() => setShowModal(false)}
+                    >
+                        Submit
+                    </Button>
+                </form>
+            </Modal>
         </div>
     );
 };
