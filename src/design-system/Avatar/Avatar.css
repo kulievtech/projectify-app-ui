@@ -1,0 +1,53 @@
+.avatar {
+    font-family: inherit;
+    font-size: var(--font-size-12);
+    font-weight: var(--font-weight-600);
+    line-height: var(--line-height-10);
+    border: none;
+    outline: none;
+
+    height: var(--space-24);
+    width: var(--space-24);
+    background-color: var(--jaguar-400);
+    color: var(--white);
+
+    transition: all 0.3s;
+}
+
+.avatar:hover {
+    cursor: pointer;
+    box-shadow: var(---shadow-xs-hover);
+}
+
+.avatar:focus {
+    box-shadow: var(---shadow-s);
+}
+
+.avatar-small {
+    font-size: var(--font-size-12);
+    line-height: var(--line-height-10);
+    height: var(--space-24);
+    width: var(--space-24);
+}
+
+.avatar-medium {
+    font-size: var(--font-size-14);
+    line-height: var(--line-height-20);
+    height: var(--space-32);
+    width: var(--space-32);
+}
+
+.avatar-large {
+    font-size: var(--font-size-16);
+    line-height: var(--line-height-24);
+    height: var(--space-40);
+    width: var(--space-40);
+}
+
+.avatar-rounded {
+    border-radius: var(--border-radius-8);
+}
+
+.avatar-circle {
+    border-radius: 50%;
+}
