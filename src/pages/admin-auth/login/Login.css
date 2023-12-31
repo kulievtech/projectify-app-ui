@@ -1,0 +1,13 @@
+.login {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-20);
+}
+
+.login__email,
+.login__password,
+.login__submit-button {
+    grid-column: 1 / 3;
+}
