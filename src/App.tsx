@@ -1,11 +1,7 @@
-import { ForgotPassword } from "./pages";
+import { MainLayout } from "./pages/components/main-layout/MainLayout";
 
 const App = () => {
-    return (
-        <>
-            <ForgotPassword />
-        </>
-    );
+    return <MainLayout> Hello</MainLayout>;
 };
 
 export { App };
