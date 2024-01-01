@@ -1,0 +1,28 @@
+.default-page-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.default-page__content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.default-page-wrapper img {
+    margin-bottom: 2.5rem;
+    height: 24rem;
+    width: auto;
+}
+
+.page-title {
+    margin-bottom: 5rem;
+}
+
+.default-page-wrapper .btn {
+    width: 90%;
+    max-width: 27rem;
+    border-radius: var(--space-16);
+}

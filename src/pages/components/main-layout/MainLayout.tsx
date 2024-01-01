@@ -8,8 +8,8 @@ type MainLayoutProps = {
 const MainLayout: FC<MainLayoutProps> = ({ children }) => {
     return (
         <main className="main-wrapper">
-            <div className="sidebar"></div>
-            <div className="main-content">{children}</div>
+            <section className="sidebar"></section>
+            <section className="main-content">{children}</section>
         </main>
     );
 };
