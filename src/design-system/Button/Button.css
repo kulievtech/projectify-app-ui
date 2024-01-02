@@ -40,6 +40,10 @@
     border-radius: var(--border-radius-8);
 }
 
+.btn-large.btn-rounded {
+    border-radius: var(--border-radius-16);
+}
+
 .btn-circle {
     border-radius: var(--border-radius-20);
 }

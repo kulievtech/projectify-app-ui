@@ -1,14 +1,7 @@
-import { Projects, Stories, TeamMembers, PersonalTasks } from "./pages";
+import { Profile } from "./pages";
 
 const App = () => {
-    return (
-        <>
-            <Projects />
-            <Stories />
-            <TeamMembers />
-            <PersonalTasks />
-        </>
-    );
+    return <Profile />;
 };
 
 export { App };
