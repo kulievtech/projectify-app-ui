@@ -2,7 +2,7 @@ import { MainLayout } from "../../components";
 import { DefaultPageWrapper } from "../../components";
 
 import "./Stories.css";
-import image from "../../../assets/images/123.svg";
+import image from "../../../assets/images/stories.svg";
 
 const stories = [
     {
@@ -25,7 +25,7 @@ const stories = [
 const Stories = () => {
     return (
         <MainLayout>
-            {!stories ? (
+            {stories ? (
                 <DefaultPageWrapper
                     imagePath={image}
                     pageTitle="You don't have any stories yet!"

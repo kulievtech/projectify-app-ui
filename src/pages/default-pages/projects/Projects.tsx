@@ -2,7 +2,7 @@ import { MainLayout } from "../../components";
 import { DefaultPageWrapper } from "../../components";
 
 import "./Projects.css";
-import image from "../../../assets/images/123.svg";
+import image from "../../../assets/images/projects.svg";
 
 const projects = [
     {
@@ -25,7 +25,7 @@ const projects = [
 const Projects = () => {
     return (
         <MainLayout>
-            {!projects ? (
+            {projects ? (
                 <DefaultPageWrapper
                     imagePath={image}
                     pageTitle="You don't have any projects yet!"

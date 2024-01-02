@@ -2,7 +2,7 @@ import { MainLayout } from "../../components";
 import { DefaultPageWrapper } from "../../components";
 
 import "./PersonalTasks.css";
-import image from "../../../assets/images/123.svg";
+import image from "../../../assets/images/personal-tasks.svg";
 
 const personalTasks = [
     {
@@ -25,7 +25,7 @@ const personalTasks = [
 const PersonalTasks = () => {
     return (
         <MainLayout>
-            {!personalTasks ? (
+            {personalTasks ? (
                 <DefaultPageWrapper
                     imagePath={image}
                     pageTitle="You don't have any personal tasks yet!"

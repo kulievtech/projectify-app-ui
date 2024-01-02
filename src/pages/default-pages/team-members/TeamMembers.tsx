@@ -2,7 +2,7 @@ import { MainLayout } from "../../components";
 import { DefaultPageWrapper } from "../../components";
 
 import "./TeamMembers.css";
-import image from "../../../assets/images/123.svg";
+import image from "../../../assets/images/team-members.svg";
 
 const teamMembers = [
     {
@@ -25,7 +25,7 @@ const teamMembers = [
 const TeamMembers = () => {
     return (
         <MainLayout>
-            {!teamMembers ? (
+            {teamMembers ? (
                 <DefaultPageWrapper
                     imagePath={image}
                     pageTitle="You don't have any team members yet!"
