@@ -1,0 +1,11 @@
+.profile {
+    margin: 0 auto;
+    max-width: 57rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-16);
+}
+
+.title {
+    margin-bottom: var(--space-30);
+}

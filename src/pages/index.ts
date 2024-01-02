@@ -6,3 +6,4 @@ export * from "./default-pages/projects/Projects";
 export * from "./default-pages/stories/Stories";
 export * from "./default-pages/team-members/TeamMembers";
 export * from "./default-pages/personal-tasks/PersonalTasks";
+export * from "./profile/Profile";
