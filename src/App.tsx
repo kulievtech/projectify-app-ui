@@ -1,16 +1,13 @@
-import { DefaultPageWrapper } from "./pages/components";
-import { MainLayout } from "./pages/components/main-layout/MainLayout";
-import projectImg from "./assets/images/123.svg";
+import { Projects, Stories, TeamMembers, PersonalTasks } from "./pages";
 
 const App = () => {
     return (
-        <MainLayout>
-            <DefaultPageWrapper
-                imagePath={projectImg}
-                pageTitle="You don't have any projects yet!"
-                btnText="Add a project"
-            ></DefaultPageWrapper>
-        </MainLayout>
+        <>
+            <Projects />
+            <Stories />
+            <TeamMembers />
+            <PersonalTasks />
+        </>
     );
 };
 
