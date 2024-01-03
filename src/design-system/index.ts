@@ -5,5 +5,6 @@ export * from "./Label";
 export * from "./Modal";
 export * from "./Avatar";
 export * from "./Logo";
+export * from "./Sidebar";
 
 export * from "./utils";
