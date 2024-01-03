@@ -24,7 +24,7 @@ const teamMembers = [
 
 const TeamMembers = () => {
     return (
-        <MainLayout>
+        <>
             {teamMembers ? (
                 <DefaultPageWrapper
                     imagePath={image}
@@ -34,7 +34,7 @@ const TeamMembers = () => {
             ) : (
                 "Hello"
             )}
-        </MainLayout>
+        </>
     );
 };
 

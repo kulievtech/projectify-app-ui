@@ -24,7 +24,7 @@ const personalTasks = [
 
 const PersonalTasks = () => {
     return (
-        <MainLayout>
+        <>
             {personalTasks ? (
                 <DefaultPageWrapper
                     imagePath={image}
@@ -34,7 +34,7 @@ const PersonalTasks = () => {
             ) : (
                 "Hello"
             )}
-        </MainLayout>
+        </>
     );
 };
 

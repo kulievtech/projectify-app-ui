@@ -24,7 +24,7 @@ const projects = [
 
 const Projects = () => {
     return (
-        <MainLayout>
+        <>
             {projects ? (
                 <DefaultPageWrapper
                     imagePath={image}
@@ -34,7 +34,7 @@ const Projects = () => {
             ) : (
                 "Hello"
             )}
-        </MainLayout>
+        </>
     );
 };
 

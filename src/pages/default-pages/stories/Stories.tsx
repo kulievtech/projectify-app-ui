@@ -24,7 +24,7 @@ const stories = [
 
 const Stories = () => {
     return (
-        <MainLayout>
+        <>
             {stories ? (
                 <DefaultPageWrapper
                     imagePath={image}
@@ -34,7 +34,7 @@ const Stories = () => {
             ) : (
                 "Hello"
             )}
-        </MainLayout>
+        </>
     );
 };
 

@@ -1,7 +1,12 @@
-import { Sidebar } from "./design-system";
+import { Projects } from "./pages";
+import { MainLayout } from "./pages/components";
 
 const App = () => {
-    return <Sidebar />;
+    return (
+        <MainLayout>
+            <Projects />
+        </MainLayout>
+    );
 };
 
 export { App };
