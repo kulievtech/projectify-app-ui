@@ -1,0 +1,68 @@
+.sidebar {
+    width: max-content;
+}
+
+.logo {
+    padding: var(--space-30) var(--space-20);
+    cursor: pointer;
+}
+
+.me {
+    padding: var(--space-12) var(--space-16);
+    background-color: var(--jaguar-25);
+    border-radius: var(--space-16);
+    margin-left: var(--space-8);
+    width: max-content;
+    display: flex;
+    cursor: pointer;
+}
+
+.avatar {
+    margin-right: 1.2rem;
+}
+
+.me-details {
+    margin-right: 1.2rem;
+    min-width: 17.2rem;
+}
+
+.pages {
+    padding: var(--space-30) var(--space-20);
+}
+
+.menu {
+    margin-bottom: var(--space-30);
+}
+
+.menu-title,
+.settings-title {
+    margin-bottom: var(--space-8);
+    color: var(--jaguar-500);
+}
+
+.menu ul,
+.settings,
+ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+}
+
+.menu ul li,
+.settings ul li {
+    display: flex;
+    list-style-type: none;
+    gap: var(--space-12);
+    padding: var(--space-12) 0;
+    cursor: pointer;
+}
+
+.logout {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    gap: var(--space-12);
+    padding: var(--space-12) var(--space-20);
+    border-top: 0.1rem solid var(--Jaguar-100);
+    cursor: pointer;
+}

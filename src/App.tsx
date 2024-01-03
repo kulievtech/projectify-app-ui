@@ -1,7 +1,7 @@
-import { Profile } from "./pages";
+import { Sidebar } from "./design-system";
 
 const App = () => {
-    return <Profile />;
+    return <Sidebar />;
 };
 
 export { App };
