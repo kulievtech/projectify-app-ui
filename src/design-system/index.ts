@@ -6,5 +6,5 @@ export * from "./Modal";
 export * from "./Avatar";
 export * from "./Logo";
 export * from "./Sidebar";
-
+export * from "./Toggle";
 export * from "./utils";

@@ -1,0 +1,25 @@
+.toggle__track {
+    height: 2rem;
+    width: 3.8rem;
+    padding: var(--space-2);
+    border-radius: var(--border-radius-20);
+    background-color: var(--jaguar-100);
+    transition: all 0.1s;
+    cursor: pointer;
+}
+
+.toggle__track--on {
+    background-color: var(--primary-500);
+}
+
+.toggle__thumb {
+    height: 1.6rem;
+    width: 1.6rem;
+    border-radius: var(--border-radius-20);
+    background-color: var(--white);
+    transition: all 0.1s;
+}
+
+.toggle__thumb--on {
+    margin-left: 1.8rem;
+}
