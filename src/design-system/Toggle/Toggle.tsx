@@ -1,4 +1,5 @@
 import React from "react";
+import checkIcon from "./check-icon.svg";
 import "./Toggle.css";
 import { trimWhiteSpaces } from "../utils";
 
@@ -31,7 +32,15 @@ const Toggle: React.FC<ToggleProps> = ({
     );
     return (
         <div className={trackClassNames} onClick={handleOnClick}>
-            <div className={thumbClassNames}></div>
+            <div className={thumbClassNames}>
+                {value ? (
+                    <img
+                        className="check-icon"
+                        src={checkIcon}
+                        alt="Check Icon"
+                    />
+                ) : null}
+            </div>
         </div>
     );
 };
