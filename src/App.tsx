@@ -1,15 +1,17 @@
-import { Projects } from "./pages";
-import { MainLayout } from "./pages/components";
-
-import { ForgotPassword } from "./pages";
+import { useState } from "react";
+import { Toggle } from "./design-system";
 
 const App = () => {
+    const [value, setValue] = useState<boolean>(false);
+
+    const handleOnToggle = (value: boolean) => {
+        setValue(value);
+    };
+
     return (
-        <MainLayout>
-            <Projects />
-        </MainLayout>
-        // <ForgotPassword />
+        <div style={{ padding: "300px" }}>
+            <Toggle value={value} onToggle={handleOnToggle} />
+        </div>
     );
 };
-
 export { App };
