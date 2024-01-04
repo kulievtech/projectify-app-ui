@@ -4,8 +4,12 @@
     padding: var(--space-2);
     border-radius: var(--border-radius-20);
     background-color: var(--jaguar-100);
-    transition: all 0.1s;
+    transition: all 0.2s;
     cursor: pointer;
+}
+
+.toggle__track--round {
+    border-radius: var(--border-radius-4);
 }
 
 .toggle__track--on {
@@ -17,7 +21,10 @@
     width: 1.6rem;
     border-radius: var(--border-radius-20);
     background-color: var(--white);
-    transition: all 0.1s;
+    transition: all 0.2s;
+}
+.toggle__thumb--round {
+    border-radius: var(--border-radius-2);
 }
 
 .toggle__thumb--on {
