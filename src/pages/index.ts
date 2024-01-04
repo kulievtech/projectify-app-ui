@@ -7,3 +7,5 @@ export * from "./default-pages/stories/Stories";
 export * from "./default-pages/team-members/TeamMembers";
 export * from "./default-pages/personal-tasks/PersonalTasks";
 export * from "./profile/Profile";
+export * from "./team-member-auth/team-member-create-password/TeamMemberCreatePassword";
+export * from "./team-member-auth/team-member-login/TeamMemberLogin";
