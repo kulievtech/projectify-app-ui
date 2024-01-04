@@ -1,10 +1,17 @@
-import { TeamMemberCreatePassword, TeamMemberLogin } from "./pages";
+import {
+    ForgotPassword,
+    ResetPassword,
+    TeamMemberCreatePassword,
+    TeamMemberLogin
+} from "./pages";
 
 const App = () => {
     return (
         <>
             <TeamMemberCreatePassword />
             <TeamMemberLogin />
+            <ForgotPassword />
+            <ResetPassword />
         </>
     );
 };
