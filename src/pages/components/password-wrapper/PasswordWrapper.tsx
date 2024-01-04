@@ -1,30 +1,30 @@
 import { FC, ReactNode } from "react";
 import "./PasswordWrapper.css";
-import { Button, Typography } from "../../../design-system";
+import { Typography } from "../../../design-system";
 
 type PasswordWrapperProps = {
     pageTitle: string;
-    imagePath: string;
+    imageUrl: string;
     children: ReactNode;
-    btnText: string;
 };
 
 const PasswordWrapper: FC<PasswordWrapperProps> = ({
+    imageUrl,
     pageTitle,
-    imagePath,
-    children,
-    btnText
+    children
 }) => {
     return (
         <main className="password-wrapper">
             <section className="password-wrapper__form">
                 <div className="password-wrapper__content">
-                    <Typography variant="h6" weight="semibold" align="center">
-                        {pageTitle}
-                    </Typography>
-                    <img src={imagePath} alt={pageTitle} />
+                    <Typography variant="h6">{pageTitle}</Typography>
+                    <div className="password-wrapper__image">
+                        <img
+                            src={imageUrl}
+                            alt="Projectify App | Update Password"
+                        />
+                    </div>
                     {children}
-                    <Button>{btnText}</Button>
                 </div>
             </section>
         </main>
