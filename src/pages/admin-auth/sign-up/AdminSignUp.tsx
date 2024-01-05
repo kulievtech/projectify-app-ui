@@ -17,7 +17,7 @@ const Form = styled.form`
     }
 `;
 
-const Signup = () => {
+const AdminSignUp = () => {
     const [firstName, setFirstName] = useState<string>("");
     const [lastName, setLastName] = useState<string>("");
     const [preferredName, setPreferredName] = useState<string>("");
@@ -127,4 +127,4 @@ const Signup = () => {
     );
 };
 
-export { Signup };
+export { AdminSignUp };

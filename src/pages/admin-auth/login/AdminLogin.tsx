@@ -17,7 +17,7 @@ const Form = styled.form`
     }
 `;
 
-const Login = () => {
+const AdminLogin = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
@@ -68,4 +68,4 @@ const Login = () => {
     );
 };
 
-export { Login };
+export { AdminLogin };

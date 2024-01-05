@@ -10,7 +10,7 @@ const Form = styled.form`
     gap: var(--space-20);
 `;
 
-const ForgotPassword = () => {
+const AdminForgotPassword = () => {
     const [email, setEmail] = useState<string>("");
 
     const handleOnChangeEmail = (value: string) => {
@@ -46,4 +46,4 @@ const ForgotPassword = () => {
     );
 };
 
-export { ForgotPassword };
+export { AdminForgotPassword };
