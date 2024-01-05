@@ -1,9 +1,8 @@
 import React, { useState, FC } from "react";
-
-import "./Profile.css";
 import { MainLayout } from "../components";
 import { Typography, Input, Button } from "../../design-system";
 import admin from "../../assets/images/admin1.png";
+import styled from "styled-components";
 
 type ProfileProps = {
     imagePath?: string;
@@ -14,6 +13,22 @@ type ProfileProps = {
     newPassword?: string;
     confirmNewPassword?: string;
 };
+
+const Wrapper = styled.div`
+    padding: var(--space-30) 0;
+`;
+
+const Form = styled.form`
+    max-width: max-content;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-16);
+
+    .title {
+        margin-bottom: var(--space-30);
+    }
+`;
 
 const Profile: FC<ProfileProps> = ({
     imagePath,
@@ -41,8 +56,8 @@ const Profile: FC<ProfileProps> = ({
     };
 
     return (
-        <MainLayout>
-            <form className="profile">
+        <Wrapper>
+            <Form>
                 <Typography
                     variant="h6"
                     weight="medium"
@@ -112,8 +127,8 @@ const Profile: FC<ProfileProps> = ({
                 >
                     Update
                 </Button>
-            </form>
-        </MainLayout>
+            </Form>
+        </Wrapper>
     );
 };
 

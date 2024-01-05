@@ -1,6 +1,6 @@
 import { FC, ReactNode } from "react";
 import { Button, Typography } from "../../../design-system";
-import "./DefaultPageWrapper.css";
+import styled from "styled-components";
 
 type DefaultPageWrapperProps = {
     imagePath: string;
@@ -8,14 +8,43 @@ type DefaultPageWrapperProps = {
     btnText: string;
 };
 
+const Wrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+`;
+
+const Content = styled.div`
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    img {
+        margin-bottom: 2.5rem;
+        height: 24rem;
+        width: auto;
+    }
+
+    .page-title {
+        margin-bottom: 5rem;
+    }
+
+    .btn {
+        width: 90%;
+        max-width: 27rem;
+        border-radius: var(--space-16);
+    }
+`;
+
 const DefaultPageWrapper: FC<DefaultPageWrapperProps> = ({
     imagePath,
     pageTitle,
     btnText
 }) => {
     return (
-        <div className="default-page-wrapper">
-            <div className="default-page__content">
+        <Wrapper>
+            <Content>
                 <img src={imagePath} alt={pageTitle} />
                 <Typography variant="paragraphLG" className="page-title">
                     {pageTitle}
@@ -28,8 +57,8 @@ const DefaultPageWrapper: FC<DefaultPageWrapperProps> = ({
                 >
                     {btnText}
                 </Button>
-            </div>
-        </div>
+            </Content>
+        </Wrapper>
     );
 };
 

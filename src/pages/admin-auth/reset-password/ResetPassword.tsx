@@ -2,7 +2,13 @@ import { useState } from "react";
 import { PasswordWrapper } from "../../components";
 import { Input, Button } from "../../../design-system";
 import updatePassword from "../../../assets/images/update-password.svg";
-import "./ResetPassword.css";
+import styled from "styled-components";
+
+const Form = styled.form`
+    width: 100%;
+    display: grid;
+    gap: var(--space-20);
+`;
 
 const ResetPassword = () => {
     const [newPassword, setNewPassword] = useState<string>("");
@@ -23,11 +29,7 @@ const ResetPassword = () => {
 
     return (
         <PasswordWrapper pageTitle="Update Password?" imageUrl={updatePassword}>
-            <form
-                className="update-password"
-                onSubmit={resetPassword}
-                noValidate
-            >
+            <Form onSubmit={resetPassword}>
                 <Input
                     type="password"
                     placeholder="New Password"
@@ -50,9 +52,9 @@ const ResetPassword = () => {
                     shape="rounded"
                     fullWidth={true}
                 >
-                    Peset My Password
+                    Reset My Password
                 </Button>
-            </form>
+            </Form>
         </PasswordWrapper>
     );
 };

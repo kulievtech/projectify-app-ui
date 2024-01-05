@@ -1,8 +1,6 @@
-import { MainLayout } from "../../components";
-import { DefaultPageWrapper } from "../../components";
-
-import "./Stories.css";
+import { DefaultPageWrapper, MainLayout } from "../../components";
 import image from "../../../assets/images/stories.svg";
+import styled from "styled-components";
 
 const stories = [
     {
@@ -26,11 +24,13 @@ const Stories = () => {
     return (
         <>
             {stories ? (
-                <DefaultPageWrapper
-                    imagePath={image}
-                    pageTitle="You don't have any stories yet!"
-                    btnText="Add a Story"
-                />
+                <MainLayout>
+                    <DefaultPageWrapper
+                        imagePath={image}
+                        pageTitle="You don't have any stories yet!"
+                        btnText="Add a Story"
+                    />
+                </MainLayout>
             ) : (
                 "Hello"
             )}
