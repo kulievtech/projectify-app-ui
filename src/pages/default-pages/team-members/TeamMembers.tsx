@@ -1,8 +1,6 @@
-import { MainLayout } from "../../components";
-import { DefaultPageWrapper } from "../../components";
-
-import "./TeamMembers.css";
+import { DefaultPageWrapper, MainLayout } from "../../components";
 import image from "../../../assets/images/team-members.svg";
+import styled from "styled-components";
 
 const teamMembers = [
     {
@@ -26,11 +24,13 @@ const TeamMembers = () => {
     return (
         <>
             {teamMembers ? (
-                <DefaultPageWrapper
-                    imagePath={image}
-                    pageTitle="You don't have any team members yet!"
-                    btnText="Add a New Member"
-                />
+                <MainLayout>
+                    <DefaultPageWrapper
+                        imagePath={image}
+                        pageTitle="You don't have any team members yet!"
+                        btnText="Add a New Member"
+                    />
+                </MainLayout>
             ) : (
                 "Hello"
             )}

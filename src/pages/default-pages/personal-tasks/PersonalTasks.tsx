@@ -1,8 +1,6 @@
-import { MainLayout } from "../../components";
-import { DefaultPageWrapper } from "../../components";
-
-import "./PersonalTasks.css";
+import { DefaultPageWrapper, MainLayout } from "../../components";
 import image from "../../../assets/images/personal-tasks.svg";
+import styled from "styled-components";
 
 const personalTasks = [
     {
@@ -26,11 +24,13 @@ const PersonalTasks = () => {
     return (
         <>
             {personalTasks ? (
-                <DefaultPageWrapper
-                    imagePath={image}
-                    pageTitle="You don't have any personal tasks yet!"
-                    btnText="Add a Task"
-                />
+                <MainLayout>
+                    <DefaultPageWrapper
+                        imagePath={image}
+                        pageTitle="You don't have any personal tasks yet!"
+                        btnText="Add a Task"
+                    />
+                </MainLayout>
             ) : (
                 "Hello"
             )}

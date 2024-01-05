@@ -1,10 +1,21 @@
 import { useState } from "react";
 import { Button, Input } from "../../../design-system";
 import { AuthWrapper } from "../../components";
-
+import styled from "styled-components";
 import flatIronBuilding from "../../../assets/images/flat-iron-building.jpg";
 
-import "./Login.css";
+const Form = styled.form`
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-20);
+
+    .login__email,
+    .login__password,
+    .login__submit-button {
+        grid-column: 1 / 3;
+    }
+`;
 
 const Login = () => {
     const [email, setEmail] = useState<string>("");
@@ -25,7 +36,7 @@ const Login = () => {
 
     return (
         <AuthWrapper imageUrl={flatIronBuilding} pageTitle="Login">
-            <form className="login" onSubmit={authorizeLogin}>
+            <Form onSubmit={authorizeLogin}>
                 <Input
                     type="email"
                     placeholder="Email"
@@ -52,7 +63,7 @@ const Login = () => {
                 >
                     Login
                 </Button>
-            </form>
+            </Form>
         </AuthWrapper>
     );
 };

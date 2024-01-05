@@ -1,17 +1,15 @@
 import {
-    ForgotPassword,
-    ResetPassword,
-    TeamMemberCreatePassword,
-    TeamMemberLogin
+    PersonalTasks,
+    Profile,
+    Projects,
+    Stories,
+    TeamMembers
 } from "./pages";
 
 const App = () => {
     return (
         <>
-            <TeamMemberCreatePassword />
-            <TeamMemberLogin />
-            <ForgotPassword />
-            <ResetPassword />
+            <Profile />
         </>
     );
 };

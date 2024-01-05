@@ -1,9 +1,14 @@
 import { useState } from "react";
 import { Button, Input } from "../../../design-system";
 import { AuthWrapper } from "../../components";
-
 import teamWork from "../../../assets/images/team-work.jpg";
-import "./TeamMemberLogin.css";
+import styled from "styled-components";
+
+const Form = styled.form`
+    width: 100%;
+    display: grid;
+    gap: var(--space-20);
+`;
 
 const TeamMemberLogin = () => {
     const [email, setEmail] = useState<string>("");
@@ -24,7 +29,7 @@ const TeamMemberLogin = () => {
 
     return (
         <AuthWrapper imageUrl={teamWork} pageTitle="Login">
-            <form className="login" onSubmit={login} noValidate>
+            <Form onSubmit={login} noValidate>
                 <Input
                     type="email"
                     placeholder="Email"
@@ -32,7 +37,6 @@ const TeamMemberLogin = () => {
                     onChange={handleOnChangeEmail}
                     shape="rounded"
                     size="lg"
-                    className="login__email"
                 />
                 <Input
                     type="password"
@@ -41,18 +45,12 @@ const TeamMemberLogin = () => {
                     onChange={handleOnChangePassword}
                     shape="rounded"
                     size="lg"
-                    className="login__password"
                 />
 
-                <Button
-                    color="primary"
-                    size="lg"
-                    shape="rounded"
-                    className="login__submit-button"
-                >
+                <Button color="primary" size="lg" shape="rounded">
                     Login
                 </Button>
-            </form>
+            </Form>
         </AuthWrapper>
     );
 };

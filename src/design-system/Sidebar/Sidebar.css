@@ -1,5 +1,6 @@
 .sidebar {
-    width: max-content;
+    height: 100vh;
+    position: relative;
 }
 
 .logo {
@@ -11,8 +12,7 @@
     padding: var(--space-12) var(--space-16);
     background-color: var(--jaguar-25);
     border-radius: var(--space-16);
-    margin-left: var(--space-8);
-    width: max-content;
+    margin: 0 var(--space-8);
     display: flex;
     cursor: pointer;
 }
@@ -36,16 +36,7 @@
 
 .menu-title,
 .settings-title {
-    margin-bottom: var(--space-8);
     color: var(--jaguar-500);
-}
-
-.menu ul,
-.settings,
-ul {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-8);
 }
 
 .menu ul li,
@@ -58,11 +49,12 @@ ul {
 }
 
 .logout {
-    display: flex;
     position: absolute;
     bottom: 0;
+    display: flex;
     gap: var(--space-12);
+    width: 100%;
     padding: var(--space-12) var(--space-20);
-    border-top: 0.1rem solid var(--Jaguar-100);
+    border-top: 0.1rem solid var(--jaguar-100);
     cursor: pointer;
 }

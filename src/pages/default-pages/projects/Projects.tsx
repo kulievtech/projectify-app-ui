@@ -1,8 +1,6 @@
-import { MainLayout } from "../../components";
-import { DefaultPageWrapper } from "../../components";
-
-import "./Projects.css";
+import { DefaultPageWrapper, MainLayout } from "../../components";
 import image from "../../../assets/images/projects.svg";
+import styled from "styled-components";
 
 const projects = [
     {
@@ -26,11 +24,13 @@ const Projects = () => {
     return (
         <>
             {projects ? (
-                <DefaultPageWrapper
-                    imagePath={image}
-                    pageTitle="You don't have any projects yet!"
-                    btnText="Add a Project"
-                />
+                <MainLayout>
+                    <DefaultPageWrapper
+                        imagePath={image}
+                        pageTitle="You don't have any projects yet!"
+                        btnText="Add a Project"
+                    />
+                </MainLayout>
             ) : (
                 "Hello"
             )}
