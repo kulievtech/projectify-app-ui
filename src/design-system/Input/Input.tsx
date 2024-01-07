@@ -15,7 +15,7 @@ const shapeClassNames = {
 };
 
 type InputProps = {
-    type: "text" | "email" | "password" | "tel" | "textarea";
+    type?: "text" | "email" | "password" | "tel" | "textarea";
     disabled?: boolean;
     placeholder: string;
     className?: string;
@@ -88,7 +88,7 @@ const Input: React.FC<InputProps> = (props) => {
             ) : (
                 <input
                     className={finalClassNames}
-                    type={type}
+                    type={type || "text"}
                     placeholder={placeholder}
                     disabled={disabled}
                     id={id}
