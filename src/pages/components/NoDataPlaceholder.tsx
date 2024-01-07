@@ -46,6 +46,7 @@ const NoDataPlaceholder: React.FC<NoDatePlaceholderProps> = ({
                     color="primary"
                     size="lg"
                     shape="rounded"
+                    fullWidth={true}
                     onClick={buttonAction}
                 >
                     {buttonText}
