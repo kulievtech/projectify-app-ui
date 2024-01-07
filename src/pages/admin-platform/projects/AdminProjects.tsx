@@ -37,7 +37,7 @@ const AdminProjects = () => {
                 <NoDataPlaceholder
                     illustrationUrl={noProject}
                     text="You don’t have any projects yet!"
-                    buttonText="Add a Projects"
+                    buttonText="Add a Project"
                     buttonAction={() => setShowCreateProjectModal(true)}
                 />
             ) : (
