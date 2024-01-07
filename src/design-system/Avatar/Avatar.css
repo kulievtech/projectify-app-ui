@@ -1,53 +1,58 @@
 .avatar {
-    font-family: inherit;
-    font-size: var(--font-size-12);
-    font-weight: var(--font-weight-600);
-    line-height: var(--line-height-10);
     border: none;
     outline: none;
 
-    height: var(--space-24);
-    width: var(--space-24);
+    font-family: inherit;
+    font-size: var(--font-size-12);
+    font-weight: var(--font-weight-700);
+    padding: 0 !important;
+
+    height: 2.4rem;
+    width: 2.4rem;
     background-color: var(--jaguar-400);
     color: var(--white);
 
-    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.avatar:hover {
-    cursor: pointer;
-    box-shadow: var(---shadow-xs-hover);
+.avatar img {
+    object-fit: cover;
+    height: 2.4rem;
+    width: 2.4rem;
 }
-
-.avatar:focus {
-    box-shadow: var(---shadow-s);
+.avatar-medium img {
+    height: 3.2rem;
+    width: 3.2rem;
 }
-
-.avatar-small {
-    font-size: var(--font-size-12);
-    line-height: var(--line-height-10);
-    height: var(--space-24);
-    width: var(--space-24);
+.avatar-large img {
+    height: 4rem;
+    width: 4rem;
 }
 
 .avatar-medium {
+    height: 3.2rem;
+    width: 3.2rem;
+
     font-size: var(--font-size-14);
-    line-height: var(--line-height-20);
-    height: var(--space-32);
-    width: var(--space-32);
+    font-weight: var(--font-weight-600);
 }
 
 .avatar-large {
+    height: 4rem;
+    width: 4rem;
+
     font-size: var(--font-size-16);
-    line-height: var(--line-height-24);
-    height: var(--space-40);
-    width: var(--space-40);
+    font-weight: var(--font-weight-600);
 }
 
-.avatar-rounded {
+.avatar-rounded,
+.avatar-rounded img {
     border-radius: var(--border-radius-8);
 }
 
-.avatar-circle {
+.avatar-circle,
+.avatar-circle img {
     border-radius: 50%;
 }

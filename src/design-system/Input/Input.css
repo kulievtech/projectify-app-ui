@@ -31,15 +31,11 @@ input::placeholder,
     border-radius: var(--border-radius-8);
 }
 
-.input-large.input-rounded {
-    border-radius: var(--border-radius-16);
-}
-
 .input-circle {
     border-radius: var(--border-radius-20);
 }
 
-.input-large.input-circle {
+.input-lg.input-circle {
     border-radius: var(--border-radius-24);
 }
 
@@ -76,6 +72,8 @@ input::placeholder,
 
 .input-textarea {
     resize: none;
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-16);
 }
 
 .input-textarea.input-small {

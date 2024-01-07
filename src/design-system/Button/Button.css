@@ -5,9 +5,11 @@
     line-height: var(--line-height-20);
     border: none;
     outline: none;
+    display: block;
 
     height: 3.6rem;
     padding: 0 var(--space-16);
+
     transition: all 0.3s;
 }
 
@@ -38,10 +40,6 @@
 
 .btn-rounded {
     border-radius: var(--border-radius-8);
-}
-
-.btn-large.btn-rounded {
-    border-radius: var(--border-radius-16);
 }
 
 .btn-circle {

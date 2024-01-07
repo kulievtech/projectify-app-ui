@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { PasswordWrapper } from "../../components";
 import { Input, Button } from "../../../design-system";
-import forgotPassword from "../../../assets/images/forgot-password.svg";
+import forgotPassword from "../../../assets/illustrations/forgot-password.svg";
 import styled from "styled-components";
 
 const Form = styled.form`
