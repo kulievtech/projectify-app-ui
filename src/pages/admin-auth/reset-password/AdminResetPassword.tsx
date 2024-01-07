@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { PasswordWrapper } from "../../components";
 import { Input, Button } from "../../../design-system";
-import updatePassword from "../../../assets/images/update-password.svg";
+import updatePassword from "../../../assets/illustrations/reset-password.svg";
 import styled from "styled-components";
 import { useSearchParams } from "react-router-dom";
 
