@@ -26,7 +26,7 @@ const Buttons = styled.div`
     gap: var(--space-10);
 `;
 
-const Projects = () => {
+const AdminProjects = () => {
     const [projects, setProject] = useState<string[]>([]);
     const [showCreateProjectModal, setShowCreateProjectModal] =
         useState<boolean>(false);
@@ -85,4 +85,4 @@ const Projects = () => {
     );
 };
 
-export { Projects as AdminProjects };
+export { AdminProjects };
