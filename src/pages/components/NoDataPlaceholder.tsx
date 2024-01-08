@@ -16,17 +16,16 @@ const NoDataPlaceholderBase = styled.div`
     transform: translate(-50%, -50%);
 `;
 
-const Illustration = styled.img.attrs({ alt: "There is no data" })`
+const Illustration = styled.img`
     display: block;
     margin: 0 auto var(--space-24) auto;
+
+    alt: "There is no data";
 `;
+
 const Text = styled(Typography)`
     margin-bottom: var(--space-50);
     text-align: center;
-`;
-
-const ActionButton = styled(Button)`
-    margin: 0 auto;
 `;
 
 const NoDataPlaceholder: React.FC<NoDatePlaceholderProps> = ({
@@ -42,7 +41,7 @@ const NoDataPlaceholder: React.FC<NoDatePlaceholderProps> = ({
                 {text}
             </Text>
             {buttonText ? (
-                <ActionButton
+                <Button
                     color="primary"
                     size="lg"
                     shape="rounded"
@@ -50,7 +49,7 @@ const NoDataPlaceholder: React.FC<NoDatePlaceholderProps> = ({
                     onClick={buttonAction}
                 >
                     {buttonText}
-                </ActionButton>
+                </Button>
             ) : null}
         </NoDataPlaceholderBase>
     );

@@ -43,11 +43,11 @@ const SideBarUser: React.FC<UserProps> = ({ details, onClick }) => {
                 lastName={details.lastName}
                 imageUrl={details.imageUrl}
                 size="lg"
-                shape="rounded"
+                shape="circle"
             />
             <UserDetails>
                 <Typography variant="paragraphSM" weight="medium">
-                    {details.firstName} {details.firstName}
+                    {details.firstName} {details.lastName}
                 </Typography>
                 <EmailTypography variant="subtitleSM" weight="medium">
                     {details.email}
