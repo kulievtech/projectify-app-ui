@@ -1,22 +1,22 @@
 import { Outlet } from "react-router-dom";
 import { AppContent, AppLayout, SideBarUser } from "../components";
-import user from "../../assets/images/user.jpg";
+import user from "../../assets/images/user2.jpg";
 import { SideBar, SideBarLinks } from "../../design-system";
-import { adminLinks } from "./adminLinks";
+import { teamMemberLinks } from "./teamMemberLinks";
 
-const AdminPlatform = () => {
+const TeamMemberPlatform = () => {
     return (
         <AppLayout>
             <SideBar>
                 <SideBarUser
                     details={{
-                        firstName: "John",
-                        lastName: "John",
+                        firstName: "Alex",
+                        lastName: "Williams",
                         imageUrl: user,
-                        email: "info@email.com"
+                        email: "example@gmail.com"
                     }}
                 />
-                <SideBarLinks links={adminLinks} />
+                <SideBarLinks links={teamMemberLinks} />
             </SideBar>
             <AppContent>
                 <Outlet />
@@ -25,4 +25,4 @@ const AdminPlatform = () => {
     );
 };
 
-export { AdminPlatform };
+export { TeamMemberPlatform };
