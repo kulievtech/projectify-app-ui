@@ -1,9 +1,10 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { PasswordWrapper } from "../../components";
 import { Input, Button } from "../../../design-system";
 import updatePassword from "../../../assets/illustrations/reset-password.svg";
 import styled from "styled-components";
 import { useSearchParams } from "react-router-dom";
+import { useFocus } from "../../../custom-hooks/useFocus";
 
 const Form = styled.form`
     width: 100%;
@@ -17,13 +18,7 @@ const AdminResetPassword = () => {
     const [searchParams] = useSearchParams();
     const resetPasswordToken = searchParams.get("resetPasswordToken");
 
-    const focusRef = useRef<HTMLInputElement | HTMLTextAreaElement | null>(
-        null
-    );
-
-    useEffect(() => {
-        focusRef.current?.focus();
-    }, []);
+    const focusRef = useFocus();
 
     const handleOnChangeNewPassword = (value: string) => {
         setNewPassword(value);

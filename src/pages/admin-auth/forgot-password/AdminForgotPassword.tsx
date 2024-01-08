@@ -1,8 +1,9 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { PasswordWrapper } from "../../components";
 import { Input, Button } from "../../../design-system";
 import forgotPassword from "../../../assets/illustrations/forgot-password.svg";
 import styled from "styled-components";
+import { useFocus } from "../../../custom-hooks/useFocus";
 
 const Form = styled.form`
     width: 100%;
@@ -13,13 +14,7 @@ const Form = styled.form`
 const AdminForgotPassword = () => {
     const [email, setEmail] = useState<string>("");
 
-    const focusRef = useRef<HTMLInputElement | HTMLTextAreaElement | null>(
-        null
-    );
-
-    useEffect(() => {
-        focusRef.current?.focus();
-    }, []);
+    const focusRef = useFocus();
 
     const handleOnChangeEmail = (value: string) => {
         setEmail(value);

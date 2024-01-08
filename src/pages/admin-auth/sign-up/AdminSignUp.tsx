@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Button, Input } from "../../../design-system";
 import { AuthWrapper } from "../../components";
 import flatIronBuilding from "../../../assets/images/flat-iron-building.jpg";
 import styled from "styled-components";
+import { useFocus } from "../../../custom-hooks/useFocus";
 
 const Form = styled.form`
     width: 100%;
@@ -25,13 +26,7 @@ const AdminSignUp = () => {
     const [password, setPassword] = useState<string>("");
     const [passwordConfirm, setPasswordConfirm] = useState<string>("");
 
-    const focusRef = useRef<HTMLInputElement | HTMLTextAreaElement | null>(
-        null
-    );
-
-    useEffect(() => {
-        focusRef.current?.focus();
-    }, []);
+    const focusRef = useFocus();
 
     const handleOnChangeFirstName = (value: string) => {
         setFirstName(value);
