@@ -11,7 +11,8 @@ import {
     AdminPlatform,
     AdminProjects,
     TeamMemberCreatePassword,
-    TeamMemberLogin
+    TeamMemberLogin,
+    TeamMemberPlatform
 } from "../pages";
 import { App } from "../App";
 
@@ -40,8 +41,25 @@ export const router = createBrowserRouter(
             <Route path="/admin/platform" element={<AdminPlatform />}>
                 <Route path="projects" element={<AdminProjects />} />
                 <Route path="stories" element={<h1>Admin Stories</h1>} />
-                <Route path="personal-tasks" element={<h1>Admin Tasks</h1>} />
+                <Route
+                    path="personal-tasks"
+                    element={<h1>Admin Personal Tasks</h1>}
+                />
                 <Route path="team-members" element={<h1>Admin Members</h1>} />
+            </Route>
+            <Route
+                path="/team-member/platform"
+                element={<TeamMemberPlatform />}
+            >
+                <Route
+                    path="projects"
+                    element={<h1>Team Member Projects</h1>}
+                />
+                <Route path="stories" element={<h1>Team Member Stories</h1>} />
+                <Route
+                    path="personal-tasks"
+                    element={<h1>Team Member Personal Tasks</h1>}
+                />
             </Route>
         </>
     )
