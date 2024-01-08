@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { PasswordWrapper } from "../../components";
 import { Input, Button } from "../../../design-system";
 import updatePassword from "../../../assets/illustrations/reset-password.svg";
@@ -16,6 +16,14 @@ const AdminResetPassword = () => {
     const [passwordConfirm, setPasswordConfirm] = useState<string>("");
     const [searchParams] = useSearchParams();
     const resetPasswordToken = searchParams.get("resetPasswordToken");
+
+    const focusRef = useRef<HTMLInputElement | HTMLTextAreaElement | null>(
+        null
+    );
+
+    useEffect(() => {
+        focusRef.current?.focus();
+    }, []);
 
     const handleOnChangeNewPassword = (value: string) => {
         setNewPassword(value);
@@ -40,6 +48,7 @@ const AdminResetPassword = () => {
                     onChange={handleOnChangeNewPassword}
                     shape="rounded"
                     size="lg"
+                    inputRef={focusRef}
                 />
                 <Input
                     type="password"

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button, Input } from "../../../design-system";
 import { AuthWrapper } from "../../components";
 import flatIronBuilding from "../../../assets/images/flat-iron-building.jpg";
@@ -24,6 +24,14 @@ const AdminSignUp = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [passwordConfirm, setPasswordConfirm] = useState<string>("");
+
+    const focusRef = useRef<HTMLInputElement | HTMLTextAreaElement | null>(
+        null
+    );
+
+    useEffect(() => {
+        focusRef.current?.focus();
+    }, []);
 
     const handleOnChangeFirstName = (value: string) => {
         setFirstName(value);
@@ -71,6 +79,7 @@ const AdminSignUp = () => {
                     onChange={handleOnChangeFirstName}
                     shape="rounded"
                     size="lg"
+                    inputRef={focusRef}
                 />
                 <Input
                     type="text"

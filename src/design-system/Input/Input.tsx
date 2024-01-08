@@ -26,6 +26,7 @@ type InputProps = {
     size?: "sm" | "md" | "lg";
     hintMessage?: string;
     labelText?: string;
+    inputRef?: React.RefObject<HTMLInputElement | HTMLTextAreaElement | null>;
 
     onChange: (value: string) => void;
     value: string;
@@ -40,6 +41,7 @@ const Input: React.FC<InputProps> = (props) => {
         size,
         hintMessage,
         labelText,
+        inputRef,
         className,
         id,
         onChange,
@@ -84,6 +86,7 @@ const Input: React.FC<InputProps> = (props) => {
                     id={id}
                     onChange={handleOnChange}
                     value={value}
+                    ref={inputRef as React.LegacyRef<HTMLTextAreaElement>}
                 />
             ) : (
                 <input
@@ -94,6 +97,7 @@ const Input: React.FC<InputProps> = (props) => {
                     id={id}
                     onChange={handleOnChange}
                     value={value}
+                    ref={inputRef as React.LegacyRef<HTMLInputElement>}
                 />
             )}
 
