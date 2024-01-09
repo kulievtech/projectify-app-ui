@@ -35,6 +35,7 @@ const AdminForgotPassword = () => {
                     onChange={handleOnChangeEmail}
                     shape="rounded"
                     size="lg"
+                    required={true}
                     inputRef={focusRef}
                 />
                 <Button

@@ -43,6 +43,7 @@ const AdminResetPassword = () => {
                     onChange={handleOnChangeNewPassword}
                     shape="rounded"
                     size="lg"
+                    required={true}
                     inputRef={focusRef}
                 />
                 <Input
@@ -52,6 +53,7 @@ const AdminResetPassword = () => {
                     onChange={handleOnChangePasswordConfirm}
                     shape="rounded"
                     size="lg"
+                    required={true}
                 />
                 <Button
                     color="primary"
