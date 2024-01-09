@@ -62,15 +62,21 @@
     background-color: var(--primary-500);
 }
 
-.side-bar__log-out {
+.side-bar__log-out-wrapper {
     height: 4.8rem;
     padding-left: var(--space-16);
     display: flex;
-    align-items: center;
-    gap: var(--space-12);
     border-top: 1px solid var(--jaguar-100);
 
     margin-top: auto;
+}
+
+.side-bar__log-out {
+    cursor: pointer;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    gap: var(--space-12);
 }
 
 .log-out-icon {
