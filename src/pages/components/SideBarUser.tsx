@@ -13,6 +13,7 @@ const UserBase = styled.div`
     display: flex;
     align-items: center;
     gap: var(--space-12);
+    cursor: pointer;
 `;
 
 const UserDetails = styled.div`
