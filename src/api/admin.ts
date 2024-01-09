@@ -1,9 +1,10 @@
 type SignUpInput = {
     firstName: string;
     lastName: string;
+    preferredFirstName?: string;
     email: string;
     password: string;
-    company: {
+    company?: {
         name: string;
         position: string;
     };
@@ -17,7 +18,11 @@ type SignInInput = {
 class Admin {
     url: string;
     constructor() {
-        this.url = `${process.env.REACT_APP_PROJECTIFY_API_URL}/admins`;
+        this.url = `${
+            process.env.NODE_ENV === "development"
+                ? process.env.REACT_APP_PROJECTIFY_API_URL_LOCAL
+                : process.env.REACT_APP_PROJECTIFY_API_URL
+        }/admins`;
     }
     async signUp(input: SignUpInput) {
         try {
@@ -37,7 +42,7 @@ class Admin {
         }
     }
 
-    async signIn(input: SignInInput) {
+    async signIn(input: SignInInput): Promise<{ token: string }> {
         try {
             const response = await fetch(`${this.url}/login`, {
                 method: "POST",
@@ -50,6 +55,8 @@ class Admin {
                 const data = await response.json();
                 throw new Error(data.message);
             }
+
+            return response.json();
         } catch (error) {
             throw error;
         }
