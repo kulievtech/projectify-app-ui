@@ -77,10 +77,11 @@ const AdminSignUp = () => {
                 lastName,
                 email,
                 password,
+                passwordConfirm,
                 preferredFirstName,
                 company: {
-                    name: "Turan Tech",
-                    position: "Student"
+                    name: companyName,
+                    position: companyPosition
                 }
             });
 
