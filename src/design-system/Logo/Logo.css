@@ -2,6 +2,7 @@
     display: flex;
     width: max-content;
     align-content: center;
+    cursor: pointer;
 }
 
 .logo.logo-small {
