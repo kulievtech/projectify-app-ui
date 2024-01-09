@@ -52,6 +52,7 @@ const TeamMemberCreatePassword = () => {
                     shape="rounded"
                     size="lg"
                     className="create-password__email"
+                    required={true}
                     inputRef={focusRef}
                 />
                 <Input
@@ -61,6 +62,7 @@ const TeamMemberCreatePassword = () => {
                     onChange={handleOnChangePassword}
                     shape="rounded"
                     size="lg"
+                    required={true}
                 />
                 <Input
                     type="password"
@@ -69,6 +71,7 @@ const TeamMemberCreatePassword = () => {
                     onChange={handleOnChangePasswordConfirm}
                     shape="rounded"
                     size="lg"
+                    required={true}
                 />
                 <Button
                     color="primary"

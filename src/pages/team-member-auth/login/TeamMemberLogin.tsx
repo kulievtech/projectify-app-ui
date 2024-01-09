@@ -40,6 +40,7 @@ const TeamMemberLogin = () => {
                     onChange={handleOnChangeEmail}
                     shape="rounded"
                     size="lg"
+                    required={true}
                     inputRef={focusRef}
                 />
                 <Input
@@ -49,6 +50,7 @@ const TeamMemberLogin = () => {
                     onChange={handleOnChangePassword}
                     shape="rounded"
                     size="lg"
+                    required={true}
                 />
 
                 <Button color="primary" size="lg" shape="rounded">
