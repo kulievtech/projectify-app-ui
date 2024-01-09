@@ -17,9 +17,11 @@ const shapeClassNames = {
 type InputProps = {
     type?: "text" | "email" | "password" | "tel" | "textarea";
     disabled?: boolean;
+    required?: boolean;
     placeholder: string;
     className?: string;
     id?: string;
+    isRequired?: boolean;
 
     error?: boolean;
     shape?: "rounded" | "circle";
@@ -36,6 +38,7 @@ const Input: React.FC<InputProps> = (props) => {
         type,
         error,
         disabled,
+        required,
         placeholder,
         shape,
         size,
@@ -82,6 +85,7 @@ const Input: React.FC<InputProps> = (props) => {
                 <textarea
                     placeholder={placeholder}
                     className={finalClassNames}
+                    required={required}
                     disabled={disabled}
                     id={id}
                     onChange={handleOnChange}
@@ -94,6 +98,7 @@ const Input: React.FC<InputProps> = (props) => {
                     type={type || "text"}
                     placeholder={placeholder}
                     disabled={disabled}
+                    required={required}
                     id={id}
                     onChange={handleOnChange}
                     value={value}
