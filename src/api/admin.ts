@@ -38,12 +38,13 @@ class Admin {
                 const data = await response.json();
                 throw new Error(data.message);
             }
+            return response.json();
         } catch (error) {
             throw error;
         }
     }
 
-    async signIn(input: SignInInput): Promise<{ token: string }> {
+    async signIn(input: SignInInput) {
         try {
             const response = await fetch(`${this.url}/login`, {
                 method: "POST",
@@ -78,6 +79,36 @@ class Admin {
                 const data = await response.json();
                 throw new Error(data.message);
             }
+
+            return response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async resetPassword(
+        password: string,
+        passwordConfirm: string,
+        token: string
+    ) {
+        try {
+            const response = await fetch(`${this.url}/reset-password`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    password,
+                    passwordConfirm
+                })
+            });
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+
+            return response.json();
         } catch (error) {
             throw error;
         }

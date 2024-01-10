@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { PasswordWrapper } from "../../components";
-import { Input, Button } from "../../../design-system";
-import updatePassword from "../../../assets/illustrations/reset-password.svg";
+import { PasswordWrapper, AuthActionLink } from "../../components";
+import { Input, Button, Toaster } from "../../../design-system";
 import styled from "styled-components";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { useFocus } from "../../../custom-hooks/useFocus";
+import { admin } from "../../../api";
+import toast from "react-hot-toast";
+import updatePassword from "../../../assets/illustrations/reset-password.svg";
 
 const Form = styled.form`
     width: 100%;
@@ -14,9 +16,11 @@ const Form = styled.form`
 
 const AdminResetPassword = () => {
     const [newPassword, setNewPassword] = useState<string>("");
-    const [passwordConfirm, setPasswordConfirm] = useState<string>("");
+    const [newPasswordConfirm, setNewPasswordConfirm] = useState<string>("");
     const [searchParams] = useSearchParams();
-    const resetPasswordToken = searchParams.get("resetPasswordToken");
+    const passwordResetToken = searchParams.get("resetPasswordToken");
+
+    const navigate = useNavigate();
 
     const focusRef = useFocus();
 
@@ -24,47 +28,77 @@ const AdminResetPassword = () => {
         setNewPassword(value);
     };
 
-    const handleOnChangePasswordConfirm = (value: string) => {
-        setPasswordConfirm(value);
+    const handleOnChangeNewPasswordConfirm = (value: string) => {
+        setNewPasswordConfirm(value);
     };
 
-    const resetPassword = (e: React.FormEvent<HTMLFormElement>) => {
+    const resetPassword = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(newPassword, passwordConfirm);
+
+        try {
+            const response = await admin.resetPassword(
+                newPassword,
+                newPasswordConfirm,
+                passwordResetToken as string
+            );
+
+            setNewPassword("");
+            setNewPasswordConfirm("");
+
+            toast.success(response.message);
+            setTimeout(() => {
+                navigate("/admin/login");
+            }, 4000);
+        } catch (error) {
+            if (error instanceof Error) {
+                toast.error(error.message);
+            }
+        }
     };
 
     return (
-        <PasswordWrapper pageTitle="Update Password?" imageUrl={updatePassword}>
-            <Form onSubmit={resetPassword}>
-                <Input
-                    type="password"
-                    placeholder="New Password"
-                    value={newPassword}
-                    onChange={handleOnChangeNewPassword}
-                    shape="rounded"
-                    size="lg"
-                    required={true}
-                    inputRef={focusRef}
+        <>
+            <PasswordWrapper
+                pageTitle="Update Password?"
+                imageUrl={updatePassword}
+            >
+                <Form onSubmit={resetPassword}>
+                    <Input
+                        type="password"
+                        placeholder="New Password"
+                        value={newPassword}
+                        onChange={handleOnChangeNewPassword}
+                        shape="rounded"
+                        size="lg"
+                        required={true}
+                        inputRef={focusRef}
+                    />
+                    <Input
+                        type="password"
+                        placeholder="Confirm Password"
+                        value={newPasswordConfirm}
+                        onChange={handleOnChangeNewPasswordConfirm}
+                        shape="rounded"
+                        size="lg"
+                        required={true}
+                    />
+                    <Button
+                        color="primary"
+                        size="lg"
+                        shape="rounded"
+                        fullWidth={true}
+                    >
+                        Reset My Password
+                    </Button>
+                </Form>
+                <AuthActionLink
+                    hintText="Get Instructions"
+                    linkText="Forget password"
+                    linkTo="../admin/forget-password"
                 />
-                <Input
-                    type="password"
-                    placeholder="Confirm Password"
-                    value={passwordConfirm}
-                    onChange={handleOnChangePasswordConfirm}
-                    shape="rounded"
-                    size="lg"
-                    required={true}
-                />
-                <Button
-                    color="primary"
-                    size="lg"
-                    shape="rounded"
-                    fullWidth={true}
-                >
-                    Reset My Password
-                </Button>
-            </Form>
-        </PasswordWrapper>
+            </PasswordWrapper>
+            <Toaster />
+        </>
     );
 };
 
