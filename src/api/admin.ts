@@ -4,6 +4,7 @@ type SignUpInput = {
     preferredFirstName?: string;
     email: string;
     password: string;
+    passwordConfirm: string;
     company?: {
         name: string;
         position: string;
