@@ -89,6 +89,8 @@ const AdminSignUp = () => {
             setFirstName("");
             setLastName("");
             setPreferredFirstName("");
+            setCompanyName("");
+            setCompanyPosition("");
             setEmail("");
             setPassword("");
             setPasswordConfirm("");
