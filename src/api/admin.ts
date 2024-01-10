@@ -1,10 +1,9 @@
 type SignUpInput = {
     firstName: string;
     lastName: string;
-    preferredFirstName?: string;
+    preferredName?: string;
     email: string;
     password: string;
-    passwordConfirm: string;
     company?: {
         name: string;
         position: string;
@@ -38,6 +37,7 @@ class Admin {
                 const data = await response.json();
                 throw new Error(data.message);
             }
+            return response.json();
         } catch (error) {
             throw error;
         }
@@ -78,6 +78,36 @@ class Admin {
                 const data = await response.json();
                 throw new Error(data.message);
             }
+
+            return response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async resetPassword(
+        password: string,
+        passwordConfirm: string,
+        token: string
+    ) {
+        try {
+            const response = await fetch(`${this.url}/reset-password`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    password,
+                    passwordConfirm
+                })
+            });
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+
+            return response.json();
         } catch (error) {
             throw error;
         }
