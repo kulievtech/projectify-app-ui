@@ -23,4 +23,7 @@
   <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 20" id="chevron-right">
     <path id="icon" d="M10.5 7L15.5 12L10.5 17" stroke="#A29FB2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="white"/>
   </symbol>
+<symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="arrow-left">
+  <path d="M7.42 8.16 3.58 12l3.85 3.85 3.85 3.85.71-.71.71-.71-2.64-2.64L7.42 13H20v-2H7.42l2.63-2.63c1.447-1.447 2.63-2.648 2.63-2.671 0-.052-1.328-1.379-1.381-1.379-.021 0-1.767 1.728-3.879 3.84" fill-rule="evenodd"></path>
+</symbol>
 </svg>
