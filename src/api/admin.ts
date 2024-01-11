@@ -89,14 +89,15 @@ class Admin {
     async resetPassword(
         password: string,
         passwordConfirm: string,
-        token: string
+        passwordResetToken: string
     ) {
         try {
+            console.log(this.url);
             const response = await fetch(`${this.url}/reset-password`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
-                    authorization: `Bearer ${token}`
+                    authorization: `Bearer ${passwordResetToken}`
                 },
                 body: JSON.stringify({
                     password,
