@@ -16,7 +16,10 @@ const TeamMemberPlatform = () => {
                         email: "example@gmail.com"
                     }}
                 />
-                <SideBarLinks links={teamMemberLinks} loggedOutLink="" />
+                <SideBarLinks
+                    links={teamMemberLinks}
+                    loggedOutLink="../team-member/login"
+                />
             </SideBar>
             <AppContent>
                 <Outlet />
