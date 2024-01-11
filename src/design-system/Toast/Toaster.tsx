@@ -13,11 +13,12 @@ const Toaster: React.FC<ToasterProps> = () => {
                 style: {
                     fontSize: "var(--font-size-14)",
                     fontFamily: "inherit",
-                    padding: "var(--space-16)"
+                    padding: "var(--space-16)",
+                    width: "40rem"
                 },
                 success: {
                     iconTheme: {
-                        primary: `var(--green-500)`,
+                        primary: "var(--green-500)",
                         secondary: "var(--white)"
                     }
                 },
