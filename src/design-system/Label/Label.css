@@ -3,6 +3,7 @@
     line-height: var(--line-height-24);
     color: var(--jaguar-500);
     font-weight: var(--font-weight-500);
+    margin-bottom: var(--space-6);
 }
 
 .label-error {
