@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { PasswordWrapper, AuthActionLink } from "../../components";
+import { PasswordWrapper } from "../../components";
 import { Input, Button, Toaster } from "../../../design-system";
 import styled from "styled-components";
 import { useSearchParams, useNavigate } from "react-router-dom";
