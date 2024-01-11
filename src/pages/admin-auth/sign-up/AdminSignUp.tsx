@@ -204,7 +204,7 @@ const AdminSignUp = () => {
                 </Form>
                 <div style={{ marginTop: "auto" }}>
                     <AuthActionLink
-                        linkText="Sign In"
+                        linkText="Login"
                         hintText="Already have an account?"
                         linkTo="../admin/login"
                     />
