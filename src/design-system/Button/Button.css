@@ -38,9 +38,9 @@
     padding: 0 var(--space-24);
 }
 
-.btn-large.btn-rounded {
+/* .btn-large.btn-rounded {
     border-radius: var(--border-radius-16);
-}
+} */
 
 .btn-rounded {
     border-radius: var(--border-radius-8);
@@ -67,7 +67,7 @@
 }
 
 .btn-primary:disabled {
-    background-color: var(--jaguar-300);
+    background-color: var(--primary-300);
 }
 
 .btn-primary:focus {
