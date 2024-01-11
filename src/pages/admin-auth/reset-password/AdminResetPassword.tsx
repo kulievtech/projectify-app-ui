@@ -18,7 +18,7 @@ const AdminResetPassword = () => {
     const [newPassword, setNewPassword] = useState<string>("");
     const [newPasswordConfirm, setNewPasswordConfirm] = useState<string>("");
     const [searchParams] = useSearchParams();
-    const passwordResetToken = searchParams.get("resetPasswordToken");
+    const passwordResetToken = searchParams.get("passwordResetToken");
 
     const navigate = useNavigate();
 
@@ -59,7 +59,7 @@ const AdminResetPassword = () => {
     return (
         <>
             <PasswordWrapper
-                pageTitle="Update Password?"
+                pageTitle="Reset Password?"
                 imageUrl={updatePassword}
             >
                 <Form onSubmit={resetPassword}>
@@ -91,11 +91,6 @@ const AdminResetPassword = () => {
                         Reset My Password
                     </Button>
                 </Form>
-                <AuthActionLink
-                    hintText="Get Instructions"
-                    linkText="Forget password"
-                    linkTo="../admin/forget-password"
-                />
             </PasswordWrapper>
             <Toaster />
         </>
