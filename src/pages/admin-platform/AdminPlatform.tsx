@@ -11,7 +11,7 @@ const AdminPlatform = () => {
                 <SideBarUser
                     details={{
                         firstName: "John",
-                        lastName: "John",
+                        lastName: "Williams",
                         imageUrl: user,
                         email: "info@email.com"
                     }}
