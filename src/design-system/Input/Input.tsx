@@ -18,7 +18,7 @@ type InputProps = {
     type?: "text" | "email" | "password" | "tel" | "textarea";
     disabled?: boolean;
     required?: boolean;
-    placeholder: string;
+    placeholder?: string;
     className?: string;
     id?: string;
     isRequired?: boolean;
