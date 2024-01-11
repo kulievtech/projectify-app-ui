@@ -73,13 +73,13 @@ const AdminLogin = () => {
 
             setItem("authToken", response.token);
 
-            setTimeout(() => {
-                navigate("../admin/platform");
-            }, 1000);
-
             setIsFormSubmitting(false);
             setEmail("");
             setPassword("");
+
+            setTimeout(() => {
+                navigate("../admin/platform");
+            }, 1000);
         } catch (error) {
             setIsFormSubmitting(false);
             setIsError(true);
