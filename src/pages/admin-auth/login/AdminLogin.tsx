@@ -50,6 +50,8 @@ const AdminLogin = () => {
 
     const focusRef = useFocus();
 
+    const isFormSubmittable = email && password;
+
     const handleOnChangeEmail = (value: string) => {
         setEmail(value);
     };
@@ -71,12 +73,13 @@ const AdminLogin = () => {
 
             setItem("authToken", response.token);
 
-            navigate("../admin/platform");
+            setTimeout(() => {
+                navigate("../admin/platform");
+            }, 1000);
 
             setIsFormSubmitting(false);
             setEmail("");
             setPassword("");
-            toast.success(response.message);
         } catch (error) {
             setIsFormSubmitting(false);
             setIsError(true);
@@ -131,6 +134,7 @@ const AdminLogin = () => {
                         size="lg"
                         shape="rounded"
                         className="login__submit-button"
+                        disabled={isFormSubmitting || !isFormSubmittable}
                         fullWidth={true}
                     >
                         Login
