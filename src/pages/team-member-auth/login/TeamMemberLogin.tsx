@@ -1,18 +1,43 @@
 import { useState } from "react";
-import { Button, Input, Toaster } from "../../../design-system";
+import { Button, Input, Toaster, Label } from "../../../design-system";
 import { AuthWrapper } from "../../components";
 import teamWork from "../../../assets/images/team-work.jpg";
 import styled from "styled-components";
 import { useFocus } from "../../../custom-hooks/useFocus";
 import { teamMember } from "../../../api";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useLocalStorage } from "../../../custom-hooks/useLocalStorage";
 
 const Form = styled.form`
     width: 100%;
     display: grid;
     gap: var(--space-20);
+`;
+
+const PasswordLabelWrapper = styled.div`
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+
+    .password-label {
+        grid-column: 1 / 2;
+    }
+
+    .forgot-password-link {
+        grid-column: 2 / 3;
+        font-size: var(--font-size-16);
+        line-height: var(--line-height-24);
+        color: var(--primary-500);
+        font-weight: var(--font-weight-500);
+        text-align: right;
+        margin-bottom: var(--space-6);
+    }
+
+    .login__input-password {
+        grid-column: 1 / 3;
+    }
 `;
 
 const TeamMemberLogin = () => {
@@ -67,8 +92,8 @@ const TeamMemberLogin = () => {
             <AuthWrapper imageUrl={teamWork} pageTitle="Login" switchLayout>
                 <Form onSubmit={login} noValidate>
                     <Input
+                        labelText="Email"
                         type="email"
-                        placeholder="Email"
                         value={email}
                         onChange={handleOnChangeEmail}
                         shape="rounded"
@@ -77,16 +102,22 @@ const TeamMemberLogin = () => {
                         required={true}
                         inputRef={focusRef}
                     />
-                    <Input
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={handleOnChangePassword}
-                        shape="rounded"
-                        size="lg"
-                        disabled={isFormSubmitting}
-                        required={true}
-                    />
+                    <PasswordLabelWrapper>
+                        <Label className="password-label">Password</Label>
+                        <Link to={""} className="forgot-password-link">
+                            Forgot password?
+                        </Link>
+                        <Input
+                            type="password"
+                            value={password}
+                            onChange={handleOnChangePassword}
+                            shape="rounded"
+                            size="lg"
+                            required={true}
+                            className="login__input-password"
+                            disabled={isFormSubmitting}
+                        />
+                    </PasswordLabelWrapper>
 
                     <Button
                         color="primary"

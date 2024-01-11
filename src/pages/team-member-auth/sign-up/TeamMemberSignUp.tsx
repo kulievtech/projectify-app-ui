@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Input, Toaster } from "../../../design-system";
-import { AuthWrapper } from "../../components";
+import { AuthWrapper, AuthActionLink } from "../../components";
 import teamWork from "../../../assets/images/team-work.jpg";
 import styled from "styled-components";
 import { useFocus } from "../../../custom-hooks/useFocus";
@@ -125,6 +125,12 @@ const TeamMemberCreatePassword = () => {
                         Create Password
                     </Button>
                 </Form>
+
+                <AuthActionLink
+                    hintText="Already have a password?"
+                    linkTo="../team-member/login"
+                    linkText="Login"
+                />
             </AuthWrapper>
             <Toaster />
         </>
