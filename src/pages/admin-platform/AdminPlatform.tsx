@@ -16,7 +16,10 @@ const AdminPlatform = () => {
                         email: "info@email.com"
                     }}
                 />
-                <SideBarLinks links={adminLinks} loggedOutLink="/admin/login" />
+                <SideBarLinks
+                    links={adminLinks}
+                    loggedOutLink="../admin/login"
+                />
             </SideBar>
             <AppContent>
                 <Outlet />
