@@ -12,7 +12,7 @@ import { useLocalStorage } from "../../../custom-hooks/useLocalStorage";
 const Form = styled.form`
     width: 100%;
     display: grid;
-    gap: var(--space-20);
+    gap: var(--space-30);
 `;
 
 const PasswordLabelWrapper = styled.div`
@@ -103,7 +103,10 @@ const TeamMemberLogin = () => {
                 />
                 <PasswordLabelWrapper>
                     <Label className="password-label">Password</Label>
-                    <Link to={""} className="forgot-password-link">
+                    <Link
+                        to={"../team-member/forgot-password"}
+                        className="forgot-password-link"
+                    >
                         Forgot password?
                     </Link>
                     <Input
