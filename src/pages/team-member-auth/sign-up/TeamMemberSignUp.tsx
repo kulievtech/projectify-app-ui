@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, Input, Toaster } from "../../../design-system";
 import { AuthWrapper, AuthActionLink } from "../../components";
-import teamWork from "../../../assets/images/team-work.jpg";
+import office from "../../../assets/images/office.jpg";
 import styled from "styled-components";
 import { useFocus } from "../../../custom-hooks/useFocus";
 import { teamMember } from "../../../api";
@@ -82,7 +82,7 @@ const TeamMemberCreatePassword = () => {
 
     return (
         <>
-            <AuthWrapper imageUrl={teamWork} pageTitle="Create Password">
+            <AuthWrapper imageUrl={office} pageTitle="Create Password">
                 <Form onSubmit={createPassword}>
                     <Input
                         type="email"
