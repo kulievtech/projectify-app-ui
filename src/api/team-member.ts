@@ -59,6 +59,57 @@ class TeamMember {
             throw error;
         }
     }
+
+    async forgotPassword(email: string) {
+        try {
+            const response = await fetch(`${this.url}/forgot-password`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email
+                })
+            });
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+
+            return response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async resetPassword(
+        password: string,
+        passwordConfirm: string,
+        passwordResetToken: string
+    ) {
+        try {
+            console.log(this.url);
+            const response = await fetch(`${this.url}/reset-password`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: `Bearer ${passwordResetToken}`
+                },
+                body: JSON.stringify({
+                    password,
+                    passwordConfirm
+                })
+            });
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+
+            return response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 export const teamMember = new TeamMember();
