@@ -13,7 +13,8 @@ import {
     TeamMemberCreatePassword,
     TeamMemberLogin,
     TeamMemberPlatform,
-    TeamMemberResetPassword
+    TeamMemberResetPassword,
+    TeamMemberForgotPassword
 } from "../pages";
 import { App } from "../App";
 
@@ -41,7 +42,7 @@ export const router = createBrowserRouter(
             ></Route>
             <Route
                 path="/team-member/forgot-password"
-                element={<TeamMemberResetPassword />}
+                element={<TeamMemberForgotPassword />}
             ></Route>
             <Route
                 path="/team-member/reset-password"
