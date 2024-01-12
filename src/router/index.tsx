@@ -12,7 +12,8 @@ import {
     AdminProjects,
     TeamMemberCreatePassword,
     TeamMemberLogin,
-    TeamMemberPlatform
+    TeamMemberPlatform,
+    TeamMemberResetPassword
 } from "../pages";
 import { App } from "../App";
 
@@ -37,6 +38,14 @@ export const router = createBrowserRouter(
             <Route
                 path="/team-member/login"
                 element={<TeamMemberLogin />}
+            ></Route>
+            <Route
+                path="/team-member/forgot-password"
+                element={<TeamMemberResetPassword />}
+            ></Route>
+            <Route
+                path="/team-member/reset-password"
+                element={<TeamMemberResetPassword />}
             ></Route>
             <Route path="/admin/platform" element={<AdminPlatform />}>
                 <Route path="projects" element={<AdminProjects />} />

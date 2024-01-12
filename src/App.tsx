@@ -1,16 +1,16 @@
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+
+const AppWrapper = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem;
+    font-size: 2rem;
+`;
 
 const App = () => {
     return (
-        <div
-            style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "3rem",
-                fontSize: "1.5rem"
-            }}
-        >
-            <h1>You are at Home Page</h1>
+        <AppWrapper>
             <Link to="admin/sign-up">Admin Sign Up</Link>
             <Link to="admin/login">Admin Login</Link>
             <Link to="admin/forgot-password">Admin Forgot Password</Link>
@@ -26,14 +26,19 @@ const App = () => {
                 Team Member Create Password
             </Link>
             <Link to="team-member/login">Team Member Login</Link>
-
+            <Link to="team-member/forgot-password">
+                Team Member Forgot Password
+            </Link>
+            <Link to="team-member/reset-password">
+                Team Member Reset Password
+            </Link>
             <Link to="team-member/platform">Team Member Platform</Link>
             <Link to="team-member/platform/projects">Team Member Projects</Link>
             <Link to="team-member/platform/stories">Team Member Stories</Link>
             <Link to="team-member/platform/personal-tasks">
                 Team Member Personal Tasks
             </Link>
-        </div>
+        </AppWrapper>
     );
 };
 export { App };
