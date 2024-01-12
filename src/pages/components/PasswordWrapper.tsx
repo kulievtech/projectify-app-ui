@@ -1,6 +1,7 @@
 import { FC, ReactNode } from "react";
 import { Typography } from "../../design-system";
 import styled from "styled-components";
+import { Toaster } from "react-hot-toast";
 
 type PasswordWrapperProps = {
     pageTitle: string;
@@ -9,7 +10,6 @@ type PasswordWrapperProps = {
 };
 
 const Wrapper = styled.main`
-    margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -24,7 +24,6 @@ const PasswordContent = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex-basis: 37rem;
 `;
 
 const PasswordImageWrapper = styled.div`
@@ -43,17 +42,20 @@ const PasswordWrapper: FC<PasswordWrapperProps> = ({
     children
 }) => {
     return (
-        <Wrapper>
-            <PasswordForm>
-                <PasswordContent>
-                    <Typography variant="h6">{pageTitle}</Typography>
-                    <PasswordImageWrapper>
-                        <PasswordImage src={imageUrl} />
-                    </PasswordImageWrapper>
-                    {children}
-                </PasswordContent>
-            </PasswordForm>
-        </Wrapper>
+        <>
+            <Wrapper>
+                <PasswordForm>
+                    <PasswordContent>
+                        <Typography variant="h6">{pageTitle}</Typography>
+                        <PasswordImageWrapper>
+                            <PasswordImage src={imageUrl} />
+                        </PasswordImageWrapper>
+                        {children}
+                    </PasswordContent>
+                </PasswordForm>
+            </Wrapper>
+            <Toaster />
+        </>
     );
 };
 
