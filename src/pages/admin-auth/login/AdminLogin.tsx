@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Input, Label, Toaster } from "../../../design-system";
+import { Button, Input, Label } from "../../../design-system";
 import { AuthWrapper, AuthActionLink } from "../../components";
 import styled from "styled-components";
 import { useFocus } from "../../../custom-hooks/useFocus";
@@ -90,65 +90,58 @@ const AdminLogin = () => {
     };
 
     return (
-        <>
-            <AuthWrapper
-                imageUrl={flatIronBuilding}
-                pageTitle="Login"
-                switchLayout
-            >
-                <Form onSubmit={authorizeLogin}>
+        <AuthWrapper imageUrl={flatIronBuilding} pageTitle="Login" switchLayout>
+            <Form onSubmit={authorizeLogin}>
+                <Input
+                    labelText="Email"
+                    type="email"
+                    value={email}
+                    onChange={handleOnChangeEmail}
+                    shape="rounded"
+                    size="lg"
+                    className="login__email"
+                    required={true}
+                    inputRef={focusRef}
+                    disabled={isFormSubmitting}
+                />
+                <PasswordLabelWrapper>
+                    <Label className="password-label">Password</Label>
+                    <Link
+                        to={"../admin/forgot-password"}
+                        className="forgot-password-link"
+                    >
+                        Forgot password?
+                    </Link>
                     <Input
-                        labelText="Email"
-                        type="email"
-                        value={email}
-                        onChange={handleOnChangeEmail}
+                        type="password"
+                        value={password}
+                        onChange={handleOnChangePassword}
                         shape="rounded"
                         size="lg"
-                        className="login__email"
                         required={true}
-                        inputRef={focusRef}
+                        className="login__input-password"
                         disabled={isFormSubmitting}
                     />
-                    <PasswordLabelWrapper>
-                        <Label className="password-label">Password</Label>
-                        <Link
-                            to={"../admin/forgot-password"}
-                            className="forgot-password-link"
-                        >
-                            Forgot password?
-                        </Link>
-                        <Input
-                            type="password"
-                            value={password}
-                            onChange={handleOnChangePassword}
-                            shape="rounded"
-                            size="lg"
-                            required={true}
-                            className="login__input-password"
-                            disabled={isFormSubmitting}
-                        />
-                    </PasswordLabelWrapper>
+                </PasswordLabelWrapper>
 
-                    <Button
-                        color="primary"
-                        size="lg"
-                        shape="rounded"
-                        className="login__submit-button"
-                        disabled={isFormSubmitting || !isFormSubmittable}
-                        fullWidth={true}
-                    >
-                        Login
-                    </Button>
-                </Form>
+                <Button
+                    color="primary"
+                    size="lg"
+                    shape="rounded"
+                    className="login__submit-button"
+                    disabled={isFormSubmitting || !isFormSubmittable}
+                    fullWidth={true}
+                >
+                    Login
+                </Button>
+            </Form>
 
-                <AuthActionLink
-                    hintText="Don’t have an account?"
-                    linkTo="../admin/sign-up"
-                    linkText="Sign Up"
-                />
-            </AuthWrapper>
-            <Toaster />
-        </>
+            <AuthActionLink
+                hintText="Don’t have an account?"
+                linkTo="../admin/sign-up"
+                linkText="Sign Up"
+            />
+        </AuthWrapper>
     );
 };
 

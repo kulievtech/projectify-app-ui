@@ -57,43 +57,37 @@ const AdminResetPassword = () => {
     };
 
     return (
-        <>
-            <PasswordWrapper
-                pageTitle="Reset Password?"
-                imageUrl={updatePassword}
-            >
-                <Form onSubmit={resetPassword}>
-                    <Input
-                        type="password"
-                        placeholder="New Password"
-                        value={newPassword}
-                        onChange={handleOnChangeNewPassword}
-                        shape="rounded"
-                        size="lg"
-                        required={true}
-                        inputRef={focusRef}
-                    />
-                    <Input
-                        type="password"
-                        placeholder="Confirm Password"
-                        value={newPasswordConfirm}
-                        onChange={handleOnChangeNewPasswordConfirm}
-                        shape="rounded"
-                        size="lg"
-                        required={true}
-                    />
-                    <Button
-                        color="primary"
-                        size="lg"
-                        shape="rounded"
-                        fullWidth={true}
-                    >
-                        Reset My Password
-                    </Button>
-                </Form>
-            </PasswordWrapper>
-            <Toaster />
-        </>
+        <PasswordWrapper pageTitle="Reset Password?" imageUrl={updatePassword}>
+            <Form onSubmit={resetPassword}>
+                <Input
+                    type="password"
+                    placeholder="New Password"
+                    value={newPassword}
+                    onChange={handleOnChangeNewPassword}
+                    shape="rounded"
+                    size="lg"
+                    required={true}
+                    inputRef={focusRef}
+                />
+                <Input
+                    type="password"
+                    placeholder="Confirm Password"
+                    value={newPasswordConfirm}
+                    onChange={handleOnChangeNewPasswordConfirm}
+                    shape="rounded"
+                    size="lg"
+                    required={true}
+                />
+                <Button
+                    color="primary"
+                    size="lg"
+                    shape="rounded"
+                    fullWidth={true}
+                >
+                    Reset My Password
+                </Button>
+            </Form>
+        </PasswordWrapper>
     );
 };
 

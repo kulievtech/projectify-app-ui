@@ -1,13 +1,7 @@
 import { useState } from "react";
 import { PasswordWrapper } from "../../components";
 import toast from "react-hot-toast";
-import {
-    Input,
-    Button,
-    Toaster,
-    Icon,
-    Typography
-} from "../../../design-system";
+import { Input, Button, Icon, Typography } from "../../../design-system";
 import forgotPassword from "../../../assets/illustrations/forgot-password.svg";
 import styled from "styled-components";
 import { useFocus } from "../../../custom-hooks/useFocus";
@@ -26,6 +20,7 @@ const StyledBackArrowLink = styled(Link)`
     gap: var(--space-20);
     margin: var(--space-50) 0 0 var(--space-50);
     cursor: pointer;
+    position: absolute;
 
     .arrow__left-icon {
         fill: var(--primary-500);
@@ -100,7 +95,6 @@ const AdminForgotPassword = () => {
                     </Button>
                 </Form>
             </PasswordWrapper>
-            <Toaster />
         </>
     );
 };

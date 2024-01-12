@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Input, Toaster, Label } from "../../../design-system";
+import { Button, Input, Label } from "../../../design-system";
 import { AuthWrapper } from "../../components";
 import office from "../../../assets/images/office.jpg";
 import styled from "styled-components";
@@ -88,49 +88,46 @@ const TeamMemberLogin = () => {
     };
 
     return (
-        <>
-            <AuthWrapper imageUrl={office} pageTitle="Login" switchLayout>
-                <Form onSubmit={login} noValidate>
+        <AuthWrapper imageUrl={office} pageTitle="Login" switchLayout>
+            <Form onSubmit={login} noValidate>
+                <Input
+                    labelText="Email"
+                    type="email"
+                    value={email}
+                    onChange={handleOnChangeEmail}
+                    shape="rounded"
+                    size="lg"
+                    disabled={isFormSubmitting}
+                    required={true}
+                    inputRef={focusRef}
+                />
+                <PasswordLabelWrapper>
+                    <Label className="password-label">Password</Label>
+                    <Link to={""} className="forgot-password-link">
+                        Forgot password?
+                    </Link>
                     <Input
-                        labelText="Email"
-                        type="email"
-                        value={email}
-                        onChange={handleOnChangeEmail}
+                        type="password"
+                        value={password}
+                        onChange={handleOnChangePassword}
                         shape="rounded"
                         size="lg"
-                        disabled={isFormSubmitting}
                         required={true}
-                        inputRef={focusRef}
+                        className="login__input-password"
+                        disabled={isFormSubmitting}
                     />
-                    <PasswordLabelWrapper>
-                        <Label className="password-label">Password</Label>
-                        <Link to={""} className="forgot-password-link">
-                            Forgot password?
-                        </Link>
-                        <Input
-                            type="password"
-                            value={password}
-                            onChange={handleOnChangePassword}
-                            shape="rounded"
-                            size="lg"
-                            required={true}
-                            className="login__input-password"
-                            disabled={isFormSubmitting}
-                        />
-                    </PasswordLabelWrapper>
+                </PasswordLabelWrapper>
 
-                    <Button
-                        color="primary"
-                        size="lg"
-                        shape="rounded"
-                        disabled={isFormSubmitting || !isFormSubmittable}
-                    >
-                        Login
-                    </Button>
-                </Form>
-            </AuthWrapper>
-            <Toaster />
-        </>
+                <Button
+                    color="primary"
+                    size="lg"
+                    shape="rounded"
+                    disabled={isFormSubmitting || !isFormSubmittable}
+                >
+                    Login
+                </Button>
+            </Form>
+        </AuthWrapper>
     );
 };
 

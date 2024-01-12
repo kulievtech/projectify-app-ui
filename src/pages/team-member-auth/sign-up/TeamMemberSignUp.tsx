@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Input, Toaster } from "../../../design-system";
+import { Button, Input } from "../../../design-system";
 import { AuthWrapper, AuthActionLink } from "../../components";
 import office from "../../../assets/images/office.jpg";
 import styled from "styled-components";
@@ -81,59 +81,56 @@ const TeamMemberCreatePassword = () => {
     };
 
     return (
-        <>
-            <AuthWrapper imageUrl={office} pageTitle="Create Password">
-                <Form onSubmit={createPassword}>
-                    <Input
-                        type="email"
-                        placeholder="Email"
-                        value={email}
-                        onChange={handleOnChangeEmail}
-                        shape="rounded"
-                        size="lg"
-                        className="create-password__email"
-                        disabled={isFormSubmitting}
-                        required={true}
-                        inputRef={focusRef}
-                    />
-                    <Input
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={handleOnChangePassword}
-                        shape="rounded"
-                        size="lg"
-                        disabled={isFormSubmitting}
-                        required={true}
-                    />
-                    <Input
-                        type="password"
-                        placeholder="Confirm Password"
-                        value={passwordConfirm}
-                        onChange={handleOnChangePasswordConfirm}
-                        shape="rounded"
-                        size="lg"
-                        required={true}
-                    />
-                    <Button
-                        color="primary"
-                        size="lg"
-                        shape="rounded"
-                        className="create-password__submit-button"
-                        disabled={isFormSubmitting || !isFormSubmittable}
-                    >
-                        Create Password
-                    </Button>
-                </Form>
-
-                <AuthActionLink
-                    hintText="Already have a password?"
-                    linkTo="../team-member/login"
-                    linkText="Login"
+        <AuthWrapper imageUrl={office} pageTitle="Create Password">
+            <Form onSubmit={createPassword}>
+                <Input
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={handleOnChangeEmail}
+                    shape="rounded"
+                    size="lg"
+                    className="create-password__email"
+                    disabled={isFormSubmitting}
+                    required={true}
+                    inputRef={focusRef}
                 />
-            </AuthWrapper>
-            <Toaster />
-        </>
+                <Input
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={handleOnChangePassword}
+                    shape="rounded"
+                    size="lg"
+                    disabled={isFormSubmitting}
+                    required={true}
+                />
+                <Input
+                    type="password"
+                    placeholder="Confirm Password"
+                    value={passwordConfirm}
+                    onChange={handleOnChangePasswordConfirm}
+                    shape="rounded"
+                    size="lg"
+                    required={true}
+                />
+                <Button
+                    color="primary"
+                    size="lg"
+                    shape="rounded"
+                    className="create-password__submit-button"
+                    disabled={isFormSubmitting || !isFormSubmittable}
+                >
+                    Create Password
+                </Button>
+            </Form>
+
+            <AuthActionLink
+                hintText="Already have a password?"
+                linkTo="../team-member/login"
+                linkText="Login"
+            />
+        </AuthWrapper>
     );
 };
 

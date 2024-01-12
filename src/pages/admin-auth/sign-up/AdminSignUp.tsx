@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Input, Toaster } from "../../../design-system";
+import { Button, Input } from "../../../design-system";
 import { AuthWrapper, AuthActionLink } from "../../components";
 import styled from "styled-components";
 import { useFocus } from "../../../custom-hooks/useFocus";
@@ -109,109 +109,106 @@ const AdminSignUp = () => {
     };
 
     return (
-        <>
-            <AuthWrapper imageUrl={flatIronBuilding} pageTitle="Sign Up">
-                <Form onSubmit={createAccount}>
-                    <Input
-                        type="text"
-                        placeholder="First Name"
-                        value={firstName}
-                        onChange={handleOnChangeFirstName}
-                        shape="rounded"
-                        size="lg"
-                        required={true}
-                        inputRef={focusRef}
-                        disabled={isFormSubmitting}
-                    />
-                    <Input
-                        type="text"
-                        placeholder="Last Name"
-                        value={lastName}
-                        onChange={handleOnChangeLastName}
-                        shape="rounded"
-                        size="lg"
-                        required={true}
-                        disabled={isFormSubmitting}
-                    />
-                    <Input
-                        type="text"
-                        placeholder="Preferred First Name"
-                        value={preferredFirstName}
-                        onChange={handleOnChangePreferredFirstName}
-                        shape="rounded"
-                        size="lg"
-                        className="sign-up__preferred-name"
-                        disabled={isFormSubmitting}
-                    />
-                    <Input
-                        type="text"
-                        placeholder="Company Name"
-                        value={companyName}
-                        onChange={handleOnChangeCompanyName}
-                        shape="rounded"
-                        size="lg"
-                        disabled={isFormSubmitting}
-                    />
-                    <Input
-                        type="text"
-                        placeholder="Company Position"
-                        value={companyPosition}
-                        onChange={handleOnChangeCompanyPosition}
-                        shape="rounded"
-                        size="lg"
-                        disabled={isFormSubmitting}
-                    />
-                    <Input
-                        type="email"
-                        placeholder="Email"
-                        value={email}
-                        onChange={handleOnChangeEmail}
-                        shape="rounded"
-                        size="lg"
-                        required={true}
-                        className="sign-up__email"
-                        disabled={isFormSubmitting}
-                    />
-                    <Input
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={handleOnChangePassword}
-                        shape="rounded"
-                        size="lg"
-                        required={true}
-                        disabled={isFormSubmitting}
-                    />
-                    <Input
-                        type="password"
-                        placeholder="Password Confirmation"
-                        value={passwordConfirm}
-                        onChange={handleOnChangePasswordConfirm}
-                        shape="rounded"
-                        size="lg"
-                        required={true}
-                        disabled={isFormSubmitting}
-                    />
-                    <Button
-                        color="primary"
-                        size="lg"
-                        shape="rounded"
-                        className="sign-up__submit-button"
-                        disabled={isFormSubmitting || !isFormSubmittable}
-                    >
-                        Sign Up
-                    </Button>
-                </Form>
-                <div style={{ marginTop: "auto" }}>
-                    <AuthActionLink
-                        linkText="Login"
-                        hintText="Already have an account?"
-                        linkTo="../admin/login"
-                    />
-                </div>
-            </AuthWrapper>
-            <Toaster />
-        </>
+        <AuthWrapper imageUrl={flatIronBuilding} pageTitle="Sign Up">
+            <Form onSubmit={createAccount}>
+                <Input
+                    type="text"
+                    placeholder="First Name"
+                    value={firstName}
+                    onChange={handleOnChangeFirstName}
+                    shape="rounded"
+                    size="lg"
+                    required={true}
+                    inputRef={focusRef}
+                    disabled={isFormSubmitting}
+                />
+                <Input
+                    type="text"
+                    placeholder="Last Name"
+                    value={lastName}
+                    onChange={handleOnChangeLastName}
+                    shape="rounded"
+                    size="lg"
+                    required={true}
+                    disabled={isFormSubmitting}
+                />
+                <Input
+                    type="text"
+                    placeholder="Preferred First Name"
+                    value={preferredFirstName}
+                    onChange={handleOnChangePreferredFirstName}
+                    shape="rounded"
+                    size="lg"
+                    className="sign-up__preferred-name"
+                    disabled={isFormSubmitting}
+                />
+                <Input
+                    type="text"
+                    placeholder="Company Name"
+                    value={companyName}
+                    onChange={handleOnChangeCompanyName}
+                    shape="rounded"
+                    size="lg"
+                    disabled={isFormSubmitting}
+                />
+                <Input
+                    type="text"
+                    placeholder="Company Position"
+                    value={companyPosition}
+                    onChange={handleOnChangeCompanyPosition}
+                    shape="rounded"
+                    size="lg"
+                    disabled={isFormSubmitting}
+                />
+                <Input
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={handleOnChangeEmail}
+                    shape="rounded"
+                    size="lg"
+                    required={true}
+                    className="sign-up__email"
+                    disabled={isFormSubmitting}
+                />
+                <Input
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={handleOnChangePassword}
+                    shape="rounded"
+                    size="lg"
+                    required={true}
+                    disabled={isFormSubmitting}
+                />
+                <Input
+                    type="password"
+                    placeholder="Password Confirmation"
+                    value={passwordConfirm}
+                    onChange={handleOnChangePasswordConfirm}
+                    shape="rounded"
+                    size="lg"
+                    required={true}
+                    disabled={isFormSubmitting}
+                />
+                <Button
+                    color="primary"
+                    size="lg"
+                    shape="rounded"
+                    className="sign-up__submit-button"
+                    disabled={isFormSubmitting || !isFormSubmittable}
+                >
+                    Sign Up
+                </Button>
+            </Form>
+            <div style={{ marginTop: "auto" }}>
+                <AuthActionLink
+                    linkText="Login"
+                    hintText="Already have an account?"
+                    linkTo="../admin/login"
+                />
+            </div>
+        </AuthWrapper>
     );
 };
 
