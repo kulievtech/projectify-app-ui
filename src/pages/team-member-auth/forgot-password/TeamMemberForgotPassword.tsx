@@ -5,8 +5,8 @@ import { Input, Button, Icon, Typography } from "../../../design-system";
 import forgotPassword from "../../../assets/illustrations/forgot-password.svg";
 import styled from "styled-components";
 import { useFocus } from "../../../custom-hooks/useFocus";
-import { admin } from "../../../api";
 import { Link } from "react-router-dom";
+import { teamMember } from "../../../api";
 
 const Form = styled.form`
     width: 100%;
@@ -48,7 +48,7 @@ const TeamMemberForgotPassword = () => {
         e.preventDefault();
 
         try {
-            const response = await admin.forgotPassword(email);
+            const response = await teamMember.forgotPassword(email);
             setEmail("");
             toast.success(response.message);
         } catch (error) {

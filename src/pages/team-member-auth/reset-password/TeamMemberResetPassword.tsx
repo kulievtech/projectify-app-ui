@@ -4,7 +4,7 @@ import { Input, Button, Toaster } from "../../../design-system";
 import styled from "styled-components";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useFocus } from "../../../custom-hooks/useFocus";
-import { admin } from "../../../api";
+import { teamMember } from "../../../api";
 import toast from "react-hot-toast";
 import updatePassword from "../../../assets/illustrations/reset-password.svg";
 
@@ -36,7 +36,7 @@ const TeamMemberResetPassword = () => {
         e.preventDefault();
 
         try {
-            const response = await admin.resetPassword(
+            const response = await teamMember.resetPassword(
                 newPassword,
                 newPasswordConfirm,
                 passwordResetToken as string
@@ -47,7 +47,7 @@ const TeamMemberResetPassword = () => {
 
             toast.success(response.message);
             setTimeout(() => {
-                navigate("/admin/login");
+                navigate("/team-member/login");
             }, 4000);
         } catch (error) {
             if (error instanceof Error) {
