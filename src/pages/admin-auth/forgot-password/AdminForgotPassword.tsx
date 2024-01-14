@@ -60,7 +60,7 @@ const AdminForgotPassword = () => {
 
     return (
         <>
-            <StyledBackArrowLink to={"../admin/login"}>
+            <StyledBackArrowLink to={"/admin/login"}>
                 <Icon iconName="arrow-left" className="arrow__left-icon" />
                 <Typography
                     variant="paragraphSM"

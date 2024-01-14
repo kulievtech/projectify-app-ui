@@ -127,7 +127,7 @@ const TeamMemberCreatePassword = () => {
 
             <AuthActionLink
                 hintText="Already have a password?"
-                linkTo="../team-member/login"
+                linkTo="/team-member/login"
                 linkText="Login"
             />
         </AuthWrapper>

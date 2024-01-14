@@ -60,7 +60,7 @@ const TeamMemberForgotPassword = () => {
 
     return (
         <>
-            <StyledBackArrowLink to={"../team-member/login"}>
+            <StyledBackArrowLink to={"/team-member/login"}>
                 <Icon iconName="arrow-left" className="arrow__left-icon" />
                 <Typography
                     variant="paragraphSM"

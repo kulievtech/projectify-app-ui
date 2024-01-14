@@ -104,7 +104,7 @@ const TeamMemberLogin = () => {
                 <PasswordLabelWrapper>
                     <Label className="password-label">Password</Label>
                     <Link
-                        to={"../team-member/forgot-password"}
+                        to={"/team-member/forgot-password"}
                         className="forgot-password-link"
                     >
                         Forgot password?

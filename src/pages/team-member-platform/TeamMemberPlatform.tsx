@@ -18,7 +18,7 @@ const TeamMemberPlatform = () => {
                 />
                 <SideBarLinks
                     links={teamMemberLinks}
-                    loggedOutLink="../team-member/login"
+                    loggedOutLink="/team-member/login"
                 />
             </SideBar>
             <AppContent>
