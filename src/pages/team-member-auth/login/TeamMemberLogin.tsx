@@ -3,11 +3,11 @@ import { Button, Input, Label } from "../../../design-system";
 import { AuthWrapper } from "../../components";
 import office from "../../../assets/images/office.jpg";
 import styled from "styled-components";
-import { useFocus } from "../../../custom-hooks/useFocus";
+import { useFocus } from "../../../hooks/useFocus";
 import { teamMember } from "../../../api";
 import toast from "react-hot-toast";
 import { useNavigate, Link } from "react-router-dom";
-import { useLocalStorage } from "../../../custom-hooks/useLocalStorage";
+import { useLocalStorage } from "../../../hooks/useLocalStorage";
 
 const Form = styled.form`
     width: 100%;

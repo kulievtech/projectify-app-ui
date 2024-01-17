@@ -3,7 +3,7 @@ import { Button, Input } from "../../../design-system";
 import { AuthWrapper, AuthActionLink } from "../../components";
 import office from "../../../assets/images/office.jpg";
 import styled from "styled-components";
-import { useFocus } from "../../../custom-hooks/useFocus";
+import { useFocus } from "../../../hooks/useFocus";
 import { teamMember } from "../../../api";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";

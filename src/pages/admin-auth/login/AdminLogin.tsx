@@ -2,12 +2,12 @@ import { useState } from "react";
 import { Button, Input, Label } from "../../../design-system";
 import { AuthWrapper, AuthActionLink } from "../../components";
 import styled from "styled-components";
-import { useFocus } from "../../../custom-hooks/useFocus";
+import { useFocus } from "../../../hooks/useFocus";
 import { Link, useNavigate } from "react-router-dom";
 import { admin } from "../../../api";
 import toast from "react-hot-toast";
 import flatIronBuilding from "../../../assets/images/flat-iron-building.jpg";
-import { useLocalStorage } from "../../../custom-hooks/useLocalStorage";
+import { useLocalStorage } from "../../../hooks/useLocalStorage";
 
 const Form = styled.form`
     width: 100%;
