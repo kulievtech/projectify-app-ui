@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { Input, Button, Icon, Typography } from "../../../design-system";
 import forgotPassword from "../../../assets/illustrations/forgot-password.svg";
 import styled from "styled-components";
-import { useFocus } from "../../../custom-hooks/useFocus";
+import { useFocus } from "../../../hooks/useFocus";
 import { Link } from "react-router-dom";
 import { teamMember } from "../../../api";
 

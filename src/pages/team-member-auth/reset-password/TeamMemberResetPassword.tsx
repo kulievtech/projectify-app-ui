@@ -3,7 +3,7 @@ import { PasswordWrapper } from "../../components";
 import { Input, Button, Toaster } from "../../../design-system";
 import styled from "styled-components";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { useFocus } from "../../../custom-hooks/useFocus";
+import { useFocus } from "../../../hooks/useFocus";
 import { teamMember } from "../../../api";
 import toast from "react-hot-toast";
 import updatePassword from "../../../assets/illustrations/reset-password.svg";

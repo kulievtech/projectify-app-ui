@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Typography } from "../Typography";
 import { Icon } from "../Icon";
 import { NavLink } from "react-router-dom";
-import { useLocalStorage } from "../../custom-hooks/useLocalStorage";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 type SideBarLink = {
     linkText: string;
