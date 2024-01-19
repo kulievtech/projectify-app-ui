@@ -1,10 +1,24 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { AppContent, AppLayout, SideBarUser } from "../components";
-import user from "../../assets/images/user2.jpg";
 import { SideBar, SideBarLinks } from "../../design-system";
+import { useLocalStorage, useStore } from "../../hooks";
 import { teamMemberLinks } from "./teamMemberLinks";
+import { Actions } from "../../store";
 
 const TeamMemberPlatform = () => {
+    const navigate = useNavigate();
+    const {
+        state: { user },
+        dispatch
+    } = useStore();
+    const { removeItem } = useLocalStorage();
+
+    const logOut = () => {
+        removeItem("authToken");
+        dispatch({ type: Actions.RESET_STATE });
+        navigate("/team-member/sign-in");
+    };
+
     return (
         <AppLayout>
             <SideBar>
@@ -12,14 +26,10 @@ const TeamMemberPlatform = () => {
                     details={{
                         firstName: "Alex",
                         lastName: "Williams",
-                        imageUrl: user,
                         email: "example@gmail.com"
                     }}
                 />
-                <SideBarLinks
-                    links={teamMemberLinks}
-                    loggedOutLink="/team-member/login"
-                />
+                <SideBarLinks links={teamMemberLinks} logOut={logOut} />
             </SideBar>
             <AppContent>
                 <Outlet />

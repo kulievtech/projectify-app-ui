@@ -17,49 +17,68 @@ import {
     TeamMemberResetPassword,
     TeamMemberForgotPassword
 } from "../pages";
+import { UserRole } from "../types";
+import { Auth } from "./Auth";
 import { ProtectedRoute } from "./ProtectedRoute";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
         <>
             <Route path="/" element={<App />} />
-            <Route path="admin/sign-up" element={<AdminSignUp />} />
-            <Route path="admin/login" element={<AdminLogin />} />
+            <Route
+                path="admin/sign-up"
+                element={
+                    <Auth
+                        component={<AdminSignUp />}
+                        userType={UserRole.admin}
+                    />
+                }
+            />
+            <Route
+                path="admin/login"
+                element={
+                    <Auth
+                        component={<AdminLogin />}
+                        userType={UserRole.admin}
+                    />
+                }
+            />
             <Route
                 path="admin/forgot-password"
-                element={<AdminForgotPassword />}
+                element={
+                    <Auth
+                        component={<AdminForgotPassword />}
+                        userType={UserRole.admin}
+                    />
+                }
             />
             <Route
                 path="admin/reset-password"
-                element={<AdminResetPassword />}
+                element={
+                    <Auth
+                        component={<AdminResetPassword />}
+                        userType={UserRole.admin}
+                    />
+                }
             />
-
             <Route
                 path="admin/platform"
                 element={
                     <ProtectedRoute
                         component={<AdminPlatform />}
-                        userType="admin"
-                        to="/admin/login"
+                        userType={UserRole.admin}
                     />
                 }
             >
                 <Route path="projects" element={<AdminProjects />} />
-                <Route path="stories" element={<h1>Admin Stories</h1>} />
+                <Route path="stories" element={<h1>Stories</h1>} />
                 <Route
                     path="personal-tasks"
-                    element={<h1>Admin Personal Tasks</h1>}
+                    element={<h1>Personal Tasks</h1>}
                 />
-                <Route
-                    path="team-members"
-                    element={<h1>Admin Team Members</h1>}
-                />
+                <Route path="team-members" element={<h1>Team Members</h1>} />
             </Route>
 
-            <Route
-                path="team-member/create-password"
-                element={<TeamMemberCreatePassword />}
-            />
             <Route path="team-member/login" element={<TeamMemberLogin />} />
             <Route
                 path="team-member/forgot-password"
@@ -69,26 +88,25 @@ export const router = createBrowserRouter(
                 path="team-member/reset-password"
                 element={<TeamMemberResetPassword />}
             />
-
+            <Route
+                path="team-member/create-password"
+                element={<TeamMemberCreatePassword />}
+            />
             <Route
                 path="team-member/platform"
                 element={
                     <ProtectedRoute
                         component={<TeamMemberPlatform />}
-                        userType="team-member"
-                        to="/team-member/login"
+                        userType={UserRole.teamMember}
                     />
                 }
             >
-                <Route
-                    path="projects"
-                    element={<h1>Team Member Projects</h1>}
-                />
-                <Route path="stories" element={<h1>Team Member Stories</h1>} />
+                <Route path="stories" element={<h1>Stories</h1>} />
                 <Route
                     path="personal-tasks"
-                    element={<h1>Team Member Personal Tasks</h1>}
+                    element={<h1>Personal Tasks</h1>}
                 />
+                <Route path="team-members" element={<h1>Members</h1>} />
             </Route>
         </>
     )

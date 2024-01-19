@@ -1,5 +1,5 @@
 import { ActionType, Actions } from "../actions";
-import { GlobalState } from "../state";
+import { GlobalState, initialState } from "../state";
 
 export const userReducer = (
     state: GlobalState,
@@ -10,6 +10,8 @@ export const userReducer = (
             ...state,
             user: action.payload
         };
+    } else if (action.type === Actions.RESET_STATE) {
+        return initialState;
     }
 
     return state;
