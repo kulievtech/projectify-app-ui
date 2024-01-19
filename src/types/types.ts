@@ -1,5 +1,7 @@
-export type UserRole = "admin" | "team-member";
-
+export enum UserRole {
+    admin = "admin",
+    teamMember = "teamMember"
+}
 export interface UserType {
     firstName: string;
     lastName: string;
