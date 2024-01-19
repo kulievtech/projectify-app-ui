@@ -1,3 +1,5 @@
+import { GetMeResponseType, UserType } from "../types";
+
 type SignUpInput = {
     email: string;
     password: string;
@@ -99,6 +101,26 @@ class TeamMember {
                     password,
                     passwordConfirm
                 })
+            });
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+
+            return response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async getMe(): Promise<GetMeResponseType> {
+        try {
+            const rawAuthToken = localStorage.getItem("authToken");
+            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+            const response = await fetch(`${this.url}/me`, {
+                headers: {
+                    authorization: `Bearer ${authToken}`
+                }
             });
             if (!response.ok) {
                 const data = await response.json();
