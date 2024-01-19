@@ -3,6 +3,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { UserRole } from "../types";
 import { useLocalStorage, useStore } from "../hooks";
 import { admin } from "../api";
+import { teamMember } from "../api";
 import { Actions, InitUserAction } from "../store";
 
 type ProtectedRouteProps = {
@@ -37,6 +38,19 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
                         navigate("../");
                     });
             } else if (userType === UserRole.teamMember) {
+                teamMember
+                    .getMe()
+                    .then((data): void => {
+                        const action: InitUserAction = {
+                            type: Actions.INIT_USER,
+                            payload: data.data
+                        };
+                        dispatch(action);
+                        setItem("userRole", data.data.role);
+                    })
+                    .catch((error: Error) => {
+                        navigate("../");
+                    });
             }
         }
     }, [userType]);
