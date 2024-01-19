@@ -16,20 +16,9 @@ type SideBarLinksGroup = {
     links: SideBarLink[];
 };
 
-type SideBarLinksProps = { links: SideBarLinksGroup[]; loggedOutLink: string };
+type SideBarLinksProps = { links: SideBarLinksGroup[]; logOut: () => void };
 
-const SideBarLinks: React.FC<SideBarLinksProps> = ({
-    links,
-    loggedOutLink
-}) => {
-    const navigate = useNavigate();
-    const { removeItem } = useLocalStorage();
-
-    const logOut = () => {
-        removeItem("authToken");
-        navigate(loggedOutLink);
-    };
-
+const SideBarLinks: React.FC<SideBarLinksProps> = ({ links, logOut }) => {
     return (
         <>
             {links.map((group, idx) => {
