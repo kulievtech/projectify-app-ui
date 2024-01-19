@@ -60,18 +60,22 @@ const AdminLogin = () => {
         setPassword(value);
     };
 
+    const saveAuthToken = (token: string) => {
+        setItem("authToken", token);
+    };
+
     const authorizeLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         try {
             setIsFormSubmitting(true);
 
-            const response = await admin.signIn({
+            const { token } = await admin.signIn({
                 email,
                 password
             });
 
-            setItem("authToken", response.token);
+            saveAuthToken(token);
 
             setIsFormSubmitting(false);
             setEmail("");
