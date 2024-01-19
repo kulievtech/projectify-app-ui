@@ -44,9 +44,14 @@ const TeamMemberLogin = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
+    const [isError, setIsError] = useState<boolean>(false);
+
     const navigate = useNavigate();
+
     const isFormSubmittable = email && password;
+
     const { setItem } = useLocalStorage();
+
     const focusRef = useFocus();
 
     const handleOnChangeEmail = (value: string) => {
@@ -57,18 +62,22 @@ const TeamMemberLogin = () => {
         setPassword(value);
     };
 
+    const saveAuthToken = (token: string) => {
+        setItem("authToken", token);
+    };
+
     const login = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         try {
             setIsFormSubmitting(true);
 
-            const response = await teamMember.signIn({
+            const { token } = await teamMember.signIn({
                 email,
                 password
             });
 
-            setItem("authToken", response.token);
+            saveAuthToken(token);
 
             setIsFormSubmitting(false);
 
@@ -81,7 +90,7 @@ const TeamMemberLogin = () => {
         } catch (error) {
             if (error instanceof Error) {
                 setIsFormSubmitting(false);
-
+                setIsError(true);
                 toast.error(error.message);
             }
         }

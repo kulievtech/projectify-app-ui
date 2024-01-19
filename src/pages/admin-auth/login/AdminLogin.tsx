@@ -45,7 +45,9 @@ const AdminLogin = () => {
     const [password, setPassword] = useState<string>("");
     const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
     const [isError, setIsError] = useState<boolean>(false);
+
     const { setItem } = useLocalStorage();
+
     const navigate = useNavigate();
 
     const focusRef = useFocus();
