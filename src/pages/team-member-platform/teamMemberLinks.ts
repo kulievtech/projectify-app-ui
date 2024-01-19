@@ -3,7 +3,7 @@ const teamMemberLinks = [
         title: "Menu",
         links: [
             {
-                linkText: "Project",
+                linkText: "Projects",
                 linkTo: "projects",
                 iconName: "projects"
             },
