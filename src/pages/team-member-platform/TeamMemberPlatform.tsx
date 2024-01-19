@@ -1,10 +1,18 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { AppContent, AppLayout, SideBarUser } from "../components";
 import user from "../../assets/images/user2.jpg";
 import { SideBar, SideBarLinks } from "../../design-system";
+import { useLocalStorage } from "../../hooks";
 import { teamMemberLinks } from "./teamMemberLinks";
 
 const TeamMemberPlatform = () => {
+    const navigate = useNavigate();
+    const { removeItem } = useLocalStorage();
+
+    const logOut = () => {
+        navigate("admin/sign-in");
+    };
+
     return (
         <AppLayout>
             <SideBar>
@@ -16,10 +24,7 @@ const TeamMemberPlatform = () => {
                         email: "example@gmail.com"
                     }}
                 />
-                <SideBarLinks
-                    links={teamMemberLinks}
-                    loggedOutLink="/team-member/login"
-                />
+                <SideBarLinks links={teamMemberLinks} logOut={logOut} />
             </SideBar>
             <AppContent>
                 <Outlet />
