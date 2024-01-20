@@ -7,6 +7,7 @@ import { useFocus } from "../../../hooks/useFocus";
 import { admin } from "../../../api";
 import toast from "react-hot-toast";
 import updatePassword from "../../../assets/illustrations/reset-password.svg";
+import { PasswordInputWithEye } from "../../components/PasswordInputWithEye";
 
 const Form = styled.form`
     width: 100%;
@@ -19,10 +20,13 @@ const AdminResetPassword = () => {
     const [newPasswordConfirm, setNewPasswordConfirm] = useState<string>("");
     const [searchParams] = useSearchParams();
     const passwordResetToken = searchParams.get("passwordResetToken");
+    const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
 
     const navigate = useNavigate();
 
     const focusRef = useFocus();
+
+    const isFormSubmittable = newPassword && newPasswordConfirm;
 
     const handleOnChangeNewPassword = (value: string) => {
         setNewPassword(value);
@@ -41,7 +45,7 @@ const AdminResetPassword = () => {
                 newPasswordConfirm,
                 passwordResetToken as string
             );
-
+            setIsFormSubmitting(false);
             setNewPassword("");
             setNewPasswordConfirm("");
 
@@ -59,30 +63,25 @@ const AdminResetPassword = () => {
     return (
         <PasswordWrapper pageTitle="Reset Password?" imageUrl={updatePassword}>
             <Form onSubmit={resetPassword}>
-                <Input
-                    type="password"
+                <PasswordInputWithEye
                     placeholder="New Password"
-                    value={newPassword}
-                    onChange={handleOnChangeNewPassword}
-                    shape="rounded"
-                    size="lg"
-                    required={true}
-                    inputRef={focusRef}
+                    password={newPassword}
+                    handleOnChangePassword={handleOnChangeNewPassword}
+                    isFormSubmitting={isFormSubmitting}
+                    focusRef={focusRef}
                 />
-                <Input
-                    type="password"
+                <PasswordInputWithEye
                     placeholder="Confirm Password"
-                    value={newPasswordConfirm}
-                    onChange={handleOnChangeNewPasswordConfirm}
-                    shape="rounded"
-                    size="lg"
-                    required={true}
+                    password={newPasswordConfirm}
+                    handleOnChangePassword={handleOnChangeNewPasswordConfirm}
+                    isFormSubmitting={isFormSubmitting}
                 />
                 <Button
                     color="primary"
                     size="lg"
                     shape="rounded"
                     fullWidth={true}
+                    disabled={isFormSubmitting || !isFormSubmittable}
                 >
                     Reset My Password
                 </Button>

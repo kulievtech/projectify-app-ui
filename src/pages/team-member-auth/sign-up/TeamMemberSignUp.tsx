@@ -7,6 +7,7 @@ import { useFocus } from "../../../hooks/useFocus";
 import { teamMember } from "../../../api";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { PasswordInputWithEye } from "../../components/PasswordInputWithEye";
 
 const Form = styled.form`
     width: 100%;
@@ -95,24 +96,17 @@ const TeamMemberCreatePassword = () => {
                     required={true}
                     inputRef={focusRef}
                 />
-                <Input
-                    type="password"
+                <PasswordInputWithEye
+                    isFormSubmitting={isFormSubmitting}
+                    password={password}
+                    handleOnChangePassword={handleOnChangePassword}
                     placeholder="Password"
-                    value={password}
-                    onChange={handleOnChangePassword}
-                    shape="rounded"
-                    size="lg"
-                    disabled={isFormSubmitting}
-                    required={true}
                 />
-                <Input
-                    type="password"
-                    placeholder="Confirm Password"
-                    value={passwordConfirm}
-                    onChange={handleOnChangePasswordConfirm}
-                    shape="rounded"
-                    size="lg"
-                    required={true}
+                <PasswordInputWithEye
+                    isFormSubmitting={isFormSubmitting}
+                    password={passwordConfirm}
+                    handleOnChangePassword={handleOnChangePasswordConfirm}
+                    placeholder="Password Confirm"
                 />
                 <Button
                     color="primary"
