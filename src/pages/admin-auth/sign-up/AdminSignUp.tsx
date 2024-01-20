@@ -6,6 +6,7 @@ import { useFocus } from "../../../hooks/useFocus";
 import toast from "react-hot-toast";
 import { admin } from "../../../api";
 import flatIronBuilding from "../../../assets/images/flat-iron-building.jpg";
+import { PasswordInputWithEye } from "../../components/PasswordInputWithEye";
 
 const Form = styled.form`
     width: 100%;
@@ -171,25 +172,17 @@ const AdminSignUp = () => {
                     className="sign-up__email"
                     disabled={isFormSubmitting}
                 />
-                <Input
-                    type="password"
+                <PasswordInputWithEye
                     placeholder="Password"
-                    value={password}
-                    onChange={handleOnChangePassword}
-                    shape="rounded"
-                    size="lg"
-                    required={true}
-                    disabled={isFormSubmitting}
+                    password={password}
+                    handleOnChangePassword={handleOnChangePassword}
+                    isFormSubmitting={isFormSubmitting}
                 />
-                <Input
-                    type="password"
-                    placeholder="Password Confirmation"
-                    value={passwordConfirm}
-                    onChange={handleOnChangePasswordConfirm}
-                    shape="rounded"
-                    size="lg"
-                    required={true}
-                    disabled={isFormSubmitting}
+                <PasswordInputWithEye
+                    placeholder="Password Confirm"
+                    password={passwordConfirm}
+                    handleOnChangePassword={handleOnChangePasswordConfirm}
+                    isFormSubmitting={isFormSubmitting}
                 />
                 <Button
                     color="primary"

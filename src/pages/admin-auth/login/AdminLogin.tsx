@@ -8,6 +8,7 @@ import { admin } from "../../../api";
 import toast from "react-hot-toast";
 import flatIronBuilding from "../../../assets/images/flat-iron-building.jpg";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
+import { PasswordInputWithEye } from "../../components/PasswordInputWithEye";
 
 const Form = styled.form`
     width: 100%;
@@ -118,15 +119,11 @@ const AdminLogin = () => {
                     >
                         Forgot password?
                     </Link>
-                    <Input
-                        type="password"
-                        value={password}
-                        onChange={handleOnChangePassword}
-                        shape="rounded"
-                        size="lg"
-                        required={true}
-                        className="login__input-password"
-                        disabled={isFormSubmitting}
+                    <PasswordInputWithEye
+                        password={password}
+                        inputClassName="login__input-password"
+                        handleOnChangePassword={handleOnChangePassword}
+                        isFormSubmitting={isFormSubmitting}
                     />
                 </PasswordLabelWrapper>
 

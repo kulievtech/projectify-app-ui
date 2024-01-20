@@ -39,14 +39,6 @@ const PasswordLabelWrapper = styled.div`
     .login__input-password {
         grid-column: 1 / 3;
     }
-
-    .password-eye {
-        position: absolute;
-        right: var(--space-16);
-        top: 50%;
-        transform: translateY(-50%);
-        cursor: pointer;
-    }
 `;
 
 const TeamMemberLogin = () => {
@@ -54,8 +46,6 @@ const TeamMemberLogin = () => {
     const [password, setPassword] = useState<string>("");
     const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
     const [isError, setIsError] = useState<boolean>(false);
-    const [isPasswordRevealed, setIsPasswordRevealed] =
-        useState<boolean>(false);
 
     const navigate = useNavigate();
 
@@ -75,10 +65,6 @@ const TeamMemberLogin = () => {
 
     const saveAuthToken = (token: string) => {
         setItem("authToken", token);
-    };
-
-    const handleRevealPasswordOnclick = () => {
-        setIsPasswordRevealed(!isPasswordRevealed);
     };
 
     const login = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -138,7 +124,6 @@ const TeamMemberLogin = () => {
                         password={password}
                         handleOnChangePassword={handleOnChangePassword}
                         inputClassName="login__input-password"
-                        iconClassName="password-eye"
                     />
                 </PasswordLabelWrapper>
 
