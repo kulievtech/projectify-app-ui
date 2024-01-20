@@ -68,6 +68,7 @@ input::placeholder,
     display: flex;
     flex-direction: column;
     gap: 4px;
+    position: relative;
 }
 
 .input-wrapper label {

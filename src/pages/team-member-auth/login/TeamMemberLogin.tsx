@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Input, Label } from "../../../design-system";
+import { Button, Icon, Input, Label } from "../../../design-system";
 import { AuthWrapper } from "../../components";
 import office from "../../../assets/images/office.jpg";
 import styled from "styled-components";
@@ -38,6 +38,14 @@ const PasswordLabelWrapper = styled.div`
     .login__input-password {
         grid-column: 1 / 3;
     }
+
+    .password-eye {
+        position: absolute;
+        right: var(--space-16);
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
 `;
 
 const TeamMemberLogin = () => {
@@ -45,6 +53,8 @@ const TeamMemberLogin = () => {
     const [password, setPassword] = useState<string>("");
     const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
     const [isError, setIsError] = useState<boolean>(false);
+    const [isPasswordRevealed, setIsPasswordRevealed] =
+        useState<boolean>(false);
 
     const navigate = useNavigate();
 
@@ -64,6 +74,10 @@ const TeamMemberLogin = () => {
 
     const saveAuthToken = (token: string) => {
         setItem("authToken", token);
+    };
+
+    const handleRevealPasswordOnclick = () => {
+        setIsPasswordRevealed(!isPasswordRevealed);
     };
 
     const login = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -119,7 +133,8 @@ const TeamMemberLogin = () => {
                         Forgot password?
                     </Link>
                     <Input
-                        type="password"
+                        type={isPasswordRevealed ? "text" : "password"}
+                        passwordEye={true}
                         value={password}
                         onChange={handleOnChangePassword}
                         shape="rounded"
@@ -127,7 +142,17 @@ const TeamMemberLogin = () => {
                         required={true}
                         className="login__input-password"
                         disabled={isFormSubmitting}
-                    />
+                    >
+                        <Icon
+                            iconName={
+                                isPasswordRevealed
+                                    ? "password-eye-off"
+                                    : "password-eye"
+                            }
+                            className="password-eye"
+                            onClick={handleRevealPasswordOnclick}
+                        />
+                    </Input>
                 </PasswordLabelWrapper>
 
                 <Button

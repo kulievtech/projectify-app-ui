@@ -2,6 +2,7 @@ import React from "react";
 import "./Input.css";
 import { trimWhiteSpaces } from "../utils";
 import { Label } from "../Label";
+import { Icon } from "../Icon";
 
 const sizeClassNames = {
     sm: "input-small",
@@ -21,7 +22,8 @@ type InputProps = {
     placeholder?: string;
     className?: string;
     id?: string;
-    isRequired?: boolean;
+    passwordEye?: boolean;
+    children?: React.ReactNode;
 
     error?: boolean;
     shape?: "rounded" | "circle";
@@ -47,6 +49,8 @@ const Input: React.FC<InputProps> = (props) => {
         inputRef,
         className,
         id,
+        passwordEye,
+        children,
         onChange,
         value
     } = props;
@@ -81,30 +85,45 @@ const Input: React.FC<InputProps> = (props) => {
                     {labelText}
                 </Label>
             ) : null}
-            {type === "textarea" ? (
-                <textarea
-                    placeholder={placeholder}
-                    className={finalClassNames}
-                    required={required}
-                    disabled={disabled}
-                    id={id}
-                    onChange={handleOnChange}
-                    value={value}
-                    ref={inputRef as React.LegacyRef<HTMLTextAreaElement>}
-                />
-            ) : (
-                <input
-                    className={finalClassNames}
-                    type={type || "text"}
-                    placeholder={placeholder}
-                    disabled={disabled}
-                    required={required}
-                    id={id}
-                    onChange={handleOnChange}
-                    value={value}
-                    ref={inputRef as React.LegacyRef<HTMLInputElement>}
-                />
-            )}
+
+            {(() => {
+                switch (type) {
+                    case "textarea":
+                        return (
+                            <textarea
+                                placeholder={placeholder}
+                                className={finalClassNames}
+                                required={required}
+                                disabled={disabled}
+                                id={id}
+                                onChange={handleOnChange}
+                                value={value}
+                                ref={
+                                    inputRef as React.LegacyRef<HTMLTextAreaElement>
+                                }
+                            />
+                        );
+                    default:
+                        return (
+                            <>
+                                <input
+                                    className={finalClassNames}
+                                    type={type || "text"}
+                                    placeholder={placeholder}
+                                    disabled={disabled}
+                                    required={required}
+                                    id={id}
+                                    onChange={handleOnChange}
+                                    value={value}
+                                    ref={
+                                        inputRef as React.LegacyRef<HTMLInputElement>
+                                    }
+                                />
+                                {passwordEye ? children : null}
+                            </>
+                        );
+                }
+            })()}
 
             {hintMessage ? (
                 <span className={hintMessageClass}>{hintMessage}</span>
