@@ -8,6 +8,7 @@ import { teamMember } from "../../../api";
 import toast from "react-hot-toast";
 import { useNavigate, Link } from "react-router-dom";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
+import { PasswordInputWithEye } from "../../components/PasswordInputWithEye";
 
 const Form = styled.form`
     width: 100%;
@@ -132,27 +133,13 @@ const TeamMemberLogin = () => {
                     >
                         Forgot password?
                     </Link>
-                    <Input
-                        type={isPasswordRevealed ? "text" : "password"}
-                        passwordEye={true}
-                        value={password}
-                        onChange={handleOnChangePassword}
-                        shape="rounded"
-                        size="lg"
-                        required={true}
-                        className="login__input-password"
-                        disabled={isFormSubmitting}
-                    >
-                        <Icon
-                            iconName={
-                                isPasswordRevealed
-                                    ? "password-eye-off"
-                                    : "password-eye"
-                            }
-                            className="password-eye"
-                            onClick={handleRevealPasswordOnclick}
-                        />
-                    </Input>
+                    <PasswordInputWithEye
+                        isFormSubmitting={isFormSubmitting}
+                        password={password}
+                        handleOnChangePassword={handleOnChangePassword}
+                        inputClassName="login__input-password"
+                        iconClassName="password-eye"
+                    />
                 </PasswordLabelWrapper>
 
                 <Button
