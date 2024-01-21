@@ -8,5 +8,6 @@ export * from "./Toggle";
 export * from "./Icon";
 export * from "./SideBar";
 export * from "./Toast";
+export * from "./Badge";
 
 export * from "./utils";

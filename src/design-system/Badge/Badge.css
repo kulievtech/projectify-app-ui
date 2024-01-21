@@ -1,0 +1,51 @@
+.badge-wrapper {
+    padding: var(--space-6) var(--space-10);
+    display: flex;
+    justify-content: space-between;
+    width: 9.2rem;
+    height: 3.2rem;
+    border-radius: var(--border-radius-8);
+}
+
+.todo-badge-wrapper {
+    background-color: var(--jaguar-25);
+}
+
+.inprogress-badge-wrapper {
+    background-color: var(--sunglow-25);
+}
+
+.done-badge-wrapper {
+    background-color: var(--green-25);
+}
+
+.flag {
+    width: 1.8rem;
+    height: 1.8rem;
+}
+
+.check-mark {
+    width: 1.8rem;
+    height: 1.8rem;
+    fill: var(--green-500);
+}
+
+.todo-flag {
+    fill: var(--jaguar-400);
+}
+
+.inprogress-flag {
+    fill: var(--sunglow-700);
+}
+
+.todo-due-date {
+    color: var(--jaguar-400);
+}
+
+.inprogress-due-date {
+    color: var(--sunglow-700);
+}
+
+.done-due-date {
+    color: var(--green-500);
+}
