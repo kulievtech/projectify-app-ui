@@ -1,5 +1,5 @@
 import React from "react";
-import "./Badge.css";
+import "./KanbanBadge.css";
 import { Icon } from "../Icon";
 import { Typography } from "../Typography";
 
