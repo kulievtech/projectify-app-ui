@@ -20,7 +20,12 @@ const StyledIcon = styled(Icon)`
     right: var(--space-16);
     top: 50%;
     transform: translateY(-50%);
+    fill: var(--jaguar-400);
     cursor: pointer;
+
+    &:hover {
+        fill: var(--primary-500);
+    }
 `;
 
 const PasswordInputWithEye: React.FC<PasswordInputEyeProps> = ({
