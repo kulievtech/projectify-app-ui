@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { Input, Modal, Typography, Button } from "../../../design-system";
 import { NoDataPlaceholder } from "../../components";
-import noProject from "../../../assets/illustrations/no-project.svg";
+import noTask from "../../../assets/illustrations/no-task.svg";
 
 const PageBase = styled.div`
     position: relative;
@@ -26,31 +26,31 @@ const Buttons = styled.div`
     gap: var(--space-10);
 `;
 
-const AdminProjects = () => {
-    const [projects, setProject] = useState<string[]>([]);
-    const [showCreateProjectModal, setShowCreateProjectModal] =
+const AdminPersonalTasks = () => {
+    const [personalTasks, setPersonalTasks] = useState<string[]>([]);
+    const [showCreateTaskModal, setShowCreateTaskModal] =
         useState<boolean>(false);
 
     return (
         <PageBase>
-            {!projects.length ? (
+            {!personalTasks.length ? (
                 <NoDataPlaceholder
-                    illustrationUrl={noProject}
-                    text="You don’t have any projects yet!"
-                    buttonText="Add a Project"
-                    buttonAction={() => setShowCreateProjectModal(true)}
+                    illustrationUrl={noTask}
+                    text="You don’t have any personal tasks yet!"
+                    buttonText="Add a Task"
+                    buttonAction={() => setShowCreateTaskModal(true)}
                 />
             ) : (
-                <h1>Projects</h1>
+                <h1>personal tasks</h1>
             )}
 
-            <Modal show={showCreateProjectModal} position="center">
+            <Modal show={showCreateTaskModal} position="center">
                 <CreateProjectModalTitle variant="paragraphLG" weight="medium">
-                    New Project
+                    New Task
                 </CreateProjectModalTitle>
                 <Inputs>
                     <Input
-                        placeholder="Name"
+                        placeholder="Title"
                         value=""
                         onChange={() => {}}
                         shape="rounded"
@@ -64,6 +64,13 @@ const AdminProjects = () => {
                         shape="rounded"
                         size="lg"
                     />
+                    <Input
+                        placeholder="Due Date"
+                        value=""
+                        onChange={() => {}}
+                        shape="rounded"
+                        size="lg"
+                    />
                 </Inputs>
                 <Buttons>
                     <Button
@@ -72,7 +79,7 @@ const AdminProjects = () => {
                         shape="rounded"
                         variant="outlined"
                         fullWidth
-                        onClick={() => setShowCreateProjectModal(false)}
+                        onClick={() => setShowCreateTaskModal(false)}
                     >
                         Cancel
                     </Button>
@@ -85,4 +92,4 @@ const AdminProjects = () => {
     );
 };
 
-export { AdminProjects };
+export { AdminPersonalTasks };
