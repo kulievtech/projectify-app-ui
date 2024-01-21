@@ -1,4 +1,4 @@
-.badge-wrapper {
+.kanban-badge-wrapper {
     padding: var(--space-6) var(--space-10);
     display: flex;
     justify-content: space-between;
@@ -7,15 +7,15 @@
     border-radius: var(--border-radius-8);
 }
 
-.todo-badge-wrapper {
+.TODO-badge-wrapper {
     background-color: var(--jaguar-25);
 }
 
-.inprogress-badge-wrapper {
+.INPROGRESS-badge-wrapper {
     background-color: var(--sunglow-25);
 }
 
-.done-badge-wrapper {
+.DONE-badge-wrapper {
     background-color: var(--green-25);
 }
 
@@ -30,22 +30,22 @@
     fill: var(--green-500);
 }
 
-.todo-flag {
+.TODO-flag {
     fill: var(--jaguar-400);
 }
 
-.inprogress-flag {
+.INPROGRESS-flag {
     fill: var(--sunglow-700);
 }
 
-.todo-due-date {
+.TODO-due-date {
     color: var(--jaguar-400);
 }
 
-.inprogress-due-date {
+.INPROGRESS-due-date {
     color: var(--sunglow-700);
 }
 
-.done-due-date {
+.DONE-due-date {
     color: var(--green-500);
 }

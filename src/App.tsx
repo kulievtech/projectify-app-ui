@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { KanbanBadge } from "./design-system";
+import { KanbanBadge, StatusBadge } from "./design-system";
 
 const AppWrapper = styled.div`
+    padding: 2rem;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 3rem;
@@ -39,7 +40,13 @@ const App = () => {
             <Link to="team-member/platform/personal-tasks">
                 Team Member Personal Tasks
             </Link>
-            <KanbanBadge status="done" dueDate="Dec 16" />
+            <KanbanBadge status="DONE" dueDate="Dec 16" />
+            <KanbanBadge status="TODO" dueDate="Dec 16" />
+            <KanbanBadge status="INPROGRESS" dueDate="Dec 16" />
+            <StatusBadge status="ACTIVE" />
+            <StatusBadge status="INACTIVE" />
+            <StatusBadge status="COMPLETED" />
+            <StatusBadge status="ARCHIVED" />
         </AppWrapper>
     );
 };
