@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { Badge } from "./design-system";
+import { KanbanBadge } from "./design-system";
 
 const AppWrapper = styled.div`
     display: grid;
@@ -39,7 +39,7 @@ const App = () => {
             <Link to="team-member/platform/personal-tasks">
                 Team Member Personal Tasks
             </Link>
-            <Badge status="done" dueDate="Dec 16" />
+            <KanbanBadge status="done" dueDate="Dec 16" />
         </AppWrapper>
     );
 };

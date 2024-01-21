@@ -8,7 +8,7 @@ type BadgeProps = {
     dueDate: string;
 };
 
-const Badge: React.FC<BadgeProps> = ({ dueDate, status }) => {
+const KanbanBadge: React.FC<BadgeProps> = ({ dueDate, status }) => {
     return (
         <span className={`badge-wrapper ${status}-badge-wrapper`}>
             <Icon
@@ -28,4 +28,4 @@ const Badge: React.FC<BadgeProps> = ({ dueDate, status }) => {
     );
 };
 
-export { Badge };
+export { KanbanBadge };
