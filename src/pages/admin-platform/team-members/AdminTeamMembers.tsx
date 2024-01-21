@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { Input, Modal, Typography, Button } from "../../../design-system";
 import { NoDataPlaceholder } from "../../components";
-import noProject from "../../../assets/illustrations/no-project.svg";
+import noTask from "../../../assets/illustrations/no-task.svg";
 
 const PageBase = styled.div`
     position: relative;
@@ -26,39 +26,53 @@ const Buttons = styled.div`
     gap: var(--space-10);
 `;
 
-const AdminProjects = () => {
-    const [projects, setProject] = useState<string[]>([]);
-    const [showCreateProjectModal, setShowCreateProjectModal] =
+const AdminTeamMembers = () => {
+    const [teamMembers, setTeamMembers] = useState<string[]>([]);
+    const [showCreateTeamMemberModal, setShowCreateTeamMemberModal] =
         useState<boolean>(false);
 
     return (
         <PageBase>
-            {!projects.length ? (
+            {!teamMembers.length ? (
                 <NoDataPlaceholder
-                    illustrationUrl={noProject}
-                    text="You don’t have any projects yet!"
-                    buttonText="Add a Project"
-                    buttonAction={() => setShowCreateProjectModal(true)}
+                    illustrationUrl={noTask}
+                    text="You don’t have any team members yet!"
+                    buttonText="Add a New Member"
+                    buttonAction={() => setShowCreateTeamMemberModal(true)}
                 />
             ) : (
-                <h1>Projects</h1>
+                <h1>personal tasks</h1>
             )}
 
-            <Modal show={showCreateProjectModal} position="center">
+            <Modal show={showCreateTeamMemberModal} position="center">
                 <CreateProjectModalTitle variant="paragraphLG" weight="medium">
-                    New Project
+                    New Member
                 </CreateProjectModalTitle>
                 <Inputs>
                     <Input
-                        placeholder="Name"
+                        placeholder="First Name"
                         value=""
                         onChange={() => {}}
                         shape="rounded"
                         size="lg"
                     />
                     <Input
-                        type="textarea"
-                        placeholder="Description"
+                        placeholder="Last Name"
+                        value=""
+                        onChange={() => {}}
+                        shape="rounded"
+                        size="lg"
+                    />
+                    <Input
+                        placeholder="Position"
+                        value=""
+                        onChange={() => {}}
+                        shape="rounded"
+                        size="lg"
+                    />
+                    <Input
+                        type="email"
+                        placeholder="Email"
                         value=""
                         onChange={() => {}}
                         shape="rounded"
@@ -72,7 +86,7 @@ const AdminProjects = () => {
                         shape="rounded"
                         variant="outlined"
                         fullWidth
-                        onClick={() => setShowCreateProjectModal(false)}
+                        onClick={() => setShowCreateTeamMemberModal(false)}
                     >
                         Cancel
                     </Button>
@@ -85,4 +99,4 @@ const AdminProjects = () => {
     );
 };
 
-export { AdminProjects };
+export { AdminTeamMembers };
