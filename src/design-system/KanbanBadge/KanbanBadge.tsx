@@ -4,17 +4,17 @@ import { Icon } from "../Icon";
 import { Typography } from "../Typography";
 
 type BadgeProps = {
-    status: "todo" | "inprogress" | "done";
+    status: "TODO" | "INPROGRESS" | "DONE";
     dueDate: string;
 };
 
 const KanbanBadge: React.FC<BadgeProps> = ({ dueDate, status }) => {
     return (
-        <span className={`badge-wrapper ${status}-badge-wrapper`}>
+        <span className={`kanban-badge-wrapper ${status}-badge-wrapper`}>
             <Icon
-                iconName={status === "done" ? "check-mark" : "flag"}
+                iconName={status === "DONE" ? "check-mark" : "flag"}
                 className={
-                    status === "done" ? `check-mark` : `flag ${status}-flag`
+                    status === "DONE" ? `check-mark` : `flag ${status}-flag`
                 }
             />
             <Typography
