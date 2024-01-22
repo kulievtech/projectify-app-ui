@@ -19,6 +19,8 @@ export interface UserType {
     role: UserRole;
 }
 
+export type TaskStatus = "TODO" | "INPROGRESS" | "DONE";
+
 export interface Task {
     id: string;
     title: string;
@@ -26,5 +28,3 @@ export interface Task {
     due: string;
     status: TaskStatus;
 }
-
-export type TaskStatus = "TODO" | "INPROGRESS" | "DONE";

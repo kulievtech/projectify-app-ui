@@ -8,7 +8,7 @@ export enum Actions {
 }
 
 export interface InitUserAction {
-    type: Actions;
+    type: Actions.INIT_USER;
     payload: UserType;
 }
 
