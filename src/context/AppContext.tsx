@@ -1,11 +1,5 @@
-import React, { useState, createContext, useReducer } from "react";
-import {
-    GlobalState,
-    initialState,
-    userReducer,
-    InitUserAction,
-    ActionType
-} from "../store/";
+import React, { createContext, useReducer } from "react";
+import { GlobalState, initialState, userReducer, ActionType } from "../store/";
 
 type AppContextType = {
     state: GlobalState;
