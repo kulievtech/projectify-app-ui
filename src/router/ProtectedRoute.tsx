@@ -38,22 +38,22 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
                         navigate("../");
                     });
             } else if (userType === UserRole.teamMember) {
-                // teamMember
-                //     .getMe()
-                //     .then((data): void => {
-                //         const action: InitUserAction = {
-                //             type: Actions.INIT_USER,
-                //             payload: data.data
-                //         };
-                //         dispatch(action);
-                //         setItem("userRole", data.data.role);
-                //     })
-                //     .catch((error: Error) => {
-                //         navigate("../");
-                //     });
+                teamMember
+                    .getMe()
+                    .then((data): void => {
+                        const action: InitUserAction = {
+                            type: Actions.INIT_USER,
+                            payload: data.data
+                        };
+                        dispatch(action);
+                        setItem("userRole", data.data.role);
+                    })
+                    .catch((error: Error) => {
+                        navigate("../");
+                    });
             }
         }
-    }, [userType]);
+    }, []);
 
     const userRole = getItem("userRole");
     const isAuthorized = userType === userRole;
