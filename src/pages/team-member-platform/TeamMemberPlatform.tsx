@@ -16,7 +16,7 @@ const TeamMemberPlatform = () => {
 
     const logOut = () => {
         removeItem("authToken");
-        removeItem("authToken");
+        removeItem("userRole");
         dispatch({ type: Actions.RESET_STATE });
         navigate("/team-member/login");
     };

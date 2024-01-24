@@ -85,9 +85,7 @@ const TeamMemberLogin = () => {
             setEmail("");
             setPassword("");
 
-            setTimeout(() => {
-                navigate("../team-member/platform");
-            }, 1000);
+            navigate("../team-member/platform");
         } catch (error) {
             if (error instanceof Error) {
                 setIsFormSubmitting(false);

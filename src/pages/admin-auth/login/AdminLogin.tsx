@@ -84,9 +84,7 @@ const AdminLogin = () => {
             setEmail("");
             setPassword("");
 
-            setTimeout(() => {
-                navigate("../admin/platform");
-            }, 1000);
+            navigate("../admin/platform");
         } catch (error) {
             setIsFormSubmitting(false);
             setIsError(true);

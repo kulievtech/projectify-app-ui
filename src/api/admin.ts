@@ -1,4 +1,4 @@
-import { GetMeResponseType, UserType } from "../types";
+import { GetMeResponseType } from "../types";
 
 type SignUpInput = {
     firstName: string;
