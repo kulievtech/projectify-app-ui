@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PasswordWrapper } from "../../components";
-import { Input, Button, Toaster } from "../../../design-system";
+import { Button } from "../../../design-system";
 import styled from "styled-components";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useFocus } from "../../../hooks/useFocus";
@@ -21,8 +21,11 @@ const AdminResetPassword = () => {
     const [searchParams] = useSearchParams();
     const passwordResetToken = searchParams.get("passwordResetToken");
     const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
-
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!passwordResetToken) navigate("/admin/forgot-password");
+    }, [passwordResetToken, navigate]);
 
     const focusRef = useFocus();
 
@@ -45,6 +48,7 @@ const AdminResetPassword = () => {
                 newPasswordConfirm,
                 passwordResetToken as string
             );
+
             setIsFormSubmitting(false);
             setNewPassword("");
             setNewPasswordConfirm("");

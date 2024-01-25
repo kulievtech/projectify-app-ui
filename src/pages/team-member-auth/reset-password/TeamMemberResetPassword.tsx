@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PasswordWrapper } from "../../components";
 import { Input, Button } from "../../../design-system";
 import styled from "styled-components";
@@ -24,6 +24,10 @@ const TeamMemberResetPassword = () => {
     const passwordResetToken = searchParams.get("passwordResetToken");
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!passwordResetToken) navigate("/team-member/forgot-password");
+    }, [passwordResetToken, navigate]);
 
     const focusRef = useFocus();
 
