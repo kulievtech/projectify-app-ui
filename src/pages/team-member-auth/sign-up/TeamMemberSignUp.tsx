@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Input } from "../../../design-system";
 import { AuthWrapper, AuthActionLink } from "../../components";
 import office from "../../../assets/images/office.jpg";
@@ -29,6 +29,10 @@ const TeamMemberCreatePassword = () => {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const inviteToken = searchParams.get("inviteToken");
+
+    useEffect(() => {
+        if (!inviteToken) navigate("/team-member/login");
+    }, [inviteToken, navigate]);
 
     const focusRef = useFocus();
 
