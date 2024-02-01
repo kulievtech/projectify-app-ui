@@ -1,32 +1,12 @@
 import React from "react";
 import "./Badge.css";
 import { trimWhiteSpaces } from "../utils";
-
-type BadgeColors =
-    | "violet"
-    | "orange"
-    | "green"
-    | "blue"
-    | "red"
-    | "purple"
-    | "gray";
-
-type BadgeShape = "rounded" | "circle";
-
-type BadgeVariant = "contained" | "outlined";
-
-interface BadgeProps {
-    label: string;
-    color: BadgeColors;
-    shape?: BadgeShape;
-    variant?: BadgeVariant;
-    icon?: React.ReactElement;
-    className?: string;
-}
+import { Icon } from "../Icon";
+import { BadgeProps } from "./types";
 
 const shapeClassNames = {
-    rounded: "btn-rounded",
-    circle: "btn-circle"
+    rounded: "badge-rounded",
+    circle: "badge-circle"
 };
 
 const variantClassNames = {
@@ -49,7 +29,9 @@ const Badge: React.FC<BadgeProps> = ({
     color,
     shape,
     variant,
+    status,
     icon,
+    iconName,
     className
 }) => {
     const shapeClassName = shape !== undefined ? shapeClassNames[shape] : "";
@@ -64,6 +46,13 @@ const Badge: React.FC<BadgeProps> = ({
     }`;
     return (
         <div className={trimWhiteSpaces(finalClassNames)}>
+            {icon && !status && !iconName ? icon : null}
+            {iconName && !status && !iconName ? (
+                <Icon iconName={iconName} />
+            ) : null}
+            {status && !icon && !iconName ? (
+                <div className="badge__status" />
+            ) : null}
             <span className="badge__text">{label}</span>
         </div>
     );
