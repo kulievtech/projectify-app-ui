@@ -9,11 +9,15 @@ import {
 } from "../../../design-system";
 import { NoDataPlaceholder, TaskCard } from "../../components";
 import noTask from "../../../assets/illustrations/no-task.svg";
-import { adminPersonalTasks as adminPersonalTasksService } from "../../../api";
+import {
+    TaskCreateInput,
+    adminPersonalTasks as adminPersonalTasksService
+} from "../../../api";
 import { useStore } from "../../../hooks";
-import { Actions, PopulateTasksAction } from "../../../store";
+import { Actions, AddTaskAction, PopulateTasksAction } from "../../../store";
 import { groupTasksByStatus } from "../../../utils";
 import { TaskStatus } from "../../../types";
+import toast from "react-hot-toast";
 
 enum StatusToTitle {
     TODO = "To Do",
@@ -84,6 +88,7 @@ const AdminPersonalTasks = () => {
     const [taskTitle, setTaskTitle] = useState<string>("");
     const [taskDescription, setTaskDescription] = useState<string>("");
     const [isTasksFetching, setIsTasksFetching] = useState(true);
+    const [isFormSubmitting, setIsFormSubmitting] = useState(false);
     const {
         state: { adminPersonalTasks },
         dispatch
@@ -112,6 +117,40 @@ const AdminPersonalTasks = () => {
     if (isTasksFetching) {
         return null;
     }
+
+    const createTask = () => {
+        setIsFormSubmitting(true);
+        const input: TaskCreateInput = {
+            title: taskTitle,
+            description: taskDescription,
+            due: taskDue!
+        };
+
+        adminPersonalTasksService
+            .createTask(input)
+            .then((data) => {
+                const action: AddTaskAction = {
+                    type: Actions.ADD_TASK,
+                    payload: data.data
+                };
+                dispatch(action);
+                setIsFormSubmitting(false);
+                closeCreateTaskModal();
+                toast.success("Task has been successfully created!");
+            })
+            .catch((e) => {
+                setIsFormSubmitting(false);
+                const error = e as Error;
+                toast.error(error.message);
+            });
+    };
+
+    const closeCreateTaskModal = () => {
+        setTaskTitle("");
+        setTaskDescription("");
+        setTaskDue(undefined);
+        setShowCreateTaskModal(false);
+    };
 
     const groupedTasks = groupTasksByStatus(adminPersonalTasks);
 
@@ -155,7 +194,12 @@ const AdminPersonalTasks = () => {
                                     </TasksColumnTitle>
 
                                     {groupedTasks[groupName].map((task) => {
-                                        return <TaskCard task={{ ...task }} />;
+                                        return (
+                                            <TaskCard
+                                                key={task.id}
+                                                task={task}
+                                            />
+                                        );
                                     })}
                                 </TasksColumn>
                             );
@@ -201,11 +245,19 @@ const AdminPersonalTasks = () => {
                         shape="rounded"
                         variant="outlined"
                         fullWidth
-                        onClick={() => setShowCreateTaskModal(false)}
+                        onClick={closeCreateTaskModal}
+                        disabled={isFormSubmitting}
                     >
                         Cancel
                     </Button>
-                    <Button size="lg" shape="rounded" color="primary" fullWidth>
+                    <Button
+                        size="lg"
+                        shape="rounded"
+                        color="primary"
+                        fullWidth
+                        onClick={createTask}
+                        disabled={isFormSubmitting}
+                    >
                         Save
                     </Button>
                 </Buttons>
