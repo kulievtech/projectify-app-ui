@@ -1,7 +1,29 @@
 import React from "react";
 import ReactDatePicker, { ReactDatePickerProps } from "react-datepicker";
+import { InputSize } from "../Input";
+import { trimWhiteSpaces } from "../utils";
 import getDate from "date-fns/getDate";
+
+import "react-datepicker/dist/react-datepicker.css";
 import "./DatePicker.css";
+
+const inputSizeClassNames = {
+    sm: "input-small",
+    md: "input-medium",
+    lg: "input-large"
+};
+
+const shapeClassNames = {
+    input: {
+        rounded: "input-rounded",
+        circle: "input-circle"
+    },
+
+    datePicker: {
+        rounded: "v1-date-picker--rounded",
+        circle: "v1-date-picker--circle"
+    }
+};
 
 interface DataPickerProps {
     selected: ReactDatePickerProps["selected"];
@@ -9,14 +31,18 @@ interface DataPickerProps {
     onChange: (value: Date) => void;
     placeholder: string;
     disabled?: boolean;
+    inputSize?: InputSize;
+    shape?: "rounded" | "circle";
 }
 
-const DatePicker: React.FC<DataPickerProps> = ({
+const DatePickerV1: React.FC<DataPickerProps> = ({
     selected,
     onSelect,
     onChange,
     placeholder,
-    disabled
+    disabled,
+    inputSize,
+    shape
 }) => {
     const handleOnChange = (date: Date) => {
         onChange(date);
@@ -25,26 +51,42 @@ const DatePicker: React.FC<DataPickerProps> = ({
         onSelect && onSelect(date);
     };
 
-    const customizeDay = (date: Date) => {
-        return "date-picker__day-wrapper";
+    const customizeDay = (_: Date) => {
+        return "v1-date-picker__day-wrapper";
     };
 
     const renderDayContents = (_: number, date: Date) => {
-        return <div className="date-picker__day">{getDate(date)}</div>;
+        return <div className="v1-date-picker__day">{getDate(date)}</div>;
     };
+
+    const inputSizeClassName = inputSize ? inputSizeClassNames[inputSize] : "";
+    const inputShapeClassName = shape ? shapeClassNames.input[shape] : "";
+    const calendarShapeClassName = shape
+        ? shapeClassNames.datePicker[shape]
+        : "";
+
+    const finalInputClassNames = trimWhiteSpaces(
+        `input ${inputSizeClassName} ${inputShapeClassName}`
+    );
+
+    const finalCalendarClassNames = trimWhiteSpaces(
+        `v1-date-picker ${calendarShapeClassName} ${
+            inputSize && inputSize === "lg" ? "v1-date-picker--lg" : ""
+        }`
+    );
     return (
         <ReactDatePicker
             selected={selected}
             onSelect={handleOnSelect}
             onChange={handleOnChange}
-            className="input input-large input-rounded"
+            className={finalInputClassNames}
             placeholderText={placeholder}
             disabled={disabled}
             dayClassName={customizeDay}
             renderDayContents={renderDayContents}
-            calendarClassName="date-picker"
+            calendarClassName={finalCalendarClassNames}
         />
     );
 };
 
-export { DatePicker };
+export { DatePickerV1 };

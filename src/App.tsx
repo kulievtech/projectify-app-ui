@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { DatePicker } from "./design-system";
-import "react-datepicker/dist/react-datepicker.css";
+import { DatePickerV1 } from "./design-system";
 import { useState } from "react";
 const AppWrapper = styled.div`
     padding: 2rem;
@@ -43,10 +42,12 @@ const App = () => {
             <Link to="team-member/platform/personal-tasks">
                 Team Member Personal Tasks
             </Link>
-            <DatePicker
+            <DatePickerV1
                 selected={date}
                 onChange={(date) => setDate(date)}
                 placeholder="Select Deadline"
+                shape="circle"
+                inputSize="lg"
             />
         </AppWrapper>
     );
