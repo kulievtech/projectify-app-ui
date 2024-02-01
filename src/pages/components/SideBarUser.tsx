@@ -14,6 +14,10 @@ const UserBase = styled.div`
     align-items: center;
     gap: var(--space-12);
     cursor: pointer;
+
+    svg {
+        fill: var(--jaguar-500);
+    }
 `;
 
 const UserDetails = styled.div`

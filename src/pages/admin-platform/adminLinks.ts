@@ -1,4 +1,6 @@
-const adminLinks = [
+import { SideBarLinksGroup } from "../../design-system";
+
+const adminLinks: SideBarLinksGroup[] = [
     {
         title: "Menu",
         links: [
