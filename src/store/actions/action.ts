@@ -18,7 +18,7 @@ export interface ResetStateAction {
 
 export interface PopulateTasksAction {
     type: Actions.POPULATE_TASKS;
-    payload: Task[] | null;
+    payload: Task[];
 }
 
 export interface AddTaskAction {
