@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { Badge, Icon } from "./design-system";
-
+import { DatePicker } from "./design-system";
+import "react-datepicker/dist/react-datepicker.css";
+import { useState } from "react";
 const AppWrapper = styled.div`
     padding: 2rem;
     display: grid;
@@ -11,6 +12,8 @@ const AppWrapper = styled.div`
 `;
 
 const App = () => {
+    const [date, setDate] = useState<Date>();
+
     return (
         <AppWrapper>
             <Link to="admin/sign-up">Admin Sign Up</Link>
@@ -40,130 +43,11 @@ const App = () => {
             <Link to="team-member/platform/personal-tasks">
                 Team Member Personal Tasks
             </Link>
-            <div>
-                <Badge label="Badge" color="gray" />
-                <Badge
-                    label="Badge"
-                    shape="circle"
-                    variant="outlined"
-                    color="gray"
-                />
-                <Badge
-                    label="Badge"
-                    shape="rounded"
-                    variant="contained"
-                    color="gray"
-                    icon={<Icon iconName="flag" />}
-                />
-                <Badge
-                    label="Badge"
-                    shape="circle"
-                    variant="contained"
-                    color="gray"
-                />
-            </div>
-            <div>
-                <Badge label="Badge" color="violet" />
-                <Badge
-                    label="Badge"
-                    shape="circle"
-                    variant="outlined"
-                    color="violet"
-                />
-                <Badge
-                    label="Badge"
-                    shape="rounded"
-                    variant="contained"
-                    color="violet"
-                    icon={<Icon iconName="flag" />}
-                />
-            </div>
-            <div>
-                <Badge label="Badge" color="orange" />
-                <Badge
-                    label="Badge"
-                    shape="circle"
-                    variant="outlined"
-                    color="orange"
-                />
-                <Badge
-                    label="Badge"
-                    shape="rounded"
-                    variant="contained"
-                    color="orange"
-                    icon={<Icon iconName="flag" />}
-                />
-            </div>
-            <div>
-                <Badge label="Badge" color="blue" />
-                <Badge
-                    label="Badge"
-                    shape="circle"
-                    variant="outlined"
-                    color="blue"
-                />
-                <Badge
-                    label="Badge"
-                    shape="rounded"
-                    variant="contained"
-                    color="blue"
-                    icon={<Icon iconName="flag" />}
-                />
-            </div>
-            <div>
-                <Badge label="Badge" color="red" />
-                <Badge
-                    label="Badge"
-                    shape="circle"
-                    variant="outlined"
-                    color="red"
-                />
-                <Badge
-                    label="Badge"
-                    shape="rounded"
-                    variant="contained"
-                    color="red"
-                    icon={<Icon iconName="flag" />}
-                />
-            </div>
-            <div>
-                <Badge label="Badge" color="purple" />
-                <Badge
-                    label="Badge"
-                    shape="circle"
-                    variant="outlined"
-                    color="purple"
-                />
-                <Badge
-                    label="Badge"
-                    shape="rounded"
-                    variant="contained"
-                    color="purple"
-                    icon={<Icon iconName="flag" />}
-                />
-            </div>
-            <div>
-                <Badge label="Badge" color="green" />
-                <Badge
-                    label="Badge"
-                    shape="circle"
-                    variant="outlined"
-                    color="green"
-                />
-                <Badge
-                    label="Badge"
-                    shape="rounded"
-                    variant="contained"
-                    color="green"
-                    icon={<Icon iconName="flag" />}
-                />
-                <Badge
-                    label="Badge"
-                    shape="circle"
-                    variant="contained"
-                    color="green"
-                />
-            </div>
+            <DatePicker
+                selected={date}
+                onChange={(date) => setDate(date)}
+                placeholder="Select Deadline"
+            />
         </AppWrapper>
     );
 };
