@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import {
     Input,
@@ -7,10 +7,14 @@ import {
     Button,
     DatePickerV1
 } from "../../../design-system";
-import { NoDataPlaceholder } from "../../components";
+import { NoDataPlaceholder, TaskCard, TaskCardProps } from "../../components";
 import noTask from "../../../assets/illustrations/no-task.svg";
+import { adminPersonalTasks as adminPersonalTasksService } from "../../../api";
+import { useStore } from "../../../hooks";
+import { Actions, PopulateTasksAction } from "../../../store";
+import { groupTasksByStatus } from "../../../utils";
 
-const PageBase = styled.div`
+const PageBase = styled.main`
     position: relative;
     width: 100%;
     height: 100%;
@@ -32,16 +36,76 @@ const Buttons = styled.div`
     gap: var(--space-10);
 `;
 
+const PageContent = styled.section`
+    width: 80%;
+    margin: 0 auto;
+`;
+
+const PageTitle = styled(Typography)`
+    margin-bottom: var(--space-36);
+`;
+
+const TasksColumns = styled.div`
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-30);
+    height: 100%;
+`;
+
+const TasksColumn = styled.div`
+    padding: 2.2rem 1rem 1rem 1rem;
+    background-color: var(--jaguar-25);
+    border-radius: var(--border-radius-20);
+    border: 0.15rem solid var(--jaguar-100);
+`;
+
+const TasksColumnTitle = styled(Typography)`
+    margin-bottom: var(--space-16);
+    color: var(--jaguar-500);
+    span {
+        color: var(--jaguar-900);
+    }
+`;
+
 const AdminPersonalTasks = () => {
-    const [personalTasks, setPersonalTasks] = useState<string[]>([]);
-    const [dueDate, setDueDate] = useState<Date>();
+    const [taskDue, setTaskDue] = useState<Date>();
+    const [taskTitle, setTaskTitle] = useState<string>("");
+    const [taskDescription, setTaskDescription] = useState<string>("");
+    const [isTasksFetching, setIsTasksFetching] = useState(true);
+    const {
+        state: { adminPersonalTasks },
+        dispatch
+    } = useStore();
 
     const [showCreateTaskModal, setShowCreateTaskModal] =
         useState<boolean>(false);
 
+    useEffect(() => {
+        adminPersonalTasksService
+            .getTasks()
+            .then((data) => {
+                setIsTasksFetching(false);
+                const action: PopulateTasksAction = {
+                    type: Actions.POPULATE_TASKS,
+                    payload: data.data.tasks
+                };
+                dispatch(action);
+            })
+            .catch((error) => {
+                setIsTasksFetching(false);
+                console.log(error);
+            });
+    }, []);
+
+    if (isTasksFetching) {
+        return null;
+    }
+
+    const groupedTasks = groupTasksByStatus(adminPersonalTasks);
+
     return (
         <PageBase>
-            {!personalTasks.length ? (
+            {!adminPersonalTasks.length ? (
                 <NoDataPlaceholder
                     illustrationUrl={noTask}
                     text="You don’t have any personal tasks yet!"
@@ -49,7 +113,32 @@ const AdminPersonalTasks = () => {
                     buttonAction={() => setShowCreateTaskModal(true)}
                 />
             ) : (
-                <h1>personal tasks</h1>
+                <PageContent>
+                    <PageTitle variant="h6" weight="medium">
+                        Personal Tasks
+                    </PageTitle>
+                    <TasksColumns>
+                        {Object.keys(groupedTasks).map((groupName) => {
+                            return (
+                                <TasksColumn key={groupName}>
+                                    <TasksColumnTitle
+                                        variant="paragraphSM"
+                                        weight="semibold"
+                                    >
+                                        {groupName}{" "}
+                                        <span>
+                                            ({groupedTasks[groupName].length})
+                                        </span>
+                                    </TasksColumnTitle>
+
+                                    {groupedTasks[groupName].map((task) => {
+                                        return <TaskCard task={task} />;
+                                    })}
+                                </TasksColumn>
+                            );
+                        })}
+                    </TasksColumns>
+                </PageContent>
             )}
 
             <Modal show={showCreateTaskModal} position="center">
@@ -59,16 +148,18 @@ const AdminPersonalTasks = () => {
                 <Inputs>
                     <Input
                         placeholder="Title"
-                        value=""
-                        onChange={() => {}}
+                        value={taskTitle}
+                        onChange={(value) => setTaskTitle(value)}
                         shape="rounded"
                         size="lg"
                     />
                     <Input
                         type="textarea"
                         placeholder="Description"
-                        value=""
-                        onChange={() => {}}
+                        value={taskDescription}
+                        onChange={(value) => {
+                            setTaskDescription(value);
+                        }}
                         shape="rounded"
                         size="lg"
                     />
@@ -76,8 +167,8 @@ const AdminPersonalTasks = () => {
                         inputSize="lg"
                         shape="rounded"
                         placeholder="Due Date"
-                        selected={dueDate}
-                        onChange={(date) => setDueDate(date)}
+                        selected={taskDue}
+                        onChange={(date) => setTaskDue(date)}
                     />
                 </Inputs>
                 <Buttons>

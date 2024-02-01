@@ -10,6 +10,10 @@ const TaskCardBase = styled.div`
     display: flex;
     flex-direction: column;
     gap: var(--space-12);
+
+    &:not(:last-of-type) {
+        margin-bottom: var(--space-10);
+    }
 `;
 
 const TaskCardHeader = styled.div`
