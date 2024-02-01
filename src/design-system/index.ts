@@ -10,4 +10,5 @@ export * from "./SideBar";
 export * from "./Toast";
 export * from "./Badge";
 export * from "./DatePicker";
+export * from "./Bar";
 export * from "./utils";
