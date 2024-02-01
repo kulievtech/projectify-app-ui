@@ -1,3 +1,4 @@
+import React from "react";
 import { IconName } from "../Icon";
 
 type BadgeColors =
