@@ -25,6 +25,12 @@ enum StatusToTitle {
     DONE = "Done"
 }
 
+enum StatusToColor {
+    TODO = "var(--jaguar-500)",
+    INPROGRESS = "var(--sunglow-700)",
+    DONE = "var(--green-500)"
+}
+
 const PageBase = styled.main`
     position: relative;
     width: 100%;
@@ -75,12 +81,9 @@ const TasksColumn = styled.div`
     border: 0.15rem solid var(--jaguar-100);
 `;
 
-const TasksColumnTitle = styled(Typography)`
+const TasksColumnTitle = styled(Typography)<{ color: string }>`
     margin-bottom: var(--space-16);
-    color: var(--jaguar-500);
-    span {
-        color: var(--jaguar-900);
-    }
+    color: ${(props) => props.color};
 `;
 
 const AdminPersonalTasks = () => {
@@ -186,6 +189,11 @@ const AdminPersonalTasks = () => {
                                     <TasksColumnTitle
                                         variant="paragraphSM"
                                         weight="semibold"
+                                        color={
+                                            StatusToColor[
+                                                groupName as TaskStatus
+                                            ]
+                                        }
                                     >
                                         {StatusToTitle[groupName as TaskStatus]}{" "}
                                         <span>
