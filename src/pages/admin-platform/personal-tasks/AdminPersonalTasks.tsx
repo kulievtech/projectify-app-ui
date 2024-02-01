@@ -1,6 +1,12 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { Input, Modal, Typography, Button } from "../../../design-system";
+import {
+    Input,
+    Modal,
+    Typography,
+    Button,
+    DatePickerV1
+} from "../../../design-system";
 import { NoDataPlaceholder } from "../../components";
 import noTask from "../../../assets/illustrations/no-task.svg";
 
@@ -28,6 +34,8 @@ const Buttons = styled.div`
 
 const AdminPersonalTasks = () => {
     const [personalTasks, setPersonalTasks] = useState<string[]>([]);
+    const [dueDate, setDueDate] = useState<Date>();
+
     const [showCreateTaskModal, setShowCreateTaskModal] =
         useState<boolean>(false);
 
@@ -64,12 +72,12 @@ const AdminPersonalTasks = () => {
                         shape="rounded"
                         size="lg"
                     />
-                    <Input
-                        placeholder="Due Date"
-                        value=""
-                        onChange={() => {}}
+                    <DatePickerV1
+                        inputSize="lg"
                         shape="rounded"
-                        size="lg"
+                        placeholder="Due Date"
+                        selected={dueDate}
+                        onChange={(date) => setDueDate(date)}
                     />
                 </Inputs>
                 <Buttons>
