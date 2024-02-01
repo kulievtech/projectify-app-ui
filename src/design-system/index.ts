@@ -8,7 +8,6 @@ export * from "./Toggle";
 export * from "./Icon";
 export * from "./SideBar";
 export * from "./Toast";
-export * from "./KanbanBadge";
-export * from "./StatusBadge";
+export * from "./Badge";
 
 export * from "./utils";
