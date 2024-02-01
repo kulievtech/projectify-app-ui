@@ -33,7 +33,7 @@ export interface Task {
     id: string;
     title: string;
     description: string;
-    due: string;
+    due: Date;
     status: TaskStatus;
 }
 

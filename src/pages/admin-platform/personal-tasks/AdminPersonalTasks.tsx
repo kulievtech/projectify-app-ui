@@ -7,12 +7,19 @@ import {
     Button,
     DatePickerV1
 } from "../../../design-system";
-import { NoDataPlaceholder, TaskCard, TaskCardProps } from "../../components";
+import { NoDataPlaceholder, TaskCard } from "../../components";
 import noTask from "../../../assets/illustrations/no-task.svg";
 import { adminPersonalTasks as adminPersonalTasksService } from "../../../api";
 import { useStore } from "../../../hooks";
 import { Actions, PopulateTasksAction } from "../../../store";
 import { groupTasksByStatus } from "../../../utils";
+import { TaskStatus } from "../../../types";
+
+enum StatusToTitle {
+    TODO = "To Do",
+    INPROGRESS = "In Progress",
+    DONE = "Done"
+}
 
 const PageBase = styled.main`
     position: relative;
@@ -41,6 +48,11 @@ const PageContent = styled.section`
     margin: 0 auto;
 `;
 
+const PageHeader = styled.header`
+    display: flex;
+    justify-content: space-between;
+`;
+
 const PageTitle = styled(Typography)`
     margin-bottom: var(--space-36);
 `;
@@ -49,7 +61,7 @@ const TasksColumns = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-30);
-    height: 100%;
+    height: calc(100vh - 12.8rem);
 `;
 
 const TasksColumn = styled.div`
@@ -114,9 +126,20 @@ const AdminPersonalTasks = () => {
                 />
             ) : (
                 <PageContent>
-                    <PageTitle variant="h6" weight="medium">
-                        Personal Tasks
-                    </PageTitle>
+                    <PageHeader>
+                        <PageTitle variant="h6" weight="medium">
+                            Personal Tasks
+                        </PageTitle>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            size="md"
+                            shape="rounded"
+                            onClick={() => setShowCreateTaskModal(true)}
+                        >
+                            Create A Task
+                        </Button>
+                    </PageHeader>
                     <TasksColumns>
                         {Object.keys(groupedTasks).map((groupName) => {
                             return (
@@ -125,14 +148,14 @@ const AdminPersonalTasks = () => {
                                         variant="paragraphSM"
                                         weight="semibold"
                                     >
-                                        {groupName}{" "}
+                                        {StatusToTitle[groupName as TaskStatus]}{" "}
                                         <span>
                                             ({groupedTasks[groupName].length})
                                         </span>
                                     </TasksColumnTitle>
 
                                     {groupedTasks[groupName].map((task) => {
-                                        return <TaskCard task={task} />;
+                                        return <TaskCard task={{ ...task }} />;
                                     })}
                                 </TasksColumn>
                             );

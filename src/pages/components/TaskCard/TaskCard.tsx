@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { TaskCardProps } from "./types";
 import { Badge, Bar, Typography } from "../../../design-system";
+import { format } from "date-fns";
 
 const TaskCardBase = styled.div`
     background-color: var(--white);
@@ -59,7 +60,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
                 </TaskDescription>
             </div>
             <TaskDue
-                label={task.due}
+                label={format(task.due, "MMMM d")}
                 color={StatusToColor[task.status]}
                 iconName={StatusToIcon[task.status]}
                 variant="contained"

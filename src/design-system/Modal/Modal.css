@@ -6,6 +6,7 @@
     right: 0;
     background-color: var(--overlay-40);
     display: flex;
+    z-index: 1;
 }
 
 .modal-overlay--center {
