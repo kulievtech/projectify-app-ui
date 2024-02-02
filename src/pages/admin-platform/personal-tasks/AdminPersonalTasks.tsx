@@ -14,7 +14,12 @@ import {
     adminPersonalTasks as adminPersonalTasksService
 } from "../../../api";
 import { useStore } from "../../../hooks";
-import { Actions, AddTaskAction, PopulateTasksAction } from "../../../store";
+import {
+    Actions,
+    AddTaskAction,
+    ChangeTaskStatusAction,
+    PopulateTasksAction
+} from "../../../store";
 import { groupTasksByStatus } from "../../../utils";
 import { TaskStatus } from "../../../types";
 import toast from "react-hot-toast";
@@ -155,6 +160,24 @@ const AdminPersonalTasks = () => {
         setShowCreateTaskModal(false);
     };
 
+    const onDrop = (e: React.DragEvent<HTMLDivElement>, status: TaskStatus) => {
+        const task = JSON.parse(e.dataTransfer.getData("application/json"));
+
+        adminPersonalTasksService
+            .updateTask(task.id, { status: status })
+            .then((_) => {
+                const action: ChangeTaskStatusAction = {
+                    type: Actions.CHANGE_TASK_STATUS,
+                    payload: {
+                        id: task.id,
+                        status: status
+                    }
+                };
+                dispatch(action);
+            })
+            .catch((e) => {});
+    };
+
     const groupedTasks = groupTasksByStatus(adminPersonalTasks);
 
     return (
@@ -185,7 +208,13 @@ const AdminPersonalTasks = () => {
                     <TasksColumns>
                         {Object.keys(groupedTasks).map((groupName) => {
                             return (
-                                <TasksColumn key={groupName}>
+                                <TasksColumn
+                                    key={groupName}
+                                    onDragOver={(e) => e.preventDefault()}
+                                    onDrop={(e) =>
+                                        onDrop(e, groupName as TaskStatus)
+                                    }
+                                >
                                     <TasksColumnTitle
                                         variant="paragraphSM"
                                         weight="semibold"
