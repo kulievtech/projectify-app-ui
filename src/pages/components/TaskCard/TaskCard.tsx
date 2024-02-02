@@ -1,9 +1,10 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { TaskCardProps } from "./types";
 import { Badge, Bar, Typography } from "../../../design-system";
 import { format } from "date-fns";
+import { useState } from "react";
 
-const TaskCardBase = styled.div`
+const TaskCardBase = styled.div<{ $isDragging: boolean }>`
     background-color: var(--white);
     padding: var(--space-16);
     border-radius: var(--border-radius-16);
@@ -11,6 +12,13 @@ const TaskCardBase = styled.div`
     display: flex;
     flex-direction: column;
     gap: var(--space-12);
+
+    transition: opacity 0.5s;
+    ${(props) =>
+        props.$isDragging &&
+        css`
+            opacity: 0.5;
+        `}
 
     &:not(:last-of-type) {
         margin-bottom: var(--space-10);
@@ -46,8 +54,25 @@ enum StatusToIcon {
     DONE = "check"
 }
 const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
+    const [isDragging, setIsDragging] = useState<boolean>(false);
+
+    const onDragStart = (e: React.DragEvent<HTMLDivElement>) => {
+        setIsDragging(true);
+        e.dataTransfer.setData("application/json", JSON.stringify(task));
+    };
+
+    const onDragEnd = (e: React.DragEvent<HTMLDivElement>) => {
+        setIsDragging(false);
+    };
+
     return (
-        <TaskCardBase>
+        <TaskCardBase
+            draggable
+            onDragStart={onDragStart}
+            onDragEnd={onDragEnd}
+            $isDragging={isDragging}
+        >
+            {" "}
             <TaskCardHeader>
                 <Bar color={StatusToColor[task.status]} />
             </TaskCardHeader>
