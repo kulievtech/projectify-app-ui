@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Typography, Button } from "../../../design-system";
 import { NoDataPlaceholder } from "../../components";
 import noTask from "../../../assets/illustrations/no-task.svg";
 import { adminTasksService } from "../../../api";

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { DatePickerV1 } from "./design-system";
 import { useState } from "react";
-import { Select } from "./design-system/Select";
+import { OptionValue, Select } from "./design-system/Select";
 
 const AppWrapper = styled.div`
     padding: 2rem;
@@ -14,6 +14,7 @@ const AppWrapper = styled.div`
 
 const App = () => {
     const [date, setDate] = useState<Date>();
+    const [value, setValue] = useState<OptionValue>("");
 
     return (
         <AppWrapper>
@@ -60,11 +61,11 @@ const App = () => {
                     { label: "Option5", value: "option5" },
                     { label: "Option6", value: "option6" }
                 ]}
-                value="option2"
                 headerPlaceholder="Select Option"
-                onSelect={(value) => {}}
+                onSelect={(option) => setValue(option.value)}
                 size="md"
-                shape="rounded"
+                shape="circle"
+                value={value}
             />
         </AppWrapper>
     );

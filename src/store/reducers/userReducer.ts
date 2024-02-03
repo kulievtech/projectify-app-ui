@@ -3,7 +3,8 @@ import {
     Actions,
     AddTaskAction,
     ChangeTaskStatusAction,
-    PopulateTasksAction
+    PopulateTasksAction,
+    UpdateTaskAction
 } from "../actions";
 import { GlobalState, initialState } from "../state";
 
@@ -46,6 +47,20 @@ export const userReducer = (
             const updatedTasks = state.adminPersonalTasks.map((task) => {
                 if (task.id === payload.id) {
                     return { ...task, status: payload.status };
+                } else {
+                    return { ...task };
+                }
+            });
+            return {
+                ...state,
+                adminPersonalTasks: updatedTasks
+            };
+        }
+        case Actions.UPDATE_TASK: {
+            const payload = action.payload as UpdateTaskAction["payload"];
+            const updatedTasks = state.adminPersonalTasks.map((task) => {
+                if (task.id === payload.id) {
+                    return payload;
                 } else {
                     return { ...task };
                 }

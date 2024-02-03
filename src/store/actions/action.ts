@@ -5,7 +5,8 @@ export enum Actions {
     RESET_STATE = "RESET_STATE",
     POPULATE_TASKS = "POPULATE_TASKS",
     ADD_TASK = "ADD_TASK",
-    CHANGE_TASK_STATUS = "CHANGE_TASK_STATUS"
+    CHANGE_TASK_STATUS = "CHANGE_TASK_STATUS",
+    UPDATE_TASK = "UPDATE_TASK"
 }
 
 export interface InitUserAction {
@@ -35,9 +36,16 @@ export type ChangeTaskStatusAction = {
     };
 };
 
+export type UpdateTaskAction = {
+    type: Actions.UPDATE_TASK;
+    payload: Task;
+};
+
 export type ActionType =
     | InitUserAction
     | ResetStateAction
     | PopulateTasksAction
     | AddTaskAction
-    | ChangeTaskStatusAction;
+    | ChangeTaskStatusAction
+    | ChangeTaskStatusAction
+    | UpdateTaskAction;
