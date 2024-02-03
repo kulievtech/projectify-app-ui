@@ -10,10 +10,10 @@ export type SelectShape = "rounded" | "circle";
 
 export interface SelectProps {
     options: Option[];
-    value: OptionValue;
+    value?: OptionValue;
     onSelect: (value: Option) => void;
     label?: string;
-    headerPlaceholder: string;
+    headerPlaceholder?: string;
     size?: SelectSize;
     shape?: SelectShape;
     disabled?: true;

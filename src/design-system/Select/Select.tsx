@@ -75,8 +75,8 @@ const Select: React.FC<SelectProps> = (props) => {
         `select ${sizeClassName} ${shapeClassName} ${className || ""}`
     );
 
-    const onSelectItem = (value: Option) => {
-        onSelect(value);
+    const onSelectItem = (option: Option) => {
+        onSelect(option);
         setExpanded(false);
     };
 
