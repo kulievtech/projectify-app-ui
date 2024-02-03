@@ -45,7 +45,7 @@ const Menu: React.FC<MenuProps> = ({
                 handleOutsideClick(e, menuRef, setShow)
             );
         };
-    }, [menuRef, show]);
+    }, [show]);
 
     const handleOnSelect = (value: string) => {
         setShow(false);
