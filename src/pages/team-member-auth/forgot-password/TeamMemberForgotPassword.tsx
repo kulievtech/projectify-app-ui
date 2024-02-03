@@ -6,7 +6,7 @@ import forgotPassword from "../../../assets/illustrations/forgot-password.svg";
 import styled from "styled-components";
 import { useFocus } from "../../../hooks/useFocus";
 import { Link } from "react-router-dom";
-import { teamMember } from "../../../api";
+import { teamMemberService } from "../../../api";
 
 const Form = styled.form`
     width: 100%;
@@ -48,7 +48,7 @@ const TeamMemberForgotPassword = () => {
         e.preventDefault();
 
         try {
-            const response = await teamMember.forgotPassword(email);
+            const response = await teamMemberService.forgotPassword(email);
             setEmail("");
             toast.success(response.message);
         } catch (error) {

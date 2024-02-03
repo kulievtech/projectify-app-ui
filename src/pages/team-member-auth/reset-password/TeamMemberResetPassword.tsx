@@ -4,7 +4,7 @@ import { Input, Button } from "../../../design-system";
 import styled from "styled-components";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useFocus } from "../../../hooks/useFocus";
-import { teamMember } from "../../../api";
+import { teamMemberService } from "../../../api";
 import toast from "react-hot-toast";
 import updatePassword from "../../../assets/illustrations/reset-password.svg";
 import { PasswordInputWithEye } from "../../components/PasswordInputWithEye";
@@ -43,7 +43,7 @@ const TeamMemberResetPassword = () => {
         e.preventDefault();
 
         try {
-            const response = await teamMember.resetPassword(
+            const response = await teamMemberService.resetPassword(
                 newPassword,
                 newPasswordConfirm,
                 passwordResetToken as string

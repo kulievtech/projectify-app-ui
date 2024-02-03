@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { UserRole } from "../types";
 import { useLocalStorage, useStore } from "../hooks";
-import { admin } from "../api";
-import { teamMember } from "../api";
+import { adminService } from "../api";
+import { teamMemberService } from "../api";
 import { Actions, InitUserAction } from "../store";
 
 type ProtectedRouteProps = {
@@ -24,8 +24,8 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
     useEffect(() => {
         if (isAuthTokenExists) {
             const user = {
-                admin: admin,
-                teamMember: teamMember
+                admin: adminService,
+                teamMember: teamMemberService
             };
 
             user[userType]

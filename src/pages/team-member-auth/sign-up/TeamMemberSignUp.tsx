@@ -4,7 +4,7 @@ import { AuthWrapper, AuthActionLink } from "../../components";
 import office from "../../../assets/images/office.jpg";
 import styled from "styled-components";
 import { useFocus } from "../../../hooks/useFocus";
-import { teamMember } from "../../../api";
+import { teamMemberService } from "../../../api";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { PasswordInputWithEye } from "../../components/PasswordInputWithEye";
@@ -56,7 +56,7 @@ const TeamMemberCreatePassword = () => {
         try {
             setIsFormSubmitting(true);
 
-            const response = await teamMember.signUp(
+            const response = await teamMemberService.signUp(
                 {
                     email,
                     password,

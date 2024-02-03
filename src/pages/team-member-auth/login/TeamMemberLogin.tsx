@@ -4,7 +4,7 @@ import { AuthWrapper } from "../../components";
 import office from "../../../assets/images/office.jpg";
 import styled from "styled-components";
 import { useFocus } from "../../../hooks/useFocus";
-import { teamMember } from "../../../api";
+import { teamMemberService } from "../../../api";
 import toast from "react-hot-toast";
 import { useNavigate, Link } from "react-router-dom";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
@@ -73,7 +73,7 @@ const TeamMemberLogin = () => {
         try {
             setIsFormSubmitting(true);
 
-            const { token } = await teamMember.signIn({
+            const { token } = await teamMemberService.signIn({
                 email,
                 password
             });

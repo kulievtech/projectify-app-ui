@@ -9,10 +9,7 @@ import {
     Button
 } from "../../../design-system";
 
-import {
-    TaskCreateInput,
-    adminPersonalTasks as adminPersonalTasksService
-} from "../../../api";
+import { TaskCreateInput, adminTasksService } from "../../../api";
 import { useStore } from "../../../hooks";
 import { Actions, AddTaskAction } from "../../../store";
 
@@ -56,7 +53,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
             due: taskDue!
         };
 
-        adminPersonalTasksService
+        adminTasksService
             .createTask(input)
             .then((data) => {
                 const action: AddTaskAction = {

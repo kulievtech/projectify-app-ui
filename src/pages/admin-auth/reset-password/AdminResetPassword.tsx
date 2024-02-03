@@ -4,7 +4,7 @@ import { Button } from "../../../design-system";
 import styled from "styled-components";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useFocus } from "../../../hooks/useFocus";
-import { admin } from "../../../api";
+import { adminService } from "../../../api";
 import toast from "react-hot-toast";
 import updatePassword from "../../../assets/illustrations/reset-password.svg";
 import { PasswordInputWithEye } from "../../components/PasswordInputWithEye";
@@ -43,7 +43,7 @@ const AdminResetPassword = () => {
         e.preventDefault();
 
         try {
-            const response = await admin.resetPassword(
+            const response = await adminService.resetPassword(
                 newPassword,
                 newPasswordConfirm,
                 passwordResetToken as string

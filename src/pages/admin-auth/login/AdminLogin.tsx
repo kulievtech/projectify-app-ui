@@ -4,7 +4,7 @@ import { AuthWrapper, AuthActionLink } from "../../components";
 import styled from "styled-components";
 import { useFocus } from "../../../hooks/useFocus";
 import { Link, useNavigate } from "react-router-dom";
-import { admin } from "../../../api";
+import { adminService } from "../../../api";
 import toast from "react-hot-toast";
 import flatIronBuilding from "../../../assets/images/flat-iron-building.jpg";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
@@ -73,7 +73,7 @@ const AdminLogin = () => {
         try {
             setIsFormSubmitting(true);
 
-            const { token } = await admin.signIn({
+            const { token } = await adminService.signIn({
                 email,
                 password
             });

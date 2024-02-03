@@ -4,7 +4,7 @@ import { AuthWrapper, AuthActionLink } from "../../components";
 import styled from "styled-components";
 import { useFocus } from "../../../hooks/useFocus";
 import toast from "react-hot-toast";
-import { admin } from "../../../api";
+import { adminService } from "../../../api";
 import flatIronBuilding from "../../../assets/images/flat-iron-building.jpg";
 import { PasswordInputWithEye } from "../../components/PasswordInputWithEye";
 
@@ -76,7 +76,7 @@ const AdminSignUp = () => {
         try {
             setIsFormSubmitting(true);
 
-            const response = await admin.signUp({
+            const response = await adminService.signUp({
                 firstName,
                 lastName,
                 email,
