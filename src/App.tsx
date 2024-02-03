@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { DatePickerV1 } from "./design-system";
 import { useState } from "react";
+import { Select } from "./design-system/Select";
+
 const AppWrapper = styled.div`
     padding: 2rem;
     display: grid;
@@ -48,6 +50,21 @@ const App = () => {
                 placeholder="Select Deadline"
                 shape="rounded"
                 inputSize="lg"
+            />
+            <Select
+                options={[
+                    { label: "Option1", value: "option1" },
+                    { label: "Option2", value: "option2" },
+                    { label: "Option3", value: "option3" },
+                    { label: "Option4", value: "option4" },
+                    { label: "Option5", value: "option5" },
+                    { label: "Option6", value: "option6" }
+                ]}
+                value="option2"
+                headerPlaceholder="Select Option"
+                onSelect={(value) => {}}
+                size="md"
+                shape="rounded"
             />
         </AppWrapper>
     );
