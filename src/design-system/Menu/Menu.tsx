@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { MenuProps } from "./types";
 import "./Menu.css";
 import { Icon } from "../Icon";
@@ -9,6 +9,21 @@ const variantClassNames = {
     danger: "menu__item--danger"
 };
 
+const handleOutsideClick = (
+    event: Event,
+    ref: React.RefObject<HTMLDivElement>,
+    setShow: (arg: boolean) => void
+) => {
+    if (
+        ref &&
+        ref.current &&
+        event.target instanceof Node &&
+        !ref.current.contains(event.target)
+    ) {
+        setShow(false);
+    }
+};
+
 const Menu: React.FC<MenuProps> = ({
     items,
     onSelect,
@@ -16,6 +31,21 @@ const Menu: React.FC<MenuProps> = ({
     className
 }) => {
     const [show, setShow] = useState(false);
+    const menuRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (show) {
+            document.addEventListener("mousedown", (e) =>
+                handleOutsideClick(e, menuRef, setShow)
+            );
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", (e) =>
+                handleOutsideClick(e, menuRef, setShow)
+            );
+        };
+    }, [menuRef, show]);
 
     const handleOnSelect = (value: string) => {
         setShow(false);
@@ -31,7 +61,7 @@ const Menu: React.FC<MenuProps> = ({
     );
 
     return (
-        <div className={finalClassNames}>
+        <div className={finalClassNames} ref={menuRef}>
             <Icon iconName="three-dots" onClick={handleTriggerClick} />
             {show ? (
                 <ul className="menu__items">
