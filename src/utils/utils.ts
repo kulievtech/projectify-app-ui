@@ -1,6 +1,6 @@
 import { Task } from "../types";
 
-interface GroupedTasks {
+export interface GroupedTasks {
     [status: string]: Task[];
 }
 
