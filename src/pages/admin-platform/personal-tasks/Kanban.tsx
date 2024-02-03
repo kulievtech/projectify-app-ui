@@ -96,13 +96,13 @@ const Kanban: React.FC<KanbanProps> = ({ groupedTasks }) => {
                                         {
                                             label: "Edit",
                                             value: "editTask",
-                                            variant: "primary",
+                                            color: "primary",
                                             iconName: "edit"
                                         },
                                         {
                                             label: "Delete",
                                             value: "deleteTask",
-                                            variant: "danger",
+                                            color: "danger",
                                             iconName: "delete"
                                         }
                                     ]}
