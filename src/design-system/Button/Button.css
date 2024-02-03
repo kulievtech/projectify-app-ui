@@ -137,7 +137,7 @@
 
 .btn-secondary.btn-outlined {
     background-color: var(--white);
-    border: 0.15rem solid var(--jaguar-500);
+    border: 0.15rem solid var(--jaguar-200);
     color: var(--jaguar-500);
 }
 
