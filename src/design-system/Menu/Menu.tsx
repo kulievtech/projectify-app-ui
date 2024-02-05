@@ -1,27 +1,13 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import { MenuProps } from "./types";
 import "./Menu.css";
 import { Icon } from "../Icon";
 import { trimWhiteSpaces } from "../utils";
+import { useCloseWhenClickOutside } from "../../hooks";
 
 const colorClassNames = {
     primary: "menu__item--primary",
     danger: "menu__item--danger"
-};
-
-const handleOutsideClick = (
-    event: Event,
-    ref: React.RefObject<HTMLDivElement>,
-    setShow: (arg: boolean) => void
-) => {
-    if (
-        ref &&
-        ref.current &&
-        event.target instanceof Node &&
-        !ref.current.contains(event.target)
-    ) {
-        setShow(false);
-    }
 };
 
 const Menu: React.FC<MenuProps> = ({
@@ -30,22 +16,8 @@ const Menu: React.FC<MenuProps> = ({
     customTrigger,
     className
 }) => {
-    const [show, setShow] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        if (show) {
-            document.addEventListener("mousedown", (e) =>
-                handleOutsideClick(e, menuRef, setShow)
-            );
-        }
-
-        return () => {
-            document.removeEventListener("mousedown", (e) =>
-                handleOutsideClick(e, menuRef, setShow)
-            );
-        };
-    }, [show]);
+    const { show, setShow } = useCloseWhenClickOutside(menuRef);
 
     const handleOnSelect = (value: string) => {
         setShow(false);

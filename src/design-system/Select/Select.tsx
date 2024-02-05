@@ -5,6 +5,7 @@ import { Button } from "../Button";
 import "./Select.css";
 import { trimWhiteSpaces } from "../utils";
 import { Icon } from "../Icon";
+import { useCloseWhenClickOutside } from "../../hooks/useCloseWhenClickOutside";
 
 const sizeClassNames = {
     md: "select-medium",
@@ -14,21 +15,6 @@ const sizeClassNames = {
 const shapeClassNames = {
     rounded: "select-rounded",
     circle: "select-circle"
-};
-
-const handleOutsideClick = (
-    event: Event,
-    ref: React.RefObject<HTMLDivElement>,
-    setShow: (arg: boolean) => void
-) => {
-    if (
-        ref &&
-        ref.current &&
-        event.target instanceof Node &&
-        !ref.current.contains(event.target)
-    ) {
-        setShow(false);
-    }
 };
 
 const Select: React.FC<SelectProps> = (props) => {
@@ -47,23 +33,9 @@ const Select: React.FC<SelectProps> = (props) => {
         className
     } = props;
 
-    const [expanded, setExpanded] = useState<boolean>(false);
-
     const selectRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        if (expanded) {
-            document.addEventListener("mousedown", (e) =>
-                handleOutsideClick(e, selectRef, setExpanded)
-            );
-        }
-
-        return () => {
-            document.removeEventListener("mousedown", (e) =>
-                handleOutsideClick(e, selectRef, setExpanded)
-            );
-        };
-    }, [expanded]);
+    const { show: expanded, setShow: setExpanded } =
+        useCloseWhenClickOutside(selectRef);
 
     const onClickHeader = () => {
         setExpanded((prevValue) => !prevValue);

@@ -79,7 +79,6 @@ const Kanban: React.FC<KanbanProps> = ({ groupedTasks }) => {
     };
     return (
         <>
-            {" "}
             <TasksColumns>
                 {Object.keys(groupedTasks).map((groupName) => {
                     return (
