@@ -47,6 +47,10 @@ const Select: React.FC<SelectProps> = (props) => {
         `select ${sizeClassName} ${shapeClassName} ${className || ""}`
     );
 
+    const finalHeaderClassName = trimWhiteSpaces(
+        `select__header ${value ? "select__header--has-selection" : ""}`
+    );
+
     const onSelectItem = (option: Option) => {
         onSelect(option);
         setExpanded(false);
@@ -71,7 +75,7 @@ const Select: React.FC<SelectProps> = (props) => {
                 variant="outlined"
                 color="secondary"
                 onClick={onClickHeader}
-                className="select__header"
+                className={finalHeaderClassName}
                 disabled={disabled}
                 fullWidth
             >

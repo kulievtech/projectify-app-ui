@@ -6,10 +6,16 @@
 .btn-secondary.select__header {
     background-color: var(--white);
     justify-content: space-between;
+    padding: 0 var(--space-8) 0 var(--space-16);
+    font-weight: var(--font-weight-400);
 }
 .btn-secondary.select__header:hover {
     border: 1px solid var(--primary-500);
     background-color: var(--white);
+}
+
+.btn-secondary.select__header.select__header--has-selection {
+    color: var(--jaguar-900);
 }
 
 .btn-secondary.select__header:focus {
@@ -18,6 +24,7 @@
 }
 .select__body {
     position: absolute;
+    top: calc(100% + var(--space-4));
     list-style-type: none;
     border: var(--jaguar-100);
     box-shadow: var(--shadow-m);
@@ -25,6 +32,10 @@
     padding: var(--space-4);
     background-color: var(--white);
     z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
 }
 
 .select-rounded .select__body {
@@ -43,7 +54,6 @@
     height: 3.2rem;
     color: var(--jaguar-900);
     font-size: var(--font-size-16);
-    font-weight: var(--font-weight-20);
     display: flex;
     align-items: center;
     padding: 0 var(--space-12);
@@ -52,7 +62,7 @@
 }
 
 .select__item:hover {
-    background-color: var(--jaguar-50);
+    background-color: var(--jaguar-100);
 }
 
 .select-medium .select__item {
@@ -76,7 +86,7 @@
 }
 
 .select__item--selected {
-    background-color: var(--jaguar-50);
+    background-color: var(--jaguar-100);
 }
 
 .select__icon {
