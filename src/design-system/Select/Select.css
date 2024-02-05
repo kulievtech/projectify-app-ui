@@ -10,7 +10,7 @@
     font-weight: var(--font-weight-400);
 }
 .btn-secondary.select__header:hover {
-    border: 1px solid var(--primary-500);
+    border-color: var(--primary-500);
     background-color: var(--white);
 }
 

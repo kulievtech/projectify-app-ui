@@ -3,6 +3,7 @@ import ReactDatePicker, { ReactDatePickerProps } from "react-datepicker";
 import { InputSize } from "../Input";
 import { trimWhiteSpaces } from "../utils";
 import getDate from "date-fns/getDate";
+import { Icon } from "../Icon";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "./DatePicker.css";
@@ -66,7 +67,7 @@ const DatePickerV1: React.FC<DataPickerProps> = ({
         : "";
 
     const finalInputClassNames = trimWhiteSpaces(
-        `input ${inputSizeClassName} ${inputShapeClassName}`
+        `v1-date-picker__input input ${inputSizeClassName} ${inputShapeClassName}`
     );
 
     const finalCalendarClassNames = trimWhiteSpaces(
@@ -85,6 +86,13 @@ const DatePickerV1: React.FC<DataPickerProps> = ({
             dayClassName={customizeDay}
             renderDayContents={renderDayContents}
             calendarClassName={finalCalendarClassNames}
+            showIcon
+            icon={
+                <Icon
+                    iconName="calendar"
+                    className="v1-date-picker__calendar-icon"
+                />
+            }
         />
     );
 };

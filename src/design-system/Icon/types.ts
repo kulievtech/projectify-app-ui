@@ -15,7 +15,8 @@ export type IconName =
     | "three-dots"
     | "edit"
     | "delete"
-    | "chevron-down";
+    | "chevron-down"
+    | "calendar";
 
 export type IconProps = {
     iconName: IconName;
