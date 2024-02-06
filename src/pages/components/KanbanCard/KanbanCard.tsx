@@ -1,10 +1,10 @@
 import styled, { css } from "styled-components";
-import { TaskCardProps } from "./types";
+import { KanbanCardProps } from "./types";
 import { Badge, Bar, Menu, Typography } from "../../../design-system";
 import { format } from "date-fns";
 import { useState } from "react";
 
-const TaskCardBase = styled.div<{ $isDragging: boolean }>`
+const KanbanCardBase = styled.div<{ $isDragging: boolean }>`
     background-color: var(--white);
     padding: var(--space-16);
     border-radius: var(--border-radius-16);
@@ -25,21 +25,21 @@ const TaskCardBase = styled.div<{ $isDragging: boolean }>`
     }
 `;
 
-const TaskCardHeader = styled.div`
+const KanbanCardHeader = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
 `;
 
-const TaskTitle = styled(Typography)`
+const KanbanTitle = styled(Typography)`
     margin-bottom: var(--space-4);
 `;
 
-const TaskDescription = styled(Typography)`
+const KanbanDescription = styled(Typography)`
     color: var(--jaguar-500);
 `;
 
-const TaskDue = styled(Badge)`
+const KanbanDue = styled(Badge)`
     align-self: flex-end;
 `;
 
@@ -54,7 +54,7 @@ enum StatusToIcon {
     INPROGRESS = "flag",
     DONE = "check"
 }
-const TaskCard: React.FC<TaskCardProps> = ({
+const KanbanCard: React.FC<KanbanCardProps> = ({
     task,
     menuActions,
     onSelectMenuAction
@@ -75,34 +75,34 @@ const TaskCard: React.FC<TaskCardProps> = ({
     };
 
     return (
-        <TaskCardBase
+        <KanbanCardBase
             draggable
             onDragStart={onDragStart}
             onDragEnd={onDragEnd}
             $isDragging={isDragging}
         >
             {" "}
-            <TaskCardHeader>
+            <KanbanCardHeader>
                 <Bar color={StatusToColor[task.status]} />
                 <Menu items={menuActions} onSelect={handleOnSelectMenuItem} />
-            </TaskCardHeader>
+            </KanbanCardHeader>
             <div>
-                <TaskTitle variant="paragraphLG" weight="semibold">
+                <KanbanTitle variant="paragraphLG" weight="semibold">
                     {task?.title}
-                </TaskTitle>
-                <TaskDescription variant="subtitleLG" weight="medium">
+                </KanbanTitle>
+                <KanbanDescription variant="subtitleLG" weight="medium">
                     {task?.description}
-                </TaskDescription>
+                </KanbanDescription>
             </div>
-            <TaskDue
+            <KanbanDue
                 label={format(task.due, "MMMM d")}
                 color={StatusToColor[task.status]}
                 iconName={StatusToIcon[task.status]}
                 variant="contained"
                 shape="rounded"
             />
-        </TaskCardBase>
+        </KanbanCardBase>
     );
 };
 
-export { TaskCard };
+export { KanbanCard };
