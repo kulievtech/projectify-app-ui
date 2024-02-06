@@ -6,10 +6,10 @@
     margin-bottom: var(--space-6);
 }
 
-.label-error {
+.label.label-error {
     color: var(--red-orange-500);
 }
 
-.label-disabled {
+.label.label-disabled {
     color: var(--jaguar-300);
 }
