@@ -67,10 +67,8 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
 
     useEffect(() => {
         const task = adminPersonalTasks.find((task) => task.id === taskId);
-        console.log("hello");
 
         if (task) {
-            console.log(task);
             setTaskDue(parseISO((task?.due).toString()));
             setTaskDescription(task.description);
             setTaskTitle(task?.title);
