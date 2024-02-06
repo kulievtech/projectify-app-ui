@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { DatePickerV1 } from "./design-system";
+import { Badge, DatePickerV1, Icon } from "./design-system";
 import { useState } from "react";
 import { OptionValue, Select } from "./design-system/Select";
 import { Checkbox, Switch } from "./design-system";
@@ -83,6 +83,19 @@ const App = () => {
                 shape="circle"
                 id="switch"
                 position="end"
+            />
+            <Badge
+                color="orange"
+                label="DONE"
+                shape="rounded"
+                variant="outlined"
+            />
+            <Badge
+                label="Badge"
+                shape="rounded"
+                variant="contained"
+                color="gray"
+                icon={<Icon iconName="flag" />}
             />
         </AppWrapper>
     );
