@@ -81,6 +81,8 @@ const App = () => {
                 checked={value3}
                 onSwitch={(value3) => setValue3(value3)}
                 shape="circle"
+                id="switch"
+                position="end"
             />
         </AppWrapper>
     );

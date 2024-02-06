@@ -83,7 +83,6 @@ const Checkbox: React.FC<CheckboxProps> = ({
                         className="checkbox__hidden-input"
                         disabled={disabled}
                     />
-                    <div className="checkbox__background"></div>
                     {checked && (
                         <Icon iconName={iconName} className="checkbox__icon" />
                     )}
