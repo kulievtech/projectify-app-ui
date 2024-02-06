@@ -75,8 +75,6 @@ const App = () => {
                 checked={value2}
                 onChange={(value2) => setValue2(value2)}
                 shape="rounded"
-                indeterminate
-                position="end"
             />
         </AppWrapper>
     );

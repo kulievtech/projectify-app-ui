@@ -80,9 +80,10 @@ const Checkbox: React.FC<CheckboxProps> = ({
                         id={id}
                         checked={checked}
                         onChange={handleOnChange}
-                        className="checkbox__input"
+                        className="checkbox__hidden-input"
                         disabled={disabled}
                     />
+                    <div className="checkbox__background"></div>
                     {checked && (
                         <Icon iconName={iconName} className="checkbox__icon" />
                     )}
