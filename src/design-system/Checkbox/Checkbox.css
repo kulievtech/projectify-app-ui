@@ -1,5 +1,5 @@
 .checkbox {
-    width: max-content;
+    width: 100%;
 }
 
 /*Visually Removes default checkbox  */
@@ -46,6 +46,7 @@
     color: var(--jaguar-900);
     display: flex;
     align-items: center;
+
     gap: var(--space-16);
     color: var(--jaguar-900);
     cursor: pointer;
@@ -67,17 +68,29 @@
 
 /* Hidden Background for Hover and Focus states */
 .checkbox__background {
-    height: 1rem;
-    width: 1rem;
+    height: 1.6rem;
+    width: 1.6rem;
     border-radius: 50%;
     position: absolute;
     z-index: -1;
+    background-color: var(--primary-50);
     transition: all 0.3s;
 }
 
 /* Hover State */
-.checkbox__hidden-input:hover:not(:disabled) + .checkbox__background,
+@keyframes animateFocus {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(2.5);
+    }
+}
+
+.checkbox__hidden-input:hover:not(:disabled) + .checkbox__background {
+    transform: scale(2.5);
+}
+
 .checkbox__hidden-input:focus:not(:disabled) + .checkbox__background {
-    transform: scale(4);
-    background-color: var(--primary-50);
+    animation: animateFocus 0.6s;
 }
