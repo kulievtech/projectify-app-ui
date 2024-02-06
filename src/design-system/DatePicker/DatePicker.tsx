@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDatePicker, { ReactDatePickerProps } from "react-datepicker";
 import { InputSize } from "../Input";
 import { trimWhiteSpaces } from "../utils";
 import getDate from "date-fns/getDate";
-import { Icon } from "../Icon";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "./DatePicker.css";
+import { Icon } from "../Icon";
 
 const inputSizeClassNames = {
     sm: "input-small",
@@ -93,6 +93,7 @@ const DatePickerV1: React.FC<DataPickerProps> = ({
                     className="v1-date-picker__calendar-icon"
                 />
             }
+            // toggleCalendarOnIconClick
         />
     );
 };

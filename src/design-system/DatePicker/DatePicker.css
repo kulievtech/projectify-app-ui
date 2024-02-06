@@ -27,6 +27,7 @@
     width: 3.6rem;
     color: var(--jaguar-900);
     border-radius: 0;
+    user-select: none;
 }
 
 .v1-date-picker--rounded .react-datepicker__day.v1-date-picker__day-wrapper {
@@ -125,6 +126,7 @@
     justify-content: center;
     font-size: var(--font-size-14);
     color: var(--jaguar-400);
+    user-select: none;
 }
 
 .v1-date-picker
@@ -140,10 +142,6 @@
     border-width: 2px 2px 0 0;
 }
 
-.react-datepicker__input-container.react-datepicker__view-calendar-icon {
-    position: relative;
-}
-
 .react-datepicker__view-calendar-icon .input {
     padding: 0 var(--space-16);
 }
@@ -156,4 +154,8 @@
     height: 2rem;
     width: 2rem;
     fill: var(--jaguar-500);
+}
+
+.v1-date-picker__calendar-icon.react-datepicker__calendar-icon:hover + input {
+    border-color: var(--primary-500) !important;
 }
