@@ -48,14 +48,14 @@ const Switch: React.FC<ToggleProps> = ({
 
     return (
         <Label htmlFor={id} className={labelClassName} disabled={disabled}>
+            <input
+                type="checkbox"
+                className="switch__hidden-input"
+                onChange={handleOnChange}
+                id={id}
+                disabled={disabled}
+            />
             <div className={trackClassNames}>
-                <input
-                    type="checkbox"
-                    className="switch__hidden-input"
-                    onChange={handleOnChange}
-                    id={id}
-                    disabled={disabled}
-                />
                 <div className="switch__thumb">
                     {checked && (
                         <Icon

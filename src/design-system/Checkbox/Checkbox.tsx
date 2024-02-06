@@ -74,15 +74,15 @@ const Checkbox: React.FC<CheckboxProps> = ({
     return (
         <div className={checkboxWrapperClassName}>
             <Label htmlFor={id} className={labelClassName} disabled={disabled}>
+                <input
+                    type="checkbox"
+                    id={id}
+                    checked={checked}
+                    onChange={handleOnChange}
+                    className="checkbox__hidden-input"
+                    disabled={disabled}
+                />
                 <div className={customCheckboxClassName}>
-                    <input
-                        type="checkbox"
-                        id={id}
-                        checked={checked}
-                        onChange={handleOnChange}
-                        className="checkbox__hidden-input"
-                        disabled={disabled}
-                    />
                     {checked && (
                         <Icon iconName={iconName} className="checkbox__icon" />
                     )}
