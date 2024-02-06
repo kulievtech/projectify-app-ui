@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { DatePickerV1 } from "./design-system";
 import { useState } from "react";
 import { OptionValue, Select } from "./design-system/Select";
+import { Checkbox } from "./design-system";
 
 const AppWrapper = styled.div`
     padding: 2rem;
@@ -15,6 +16,7 @@ const AppWrapper = styled.div`
 const App = () => {
     const [date, setDate] = useState<Date>();
     const [value, setValue] = useState<OptionValue>("");
+    const [value2, setValue2] = useState(false);
 
     return (
         <AppWrapper>
@@ -66,6 +68,15 @@ const App = () => {
                 size="md"
                 shape="circle"
                 value={value}
+            />
+            <Checkbox
+                label="Hello world"
+                id="checkbox"
+                checked={value2}
+                onChange={(value2) => setValue2(value2)}
+                shape="rounded"
+                indeterminate
+                position="end"
             />
         </AppWrapper>
     );
