@@ -22,6 +22,7 @@ import { Auth } from "./Auth";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { AdminPersonalTasks } from "../pages/admin-platform/personal-tasks/AdminPersonalTasks";
 import { AdminTeamMembers } from "../pages/admin-platform/team-members/AdminTeamMembers";
+import { TeamMemberPersonalTasks } from "../pages/team-member-platform/personal-tasks/TeamMemberPersonalTasks";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -126,7 +127,7 @@ export const router = createBrowserRouter(
                 <Route path="stories" element={<h1>Stories</h1>} />
                 <Route
                     path="personal-tasks"
-                    element={<h1>Personal Tasks</h1>}
+                    element={<TeamMemberPersonalTasks />}
                 />
                 <Route path="team-members" element={<h1>Members</h1>} />
             </Route>

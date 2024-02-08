@@ -23,10 +23,18 @@ export const userReducer = (
             return initialState;
         case Actions.POPULATE_TASKS: {
             const payload = action.payload as PopulateTasksAction["payload"];
-            return {
-                ...state,
-                adminPersonalTasks: payload
-            };
+
+            if (state.user?.role === "admin") {
+                return {
+                    ...state,
+                    adminPersonalTasks: payload
+                };
+            } else {
+                return {
+                    ...state,
+                    teamMemberPersonalTasks: payload
+                };
+            }
         }
         case Actions.ADD_TASK: {
             const payload = action.payload as AddTaskAction["payload"];
@@ -34,7 +42,11 @@ export const userReducer = (
             if (state.adminPersonalTasks) {
                 return {
                     ...state,
-                    adminPersonalTasks: [...state.adminPersonalTasks, payload]
+                    adminPersonalTasks: [...state.adminPersonalTasks, payload],
+                    teamMemberPersonalTasks: [
+                        ...state.teamMemberPersonalTasks,
+                        payload
+                    ]
                 };
             } else {
                 return {
