@@ -96,7 +96,7 @@ const App = () => {
                 shape="rounded"
                 variant="contained"
                 color="gray"
-                icon={<Icon iconName="flag" />}
+                iconName="flag"
             />
             <div>
                 <LinearProgress value={50} color="orange" error />
