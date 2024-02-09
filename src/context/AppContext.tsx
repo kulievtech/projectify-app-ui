@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from "react";
-import { GlobalState, initialState, userReducer, ActionType } from "../store/";
+import { GlobalState, initialState, rootReducer, ActionType } from "../store/";
 
 type AppContextType = {
     state: GlobalState;
@@ -16,7 +16,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
     const [state, dispatch] = useReducer<
         React.Reducer<GlobalState, ActionType>
-    >(userReducer, initialState);
+    >(rootReducer, initialState);
     const value = {
         state,
         dispatch

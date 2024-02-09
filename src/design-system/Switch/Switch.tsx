@@ -39,7 +39,7 @@ const Switch: React.FC<ToggleProps> = ({
 
     const trackClassNames = trimWhiteSpaces(
         `switch__track ${shapeClassName} ${checked ? "switch-on" : ""} 
-        }${className ? className : ""}`
+        ${className ? className : ""}`
     );
 
     const labelClassName = `switch__label ${
