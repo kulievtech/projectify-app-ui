@@ -4,6 +4,7 @@ import { Badge, DatePickerV1, Icon } from "./design-system";
 import { useState } from "react";
 import { OptionValue, Select } from "./design-system/Select";
 import { Checkbox, Switch } from "./design-system";
+import { LinearProgress } from "./design-system/Progress";
 
 const AppWrapper = styled.div`
     padding: 2rem;
@@ -97,6 +98,33 @@ const App = () => {
                 color="gray"
                 icon={<Icon iconName="flag" />}
             />
+            <div>
+                <LinearProgress value={50} color="orange" error />
+                <LinearProgress value={40} color="blue" />
+                <LinearProgress value={40} color="green" />
+                <LinearProgress value={40} color="red" />
+                <LinearProgress
+                    value={50}
+                    color="orange"
+                    error
+                    shape="rounded"
+                />
+                <LinearProgress
+                    value={40}
+                    color="blue"
+                    shape="rounded"
+                    size="md"
+                />
+                <LinearProgress
+                    value={100}
+                    color="green"
+                    shape="rounded"
+                    size="lg"
+                />
+                <LinearProgress value={40} color="red" error shape="rounded" />
+
+                <LinearProgress value={99} />
+            </div>
         </AppWrapper>
     );
 };
