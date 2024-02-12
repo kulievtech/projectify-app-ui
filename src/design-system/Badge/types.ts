@@ -1,6 +1,6 @@
 import { IconName } from "../Icon";
 
-type BadgeColors =
+export type BadgeColors =
     | "violet"
     | "orange"
     | "green"

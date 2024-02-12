@@ -3,7 +3,6 @@ import { TeamMemberState } from "../state";
 import {
     ActionType,
     Actions,
-    PopulateTasksAction,
     AdminPopulateTeamMembersAction,
     AdminAddTeamMemberAction
 } from "../actions";

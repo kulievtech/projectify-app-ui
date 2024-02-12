@@ -3,8 +3,9 @@ import { BaseCellProps, BaseRowProps } from "./types";
 
 export const TableRowBase = styled.tr<BaseRowProps>`
     display: grid;
-    grid-template-columns: ${(props) => props.$columns};
-    padding: var(--space-16);
+    grid-template-columns: ${(props) => props.$columns.join(" ")};
+    align-items: center;
+    padding: 0 var(--space-16);
     border-radius: var(--border-radius-24);
     box-shadow: var(--shadow-xs);
 `;
@@ -39,8 +40,7 @@ export const TableBody = styled.tbody`
 
 export const TableHead = styled.thead`
     ${TableRowBase} {
-        height: 4rem;
+        height: 6rem;
         margin-bottom: var(--space-4);
     }
 `;
-export const TableBase = styled.table;
