@@ -6,7 +6,9 @@ import {
     Modal,
     Input,
     DatePickerV1,
-    Button
+    Button,
+    Select,
+    Option
 } from "../../../design-system";
 
 import { useStore } from "../../../hooks";
@@ -33,11 +35,28 @@ const Buttons = styled.div`
     gap: var(--space-10);
 `;
 
+const positions: Option[] = [
+    { value: "Frontend Engineer", label: "Frontend Engineer" },
+    { value: "Backend Engineer", label: "Backend Engineer" },
+    { value: "Fullstack Engineer", label: "Fullstack Engineer" },
+    { value: "Products Designer", label: "Products Designer" },
+    { value: "Product Managers", label: "Product Managers" },
+    { value: "Frontend Engineer II", label: "Frontend Engineer II" },
+    { value: "Frontend Engineer III", label: "Frontend Engineer III" },
+    { value: "Senior Frontend Engineer", label: "Senior Frontend Engineer" },
+    { value: "Backend Engineer II", label: "Backend Engineer II" },
+    { value: "Backend Engineer III", label: "Backend Engineer III" },
+    { value: "Senior Backend Engineer", label: "Senior Backend Engineer" },
+    { value: "Fullstack Engineer II", label: "Fullstack Engineer II" },
+    { value: "Fullstack Engineer III", label: "Fullstack Engineer III" },
+    { value: "Senior Fullstack Engineer", label: "Senior Fullstack Engineer" }
+];
+
 const CreateTeamMemberModal: React.FC<ModalProps> = ({ show, closeModal }) => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
-    const [position, setPosition] = useState("");
+    const [position, setPosition] = useState<Option | undefined>();
     const [joinDate, setJoinDate] = useState<Date>();
 
     const { dispatch } = useStore();
@@ -54,8 +73,8 @@ const CreateTeamMemberModal: React.FC<ModalProps> = ({ show, closeModal }) => {
         setEmail(value);
     };
 
-    const handleOnChangePosition = (value: string) => {
-        setPosition(value);
+    const handleOnSelectPosition = (option: Option) => {
+        setPosition(option);
     };
 
     return (
@@ -80,18 +99,18 @@ const CreateTeamMemberModal: React.FC<ModalProps> = ({ show, closeModal }) => {
                     shape="rounded"
                     size="lg"
                 />
-                <Input
-                    type="text"
-                    placeholder="Position"
-                    value={position}
-                    onChange={handleOnChangePosition}
-                    shape="rounded"
+                <Select
+                    options={positions}
+                    onSelect={handleOnSelectPosition}
+                    value={position?.value}
                     size="lg"
+                    shape="rounded"
+                    headerPlaceholder="Select Position"
                 />
                 <DatePickerV1
                     inputSize="lg"
                     shape="rounded"
-                    placeholder="Due Date"
+                    placeholder="Join Date"
                     selected={joinDate}
                     onChange={(date) => setJoinDate(date)}
                 />
