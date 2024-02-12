@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
-import { NoDataPlaceholder } from "../../components";
-import noTask from "../../../assets/illustrations/no-task.svg";
+import { NoDataPlaceholder, Page, PageContent } from "../../components";
+
 import { adminTasksService } from "../../../api";
 import { useStore } from "../../../hooks";
 import { Actions, PopulateTasksAction } from "../../../store";
@@ -10,16 +9,7 @@ import { CreateTaskModal } from "./CreateTaskModel";
 import { Kanban } from "./Kanban";
 import { PageHeader } from "./PageHeader";
 
-const PageBase = styled.main`
-    position: relative;
-    width: 100%;
-    height: 100%;
-`;
-
-const PageContent = styled.section`
-    width: 80%;
-    margin: 0 auto;
-`;
+import noTask from "../../../assets/illustrations/no-task.svg";
 
 const AdminPersonalTasks = () => {
     const [isTasksFetching, setIsTasksFetching] = useState(true);
@@ -56,7 +46,7 @@ const AdminPersonalTasks = () => {
     const groupedTasks = groupTasksByStatus(adminPersonalTasks);
 
     return (
-        <PageBase>
+        <Page>
             {!adminPersonalTasks.length ? (
                 <NoDataPlaceholder
                     illustrationUrl={noTask}
@@ -76,7 +66,7 @@ const AdminPersonalTasks = () => {
                 show={showCreateTaskModal}
                 closeModal={() => setShowCreateTaskModal(false)}
             />
-        </PageBase>
+        </Page>
     );
 };
 

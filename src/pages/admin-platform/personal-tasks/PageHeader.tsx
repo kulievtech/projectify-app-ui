@@ -1,13 +1,5 @@
-import styled from "styled-components";
-import { Typography, Button } from "../../../design-system";
-
-const PageHeaderBase = styled.header`
-    display: flex;
-    justify-content: space-between;
-`;
-const PageTitle = styled(Typography)`
-    margin-bottom: var(--space-36);
-`;
+import { Button } from "../../../design-system";
+import { PageHeaderBase, PageTitle } from "../../components";
 
 const PageHeader: React.FC<{ openCreateTaskModal: () => void }> = ({
     openCreateTaskModal
