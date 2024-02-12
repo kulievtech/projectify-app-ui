@@ -27,7 +27,7 @@
     top: calc(100% + var(--space-4));
     list-style-type: none;
     border: var(--jaguar-100);
-    box-shadow: var(--shadow-m);
+    border: 0.15rem solid var(--jaguar-100);
     width: 100%;
     padding: var(--space-4);
     background-color: var(--white);
