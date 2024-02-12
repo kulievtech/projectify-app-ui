@@ -24,6 +24,16 @@
     background-color: var(--white);
 }
 
+/* Header Icon */
+.select__icon {
+    transition: 0.3s;
+    fill: var(--jaguar-500);
+}
+
+.select__icon--expanded {
+    transform: rotate(180deg);
+}
+
 /* Body */
 .select__body {
     position: absolute;
@@ -65,7 +75,8 @@
     height: 3.2rem;
     color: var(--jaguar-900);
     font-size: var(--font-size-16);
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 2rem;
     align-items: center;
     padding: 0 var(--space-12);
     transition: all 0.3s;
@@ -104,15 +115,11 @@
     background-color: var(--jaguar-100);
 }
 
-.select__icon {
-    transition: 0.3s;
-    fill: var(--jaguar-500);
+.select__selected-icon {
+    fill: var(--primary-500);
 }
 
-.select__icon--expanded {
-    transform: rotate(180deg);
-}
-
+/* Scroll Bar */
 .select__body::-webkit-scrollbar {
     width: 0.8rem;
     border-radius: var(--border-radius-0);

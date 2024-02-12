@@ -103,6 +103,14 @@ const Select: React.FC<SelectProps> = (props) => {
                                 onClick={() => onSelectItem(option)}
                             >
                                 {option.label}
+                                {value === option.value && (
+                                    <Icon
+                                        iconName={
+                                            shape ? "check" : "check-sharp"
+                                        }
+                                        className="select__selected-icon"
+                                    />
+                                )}
                             </li>
                         );
                     })}
