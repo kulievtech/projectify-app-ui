@@ -3,6 +3,7 @@ import { adminTasksReducer } from "./adminTasksReducer";
 import { teamMemberTasksReducer } from "./teamMemberTasksReducer";
 import { GlobalState } from "../state";
 import { ActionType } from "../actions";
+import { adminTeamMembersReducer } from "./adminTeamMembersReducer";
 
 const rootReducer = (state: GlobalState, action: ActionType): GlobalState => {
     const newState: GlobalState = {
@@ -11,7 +12,8 @@ const rootReducer = (state: GlobalState, action: ActionType): GlobalState => {
         teamMemberPersonalTasks: teamMemberTasksReducer(
             state.teamMemberPersonalTasks,
             action
-        )
+        ),
+        teamMembers: adminTeamMembersReducer(state.teamMembers, action)
     };
 
     return newState;

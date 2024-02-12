@@ -12,8 +12,8 @@ import {
 } from "../../../design-system";
 
 import { useStore } from "../../../hooks";
-import { Actions } from "../../../store";
-
+import { Actions, AdminAddTeamMemberAction } from "../../../store";
+import { teamMemberService } from "../../../api";
 type ModalProps = {
     show: boolean;
     closeModal: () => void;
@@ -56,7 +56,7 @@ const CreateTeamMemberModal: React.FC<ModalProps> = ({ show, closeModal }) => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
-    const [position, setPosition] = useState<Option | undefined>();
+    const [position, setPosition] = useState<Option>();
     const [joinDate, setJoinDate] = useState<Date>();
 
     const { dispatch } = useStore();
@@ -75,6 +75,42 @@ const CreateTeamMemberModal: React.FC<ModalProps> = ({ show, closeModal }) => {
 
     const handleOnSelectPosition = (option: Option) => {
         setPosition(option);
+    };
+
+    const resetFields = () => {
+        setFirstName("");
+        setLastName("");
+        setEmail("");
+        setPosition(undefined);
+        setJoinDate(undefined);
+    };
+
+    const createTeamMember = () => {
+        const input = {
+            firstName,
+            lastName,
+            email,
+            joinDate: joinDate!,
+            position: position?.value as string
+        };
+        try {
+            teamMemberService
+                .create(input)
+                .then((data) => {
+                    const action: AdminAddTeamMemberAction = {
+                        type: Actions.ADMIN_ADD_TEAM_MEMBER,
+                        payload: data.data
+                    };
+                    dispatch(action);
+                    resetFields();
+                    closeModal();
+                    toast.success("Team Member has been successfully created");
+                })
+                .catch((e) => {
+                    const err = e as Error;
+                    toast.error(err.message);
+                });
+        } catch (error) {}
     };
 
     return (
@@ -135,7 +171,13 @@ const CreateTeamMemberModal: React.FC<ModalProps> = ({ show, closeModal }) => {
                 >
                     Cancel
                 </Button>
-                <Button size="lg" shape="rounded" color="primary" fullWidth>
+                <Button
+                    size="lg"
+                    shape="rounded"
+                    color="primary"
+                    fullWidth
+                    onClick={createTeamMember}
+                >
                     Save
                 </Button>
             </Buttons>
