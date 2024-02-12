@@ -33,9 +33,49 @@
     background-color: var(--white);
     z-index: 2;
 
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
+    height: 18rem;
+    overflow-y: auto;
+}
+
+select__body::-webkit-scrollbar {
+    width: 0.8rem;
+    border-radius: var(--border-radius-0);
+}
+
+.select__body::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: var(--border-radius-0);
+}
+
+.select__body::-webkit-scrollbar-thumb {
+    background: var(--jaguar-100);
+    border-radius: var(--border-radius-0);
+}
+
+.select-rounded .select__body::-webkit-scrollbar {
+    border-radius: var(--border-radius-8);
+}
+
+.select-rounded .select__body::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: var(--border-radius-8);
+}
+
+.select-rounded .select__body::-webkit-scrollbar-thumb {
+    background: var(--jaguar-100);
+    border-radius: var(--border-radius-8);
+}
+
+.select-circle .select__body::-webkit-scrollbar {
+    display: none;
+}
+
+.select-circle .select__body::-webkit-scrollbar-track {
+    display: none;
+}
+
+.select-circle .select__body::-webkit-scrollbar-thumb {
+    display: none;
 }
 
 .select-rounded .select__body {
