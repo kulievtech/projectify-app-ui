@@ -7,6 +7,8 @@ import { teamMemberService } from "../../../api";
 import { Actions, AdminPopulateTeamMembersAction } from "../../../store";
 import toast from "react-hot-toast";
 import { PageHeader } from "../../components";
+import { TeamMemberFilters } from "./TeamMemberFilters";
+import { TeamMembersTable } from "./TeamMembersTable";
 
 const AdminTeamMembers = () => {
     const [showCreateTeamMemberModal, setShowCreateTeamMemberModal] =
@@ -51,11 +53,13 @@ const AdminTeamMembers = () => {
                 <PageContent>
                     <PageHeader
                         pageTitle="Team Members"
-                        actionButtonText="Create A Team Member"
+                        actionButtonText="Create A Member"
                         actionButtonOnClick={() =>
                             setShowCreateTeamMemberModal(true)
                         }
                     />
+                    <TeamMemberFilters />
+                    <TeamMembersTable data={teamMembers} />
                 </PageContent>
             )}
             <CreateTeamMemberModal
