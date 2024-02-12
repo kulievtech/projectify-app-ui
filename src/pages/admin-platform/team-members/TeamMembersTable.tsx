@@ -17,7 +17,7 @@ type TeamMembersTableProps = {
 const columns = ["15%", "15%", "22.5%", "20%", "15%", "12.5%"];
 
 const mapsStatusToBadgeColors = {
-    ACTIVE: "blue",
+    ACTIVE: "violet",
     INACTIVE: "gray",
     DEACTIVATED: "red"
 };
