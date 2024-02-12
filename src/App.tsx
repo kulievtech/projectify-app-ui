@@ -5,6 +5,7 @@ import { useState } from "react";
 import { OptionValue, Select } from "./design-system/Select";
 import { Checkbox, Switch } from "./design-system";
 import { LinearProgress } from "./design-system/Progress";
+import { TableBodyCell } from "./design-system/Table";
 
 const AppWrapper = styled.div`
     padding: 2rem;
@@ -125,6 +126,7 @@ const App = () => {
 
                 <LinearProgress value={99} />
             </div>
+            <TableBodyCell align="center">Hello</TableBodyCell>
         </AppWrapper>
     );
 };
