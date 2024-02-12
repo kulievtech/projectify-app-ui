@@ -3,6 +3,7 @@
     width: 100%;
 }
 
+/* Header */
 .btn-secondary.select__header {
     background-color: var(--white);
     justify-content: space-between;
@@ -22,6 +23,8 @@
     border-color: var(--primary-500);
     background-color: var(--white);
 }
+
+/* Body */
 .select__body {
     position: absolute;
     top: calc(100% + var(--space-4));
@@ -33,11 +36,84 @@
     background-color: var(--white);
     z-index: 2;
 
-    height: 18rem;
+    max-height: 14.5rem;
     overflow-y: auto;
 }
 
-select__body::-webkit-scrollbar {
+.select-medium .select__body {
+    max-height: 16.1rem;
+}
+
+.select-large .select__body {
+    max-height: 17.7rem;
+}
+
+.select-rounded .select__body {
+    border-radius: var(--border-radius-8);
+}
+
+.select-circle .select__body {
+    border-radius: var(--border-radius-20);
+}
+
+.select-large.select-circle .select__body {
+    border-radius: var(--border-radius-24);
+}
+
+/* Select Item */
+.select__item {
+    height: 3.2rem;
+    color: var(--jaguar-900);
+    font-size: var(--font-size-16);
+    display: flex;
+    align-items: center;
+    padding: 0 var(--space-12);
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.select__item:not(:last-child) {
+    margin-bottom: var(--space-2);
+}
+
+.select__item:hover {
+    background-color: var(--jaguar-100);
+}
+
+.select-medium .select__item {
+    height: 3.6rem;
+}
+
+.select-large .select__item {
+    height: 4rem;
+}
+
+.select-rounded .select__item {
+    border-radius: var(--border-radius-8);
+}
+
+.select-circle .select__item {
+    border-radius: var(--border-radius-20);
+}
+
+.select-large.select-circle .select__item {
+    border-radius: var(--border-radius-24);
+}
+
+.select__item--selected {
+    background-color: var(--jaguar-100);
+}
+
+.select__icon {
+    transition: 0.3s;
+    fill: var(--jaguar-500);
+}
+
+.select__icon--expanded {
+    transform: rotate(180deg);
+}
+
+.select__body::-webkit-scrollbar {
     width: 0.8rem;
     border-radius: var(--border-radius-0);
 }
@@ -76,64 +152,4 @@ select__body::-webkit-scrollbar {
 
 .select-circle .select__body::-webkit-scrollbar-thumb {
     display: none;
-}
-
-.select-rounded .select__body {
-    border-radius: var(--border-radius-8);
-}
-
-.select-circle .select__body {
-    border-radius: var(--border-radius-20);
-}
-
-.select-large.select-circle .select__body {
-    border-radius: var(--border-radius-24);
-}
-
-.select__item {
-    height: 3.2rem;
-    color: var(--jaguar-900);
-    font-size: var(--font-size-16);
-    display: flex;
-    align-items: center;
-    padding: 0 var(--space-12);
-    transition: all 0.3s;
-    cursor: pointer;
-}
-
-.select__item:hover {
-    background-color: var(--jaguar-100);
-}
-
-.select-medium .select__item {
-    height: 3.6rem;
-}
-
-.select-large .select__item {
-    height: 4rem;
-}
-
-.select-rounded .select__item {
-    border-radius: var(--border-radius-8);
-}
-
-.select-circle .select__item {
-    border-radius: var(--border-radius-20);
-}
-
-.select-large.select-circle .select__item {
-    border-radius: var(--border-radius-24);
-}
-
-.select__item--selected {
-    background-color: var(--jaguar-100);
-}
-
-.select__icon {
-    transition: 0.3s;
-    fill: var(--jaguar-500);
-}
-
-.select__icon--expanded {
-    transform: rotate(180deg);
 }
