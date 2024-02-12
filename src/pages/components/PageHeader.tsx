@@ -1,18 +1,11 @@
-import styled from "styled-components";
-import { Button, Typography } from "../../design-system";
+import { Button } from "../../design-system";
+import { PageHeaderBase, PageTitle } from ".";
 
 type PageHeaderProps = {
     pageTitle: string;
     actionButtonText: string;
     actionButtonOnClick: () => void;
 };
-const PageHeaderBase = styled.header`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: var(--space-30);
-`;
-
 const PageHeader: React.FC<PageHeaderProps> = ({
     pageTitle,
     actionButtonText,
@@ -20,9 +13,9 @@ const PageHeader: React.FC<PageHeaderProps> = ({
 }) => {
     return (
         <PageHeaderBase>
-            <Typography variant="h6" weight="medium">
+            <PageTitle variant="h6" weight="medium">
                 {pageTitle}
-            </Typography>
+            </PageTitle>
             <Button
                 variant="contained"
                 color="primary"
