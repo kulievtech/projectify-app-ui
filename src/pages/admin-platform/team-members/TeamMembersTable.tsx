@@ -1,5 +1,11 @@
 import format from "date-fns/format";
-import { Badge, BadgeColors, Typography } from "../../../design-system";
+import {
+    Badge,
+    BadgeColors,
+    Menu,
+    MenuOption,
+    Typography
+} from "../../../design-system";
 import {
     Table,
     TableBody,
@@ -8,18 +14,46 @@ import {
     TableHeadCell,
     TableRow
 } from "../../../design-system/Table";
-import { TeamMember } from "../../../types";
+import { TeamMember, TeamMemberStatus } from "../../../types";
 
 type TeamMembersTableProps = {
     data: TeamMember[];
 };
 
-const columns = ["15%", "15%", "22.5%", "20%", "15%", "12.5%"];
+const columns = ["12.5%", "12.5%", "20%", "20%", "15%", "15%", "5%"];
 
 const mapsStatusToBadgeColors = {
     ACTIVE: "violet",
     INACTIVE: "gray",
     DEACTIVATED: "red"
+};
+
+const actions = {
+    ACTIVE: ["edit", "deactivate"],
+    INACTIVE: ["edit", "delete"],
+    DEACTIVATED: ["edit", "reactivate"]
+};
+
+const options: MenuOption[] = [
+    { label: "Edit", iconName: "edit", value: "edit", color: "primary" },
+    {
+        label: "Reactivate",
+        iconName: "check-in-circle",
+        value: "reactivate",
+        color: "primary"
+    },
+    { label: "Delete", iconName: "delete", value: "delete", color: "danger" },
+    {
+        label: "Deactivate",
+        iconName: "x-in-circle",
+        value: "deactivate",
+        color: "danger"
+    }
+];
+const getActionOptions = (status: TeamMemberStatus) => {
+    const ableTo = actions[status];
+
+    return options.filter((option) => ableTo.includes(option.value));
 };
 
 const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
@@ -33,6 +67,7 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
                     <TableHeadCell>Email</TableHeadCell>
                     <TableHeadCell>Join Date</TableHeadCell>
                     <TableHeadCell>Status</TableHeadCell>
+                    <TableHeadCell> </TableHeadCell>
                 </TableRow>
             </TableHead>
             <TableBody>
@@ -76,26 +111,29 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
                                     variant="paragraphSM"
                                     weight="medium"
                                 >
-                                    {format(
-                                        teamMember.joinDate,
-                                        "MMMM d, yyyy"
-                                    )}
+                                    {format(teamMember.joinDate, "MMM d, yyyy")}
                                 </Typography>
                             </TableBodyCell>
                             <TableBodyCell>
-                                <TableBodyCell>
-                                    <Badge
-                                        color={
-                                            mapsStatusToBadgeColors[
-                                                teamMember.status
-                                            ] as BadgeColors
-                                        }
-                                        label={teamMember.status}
-                                        variant="outlined"
-                                        shape="rounded"
-                                        status
-                                    />
-                                </TableBodyCell>
+                                <Badge
+                                    color={
+                                        mapsStatusToBadgeColors[
+                                            teamMember.status
+                                        ] as BadgeColors
+                                    }
+                                    label={teamMember.status}
+                                    variant="outlined"
+                                    shape="rounded"
+                                    status
+                                />
+                            </TableBodyCell>
+                            <TableBodyCell>
+                                <Menu
+                                    options={getActionOptions(
+                                        teamMember.status
+                                    )}
+                                    onSelect={() => {}}
+                                />
                             </TableBodyCell>
                         </TableRow>
                     );
