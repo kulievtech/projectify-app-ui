@@ -84,7 +84,7 @@ const KanbanCard: React.FC<KanbanCardProps> = ({
             {" "}
             <KanbanCardHeader>
                 <Bar color={StatusToColor[task.status]} />
-                <Menu items={menuActions} onSelect={handleOnSelectMenuItem} />
+                <Menu options={menuActions} onSelect={handleOnSelectMenuItem} />
             </KanbanCardHeader>
             <div>
                 <KanbanTitle variant="paragraphLG" weight="semibold">

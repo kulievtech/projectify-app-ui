@@ -6,12 +6,12 @@ import { trimWhiteSpaces } from "../utils";
 import { useCloseWhenClickOutside } from "../../hooks";
 
 const colorClassNames = {
-    primary: "menu__item--primary",
-    danger: "menu__item--danger"
+    primary: "menu__option--primary",
+    danger: "menu__option--danger"
 };
 
 const Menu: React.FC<MenuProps> = ({
-    items,
+    options,
     onSelect,
     customTrigger,
     className
@@ -34,26 +34,30 @@ const Menu: React.FC<MenuProps> = ({
 
     return (
         <div className={finalClassNames} ref={menuRef}>
-            <Icon iconName="three-dots" onClick={handleTriggerClick} />
+            <Icon
+                iconName="three-dots"
+                onClick={handleTriggerClick}
+                className="menu__default-trigger"
+            />
             {show ? (
-                <ul className="menu__items">
-                    {items.map((item) => {
+                <ul className="menu__options">
+                    {options.map((option) => {
                         return (
                             <li
-                                key={item.label}
+                                key={option.label}
                                 className={trimWhiteSpaces(
-                                    `menu__item ${
-                                        item.color
-                                            ? colorClassNames[item.color]
+                                    `menu__option ${
+                                        option.color
+                                            ? colorClassNames[option.color]
                                             : ""
                                     }`
                                 )}
-                                onClick={() => handleOnSelect(item.value)}
+                                onClick={() => handleOnSelect(option.value)}
                             >
-                                {item.iconName ? (
-                                    <Icon iconName={item.iconName} />
+                                {option.iconName ? (
+                                    <Icon iconName={option.iconName} />
                                 ) : null}
-                                {item.label}
+                                {option.label}
                             </li>
                         );
                     })}
