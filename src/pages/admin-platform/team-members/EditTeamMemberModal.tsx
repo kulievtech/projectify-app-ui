@@ -13,6 +13,7 @@ import { TeamMemberUpdateInput, teamMemberService } from "../../../api";
 import toast from "react-hot-toast";
 import { Actions, AdminUpdateTeamMemberAction } from "../../../store";
 import { positions } from "./CreateTeamMemberModal";
+import { TeamMemberStatus } from "../../../types";
 
 type EditTeamMemberModalProps = {
     show: boolean;
@@ -49,6 +50,7 @@ const EditTeamMemberModal: React.FC<EditTeamMemberModalProps> = ({
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [position, setPosition] = useState("");
+    const [status, setStatus] = useState<TeamMemberStatus>();
     const [joinDate, setJoinDate] = useState<Date>();
     const [isFormSubmitting, setIsFormSubmitting] = useState(false);
 
@@ -61,6 +63,7 @@ const EditTeamMemberModal: React.FC<EditTeamMemberModalProps> = ({
             setFirstName(teamMember.firstName);
             setLastName(teamMember.lastName);
             setEmail(teamMember.email);
+            setStatus(teamMember.status);
             setPosition(teamMember.position);
             setJoinDate(teamMember.joinDate);
         }
@@ -68,7 +71,7 @@ const EditTeamMemberModal: React.FC<EditTeamMemberModalProps> = ({
 
     const updateTeamMember = () => {
         const updatedTeamMember: TeamMemberUpdateInput = {
-            firsName: firstName,
+            firstName: firstName,
             lastName: lastName,
             email: email,
             position: position,
@@ -83,15 +86,17 @@ const EditTeamMemberModal: React.FC<EditTeamMemberModalProps> = ({
                     type: Actions.ADMIN_UPDATE_TEAM_MEMBER,
                     payload: {
                         id: teamMemberId,
+                        status: status!,
                         firstName: firstName,
                         lastName: lastName,
                         email: email,
                         position: position,
-                        joinDate: joinDate!
+                        joinDate: joinDate as Date
                     }
                 };
                 dispatch(action);
                 closeModal();
+                toast.success("Team Member has been successfully updated");
             })
             .catch((e) => {
                 const err = e as Error;

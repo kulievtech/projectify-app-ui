@@ -18,7 +18,7 @@ type CreateInputResponse = {
 };
 
 export type TeamMemberUpdateInput = {
-    firsName?: string;
+    firstName?: string;
     lastName?: string;
     email?: string;
     position?: string;

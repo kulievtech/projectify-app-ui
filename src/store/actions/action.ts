@@ -1,3 +1,4 @@
+import { TeamMemberUpdateInput } from "../../api";
 import {
     AdminUser,
     Task,
@@ -93,11 +94,9 @@ export type AdminReactivateTeamMemberAction = {
     };
 };
 
-type UpdateTeamMemberInput = Omit<TeamMember, "status">;
-
 export type AdminUpdateTeamMemberAction = {
     type: Actions.ADMIN_UPDATE_TEAM_MEMBER;
-    payload: UpdateTeamMemberInput;
+    payload: TeamMember;
 };
 
 export type ActionType =
