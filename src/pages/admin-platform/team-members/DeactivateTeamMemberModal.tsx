@@ -40,6 +40,7 @@ const DeactivateTeamMemberModal: React.FC<DeactivateTeamMemberModalProps> = ({
             show={show}
             cancel={closeModal}
             onConfirm={deactivateTeamMember}
+            confirmButtonColor="secondary"
         />
     );
 };

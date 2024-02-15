@@ -1,32 +1,32 @@
 import toast from "react-hot-toast";
 import { teamMemberService } from "../../../api";
 import { useStore } from "../../../hooks";
-import { Actions, AdminRemoveTeamMemberAction } from "../../../store";
+import { Actions, AdminReactivateTeamMemberAction } from "../../../store";
 import { ConfirmationModal } from "../../components";
 
-type DeleteTeamMemberModalProps = {
+type ReactivateTeamMemberModalProps = {
     show: boolean;
     teamMemberId: string;
     closeModal: () => void;
 };
 
-const DeleteTeamMemberModal: React.FC<DeleteTeamMemberModalProps> = ({
+const ReactivateTeamMemberModal: React.FC<ReactivateTeamMemberModalProps> = ({
     show,
     closeModal,
     teamMemberId
 }) => {
     const { dispatch } = useStore();
-    const deleteTeamMember = () => {
+    const reactivateTeamMember = () => {
         teamMemberService
-            .delete(teamMemberId)
+            .reactivate(teamMemberId)
             .then((_) => {
-                const action: AdminRemoveTeamMemberAction = {
-                    type: Actions.ADMIN_REMOVE_TEAM_MEMBER,
+                const action: AdminReactivateTeamMemberAction = {
+                    type: Actions.ADMIN_REACTIVATE_TEAM_MEMBER,
                     payload: { id: teamMemberId }
                 };
                 dispatch(action);
                 closeModal();
-                toast.success("Team Member has been successfully removed");
+                toast.success("Team Member has been successfully reactivated");
             })
             .catch((e) => {
                 closeModal();
@@ -36,12 +36,13 @@ const DeleteTeamMemberModal: React.FC<DeleteTeamMemberModalProps> = ({
     };
     return (
         <ConfirmationModal
-            confirmationMessage="Are you sure you want to delete this team member?"
+            confirmationMessage="Are you sure you want to reactivate this team member?"
             show={show}
             cancel={closeModal}
-            onConfirm={deleteTeamMember}
+            onConfirm={reactivateTeamMember}
+            confirmButtonColor="primary"
         />
     );
 };
 
-export { DeleteTeamMemberModal };
+export { ReactivateTeamMemberModal };
