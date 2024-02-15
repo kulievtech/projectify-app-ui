@@ -9,12 +9,12 @@ const iconNames: {
     };
 } = {
     error: {
-        rounded: "info-in-circle",
-        sharp: "info-in-circle-sharp"
+        rounded: "info-in-circle-filled",
+        sharp: "info-in-circle-sharp-filled"
     },
     completed: {
-        rounded: "check-in-circle",
-        sharp: "check-in-circle-sharp"
+        rounded: "check-in-circle-filled",
+        sharp: "check-in-circle-sharp-filled"
     }
 };
 
