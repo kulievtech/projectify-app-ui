@@ -35,7 +35,7 @@ const Buttons = styled.div`
     gap: var(--space-10);
 `;
 
-const positions: Option[] = [
+export const positions: Option[] = [
     { value: "Frontend Engineer", label: "Frontend Engineer" },
     { value: "Backend Engineer", label: "Backend Engineer" },
     { value: "Fullstack Engineer", label: "Fullstack Engineer" },

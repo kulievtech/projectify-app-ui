@@ -14,11 +14,12 @@ import {
     TableHeadCell,
     TableRow
 } from "../../../design-system/Table";
-import { TeamMember, TeamMemberStatus } from "../../../types";
+import { TeamMember } from "../../../types";
 import { useState } from "react";
 import { DeleteTeamMemberModal } from "./DeleteTeamMemberModal";
 import { DeactivateTeamMemberModal } from "./DeactivateTeamMemberModal";
 import { ReactivateTeamMemberModal } from "./ReactivateTeamMemberModal";
+import { EditTeamMemberModal } from "./EditTeamMemberModal";
 
 type TeamMembersTableProps = {
     data: TeamMember[];
@@ -71,6 +72,9 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
     const [showReactivateTeamMemberModal, setShowReactivateTeamMemberModal] =
         useState(false);
 
+    const [showUpdateTeamMemberModal, setShowUpdateTeamMemberModal] =
+        useState(false);
+
     const onSelectActionCellMenu = (
         teamMemberId: string,
         action: TeamMemberActions
@@ -82,6 +86,8 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
             setShowDeactivateTeamMemberModal(true);
         } else if (action === "reactivate") {
             setShowReactivateTeamMemberModal(true);
+        } else if (action === "edit") {
+            setShowUpdateTeamMemberModal(true);
         }
     };
 
@@ -191,6 +197,11 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
                 show={showReactivateTeamMemberModal}
                 teamMemberId={selectedTeamMemberId}
                 closeModal={() => setShowReactivateTeamMemberModal(false)}
+            />
+            <EditTeamMemberModal
+                show={showUpdateTeamMemberModal}
+                teamMemberId={selectedTeamMemberId}
+                closeModal={() => setShowUpdateTeamMemberModal(false)}
             />
         </>
     );
