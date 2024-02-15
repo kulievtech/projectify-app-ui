@@ -9,7 +9,7 @@ import {
 import {
     Table,
     TableBody,
-    TableBodyCell,
+    TableBodyCellBase,
     TableHead,
     TableHeadCell,
     TableRow
@@ -17,6 +17,7 @@ import {
 import { TeamMember, TeamMemberStatus } from "../../../types";
 import { useState } from "react";
 import { DeleteTeamMemberModal } from "./DeleteTeamMemberModal";
+import { DeactivateTeamMemberModal } from "./DeactivateTeamMemberModal";
 
 type TeamMembersTableProps = {
     data: TeamMember[];
@@ -63,6 +64,9 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
     const [showDeleteTeamMemberModal, setShowDeleteTeamMemberModal] =
         useState(false);
 
+    const [showDeactivateTeamMemberModal, setShowDeactivateTeamMemberModal] =
+        useState(false);
+
     const onSelectActionCellMenu = (
         teamMemberId: string,
         action: TeamMemberActions
@@ -70,6 +74,8 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
         setSelectedTeamMemberId(teamMemberId);
         if (action === "delete") {
             setShowDeleteTeamMemberModal(true);
+        } else if (action === "deactivate") {
+            setShowDeactivateTeamMemberModal(true);
         }
     };
 
@@ -91,39 +97,39 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
                     {data.map((teamMember) => {
                         return (
                             <TableRow key={teamMember.id} columns={columns}>
-                                <TableBodyCell>
+                                <TableBodyCellBase>
                                     <Typography
                                         variant="paragraphSM"
                                         weight="medium"
                                     >
                                         {teamMember.firstName}
                                     </Typography>
-                                </TableBodyCell>
-                                <TableBodyCell>
+                                </TableBodyCellBase>
+                                <TableBodyCellBase>
                                     <Typography
                                         variant="paragraphSM"
                                         weight="medium"
                                     >
                                         {teamMember.lastName}
                                     </Typography>
-                                </TableBodyCell>
-                                <TableBodyCell>
+                                </TableBodyCellBase>
+                                <TableBodyCellBase>
                                     <Typography
                                         variant="paragraphSM"
                                         weight="medium"
                                     >
                                         {teamMember.position}
                                     </Typography>
-                                </TableBodyCell>
-                                <TableBodyCell>
+                                </TableBodyCellBase>
+                                <TableBodyCellBase>
                                     <Typography
                                         variant="paragraphSM"
                                         weight="medium"
                                     >
                                         {teamMember.email}
                                     </Typography>
-                                </TableBodyCell>
-                                <TableBodyCell>
+                                </TableBodyCellBase>
+                                <TableBodyCellBase>
                                     <Typography
                                         variant="paragraphSM"
                                         weight="medium"
@@ -133,8 +139,8 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
                                             "MMM d, yyyy"
                                         )}
                                     </Typography>
-                                </TableBodyCell>
-                                <TableBodyCell>
+                                </TableBodyCellBase>
+                                <TableBodyCellBase>
                                     <Badge
                                         color={
                                             mapsStatusToBadgeColors[
@@ -146,8 +152,8 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
                                         shape="rounded"
                                         status
                                     />
-                                </TableBodyCell>
-                                <TableBodyCell>
+                                </TableBodyCellBase>
+                                <TableBodyCellBase>
                                     <Menu
                                         options={
                                             allowedActions[teamMember.status]
@@ -159,7 +165,7 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
                                             )
                                         }
                                     />
-                                </TableBodyCell>
+                                </TableBodyCellBase>
                             </TableRow>
                         );
                     })}
@@ -169,6 +175,11 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
                 show={showDeleteTeamMemberModal}
                 teamMemberId={selectedTeamMemberId}
                 closeModal={() => setShowDeleteTeamMemberModal(false)}
+            />
+            <DeactivateTeamMemberModal
+                show={showDeactivateTeamMemberModal}
+                teamMemberId={selectedTeamMemberId}
+                closeModal={() => setShowDeactivateTeamMemberModal(false)}
             />
         </>
     );

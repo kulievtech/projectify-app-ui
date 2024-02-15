@@ -5,7 +5,8 @@ import {
     Actions,
     AdminPopulateTeamMembersAction,
     AdminAddTeamMemberAction,
-    AdminRemoveTeamMemberAction
+    AdminRemoveTeamMemberAction,
+    AdminDeactivateTeamMemberAction
 } from "../actions";
 
 const adminTeamMembersReducer = produce(
@@ -29,6 +30,18 @@ const adminTeamMembersReducer = produce(
                 return draft.filter(
                     (teamMember) => teamMember.id !== payload.id
                 );
+            }
+            case Actions.ADMIN_DEACTIVATE_TEAM_MEMBER: {
+                const payload =
+                    action.payload as AdminDeactivateTeamMemberAction["payload"];
+
+                draft.map((teamMember) => {
+                    if (teamMember.id === payload.id) {
+                        teamMember.status = "DEACTIVATED";
+                    }
+                    return teamMember;
+                });
+                return draft;
             }
             default:
                 return draft;

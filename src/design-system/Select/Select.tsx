@@ -85,7 +85,7 @@ const Select: React.FC<SelectProps> = (props) => {
                     className={`select__icon ${
                         expanded ? "select__icon--expanded" : ""
                     }`}
-                />{" "}
+                />
             </Button>
             {expanded && (
                 <ul className="select__body">
