@@ -60,7 +60,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
         const navigateTo =
             userType === UserRole.admin
                 ? "../admin/sign-in"
-                : "../team-member/sign-in";
+                : "../team-member/login";
         return <Navigate to={navigateTo} />;
     }
 
