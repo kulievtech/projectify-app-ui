@@ -50,7 +50,6 @@ const adminTeamMembersReducer = produce(
             case Actions.ADMIN_REACTIVATE_TEAM_MEMBER: {
                 const payload =
                     action.payload as AdminReactivateTeamMemberAction["payload"];
-
                 for (let i = 0; i < draft.length; i++) {
                     const teamMember = draft[i];
 
