@@ -32,52 +32,6 @@ const AdminTeamMembers = () => {
         dispatch
     } = useStore();
 
-    // const handleSortByStatus = (status: string) => {
-    //     if (status === "ACTIVE") {
-    //         setSortByActive(true);
-
-    //         const actives = teamMembers.map(
-    //             (teamMember) => teamMember.status === "ACTIVE"
-    //         );
-
-    //         const withoutActives = teamMembers.filter(
-    //             (teamMember) => teamMember.status === "ACTIVE"
-    //         );
-
-    //         const result = [...actives, ...withoutActives];
-
-    //         return result;
-    //     } else if (status === "INACTIVE") {
-    //         setSortByInactive(true);
-
-    //         const inactives = teamMembers.map(
-    //             (teamMember) => teamMember.status === "INACTIVE"
-    //         );
-
-    //         const withoutInactives = teamMembers.filter(
-    //             (teamMember) => teamMember.status === "INACTIVE"
-    //         );
-
-    //         const result = [...inactives, ...withoutInactives];
-
-    //         return result;
-    //     } else if (status === "DEACTIVATED") {
-    //         setSortByDeactivated(true);
-
-    //         const deactivates = teamMembers.map(
-    //             (teamMember) => teamMember.status === "DEACTIVATED"
-    //         );
-
-    //         const withoutDeactivates = teamMembers.filter(
-    //             (teamMember) => teamMember.status === "DEACTIVATED"
-    //         );
-
-    //         const result = [...deactivates, ...withoutDeactivates];
-
-    //         return result;
-    //     }
-    // };
-
     const handleSortByStatus = (status: OptionValue) => {
         let sortedTeamMembers: TeamMember[] = [];
 
