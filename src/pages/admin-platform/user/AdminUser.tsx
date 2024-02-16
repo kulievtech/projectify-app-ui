@@ -1,12 +1,15 @@
-import styled from "styled-components";
 import { Button, Input, Typography } from "../../../design-system";
 import { PasswordInputWithEye } from "../../components/PasswordInputWithEye";
 import { useState } from "react";
-import { ProfileWrapper } from "../../components";
+import { ConfirmationModal, ProfileWrapper } from "../../components";
 import { useStore } from "../../../hooks";
+import { adminService, profileUpdateInput } from "../../../api";
+import toast from "react-hot-toast";
+import { Actions, UpdateUserAction } from "../../../store";
 
 const AdminUser = () => {
     const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
+    const [showUpdateProfile, setShowUpdateProfile] = useState(false);
     const {
         state: { user },
         dispatch
@@ -14,13 +17,47 @@ const AdminUser = () => {
 
     const [firstName, setFirstName] = useState(user?.firstName);
     const [lastName, setLastName] = useState(user?.lastName);
-    // const [preferredFirstName, setPreferredFirstName] = useState(
-    //     user?.preferredFirstName
-    // ); => send preferred first name from backend as well
+    const [preferredFirstName, setPreferredFirstName] = useState(
+        user?.preferredFirstName
+    );
 
     const [oldPassword, setOldPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
-    const [confirmNewPassword, setConfirmNewPassword] = useState("");
+    const [newPasswordConfirm, setNewPasswordConfirm] = useState("");
+
+    const updateProfile = () => {
+        const updatedProfile: profileUpdateInput = {
+            firstName: firstName,
+            lastName: lastName,
+            preferredFirstName: preferredFirstName,
+            oldPassword: oldPassword,
+            newPassword: newPassword,
+            newPasswordConfirm: newPasswordConfirm
+        };
+        setIsFormSubmitting(true);
+        adminService
+            .updateMe(updatedProfile)
+            .then((_) => {
+                setIsFormSubmitting(false);
+                const action: UpdateUserAction = {
+                    type: Actions.UPDATE_USER,
+                    payload: {
+                        firstName: firstName!,
+                        lastName: lastName!,
+                        preferredFirstName: preferredFirstName
+                    }
+                };
+                dispatch(action);
+                setShowUpdateProfile(false);
+                toast.success("Profile has been successfully updated");
+            })
+            .catch((e) => {
+                const err = e as Error;
+                setIsFormSubmitting(false);
+                setShowUpdateProfile(false);
+                toast.error(err.message);
+            });
+    };
 
     return (
         <ProfileWrapper>
@@ -52,8 +89,10 @@ const AdminUser = () => {
                 labelText="Preferred First Name"
                 shape="rounded"
                 size="lg"
-                value=""
-                onChange={() => {}}
+                value={preferredFirstName!}
+                onChange={(value: string) => {
+                    setPreferredFirstName(value);
+                }}
                 disabled={isFormSubmitting}
             />
             <PasswordInputWithEye
@@ -74,9 +113,9 @@ const AdminUser = () => {
             />
             <PasswordInputWithEye
                 placeholder="Confirm New Password"
-                password={confirmNewPassword}
+                password={newPasswordConfirm}
                 handleOnChangePassword={(value: string) => {
-                    setConfirmNewPassword(value);
+                    setNewPasswordConfirm(value);
                 }}
                 isFormSubmitting={isFormSubmitting}
             />
@@ -85,9 +124,21 @@ const AdminUser = () => {
                 size="lg"
                 color="primary"
                 disabled={isFormSubmitting}
+                onClick={() => {
+                    setShowUpdateProfile(true);
+                }}
             >
                 Update
             </Button>
+            <ConfirmationModal
+                confirmationMessage="Are you sure you want to update your Profile"
+                show={showUpdateProfile}
+                confirmButtonColor="primary"
+                cancel={() => {
+                    setShowUpdateProfile(false);
+                }}
+                onConfirm={updateProfile}
+            />
         </ProfileWrapper>
     );
 };

@@ -100,7 +100,7 @@ const EditTeamMemberModal: React.FC<EditTeamMemberModalProps> = ({
             })
             .catch((e) => {
                 const err = e as Error;
-                setIsFormSubmitting(true);
+                setIsFormSubmitting(false);
                 toast.error(err.message);
             });
     };

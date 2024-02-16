@@ -9,6 +9,7 @@ import {
 
 export enum Actions {
     INIT_USER = "INIT_USER",
+    UPDATE_USER = "UPDATE_USER",
     RESET_STATE = "RESET_STATE",
     POPULATE_TASKS = "POPULATE_TASKS",
     ADD_TASK = "ADD_TASK",
@@ -27,6 +28,15 @@ export enum Actions {
 export interface InitUserAction {
     type: Actions;
     payload: AdminUser | TeamMemberUser;
+}
+
+export interface UpdateUserAction {
+    type: Actions;
+    payload: {
+        firstName: string;
+        lastName: string;
+        preferredFirstName?: string;
+    };
 }
 
 export interface ResetStateAction {
@@ -101,6 +111,7 @@ export type AdminUpdateTeamMemberAction = {
 
 export type ActionType =
     | InitUserAction
+    | UpdateUserAction
     | ResetStateAction
     | PopulateTasksAction
     | AddTaskAction

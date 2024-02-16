@@ -10,6 +10,7 @@ interface User {
     id: string;
     role: UserRole;
     imageUrl?: string;
+    preferredFirstName?: string;
 }
 
 export interface AdminUser extends User {
