@@ -1,5 +1,5 @@
-import { GetMeResponseType } from "../types";
-import { TeamMember, TeamMemberUser } from "../types";
+import { GetMeResponseType } from "../../types";
+import { TeamMember, TeamMemberUser } from "../../types";
 
 type SignUpInput = {
     email: string;

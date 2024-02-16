@@ -1,6 +1,6 @@
-export * from "./admin";
-export * from "./adminPersonalTasks";
-export * from "./adminTeamMembers";
+export * from "./admin/admin";
+export * from "./admin/adminPersonalTasks";
+export * from "./admin/adminTeamMembers";
 
-export * from "./team-member";
-export * from "./teamMemberPersonalTasks";
+export * from "./team-member/team-member";
+export * from "./team-member/teamMemberPersonalTasks";

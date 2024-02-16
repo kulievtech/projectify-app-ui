@@ -1,4 +1,4 @@
-import { Task, TaskStatus } from "../types";
+import { Task, TaskStatus } from "../../types";
 
 type TaskCreateInput = Omit<Task, "id" | "status">;
 
