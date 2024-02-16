@@ -18,6 +18,15 @@ type SignInInput = {
     password: string;
 };
 
+export type profileUpdateInput = {
+    firstName?: string;
+    lastName?: string;
+    preferredFirstName?: string;
+    oldPassword?: string;
+    newPassword?: string;
+    newPasswordConfirm?: string;
+};
+
 class Admin {
     url: string;
     constructor() {
@@ -125,6 +134,29 @@ class Admin {
                 headers: {
                     authorization: `Bearer ${authToken}`
                 }
+            });
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+
+            return response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async updateMe(input: profileUpdateInput) {
+        try {
+            const rawAuthToken = localStorage.getItem("authToken");
+            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+            const response = await fetch(`${this.url}/me`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: `Bearer ${authToken}`
+                },
+                body: JSON.stringify(input)
             });
             if (!response.ok) {
                 const data = await response.json();
