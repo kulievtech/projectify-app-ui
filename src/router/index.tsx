@@ -15,7 +15,8 @@ import {
     TeamMemberLogin,
     TeamMemberPlatform,
     TeamMemberResetPassword,
-    TeamMemberForgotPassword
+    TeamMemberForgotPassword,
+    AdminUser
 } from "../pages";
 import { UserRole } from "../types";
 import { Auth } from "./Auth";
@@ -73,6 +74,7 @@ export const router = createBrowserRouter(
                     />
                 }
             >
+                <Route path="me" element={<AdminUser />} />
                 <Route path="projects" element={<AdminProjects />} />
                 <Route path="stories" element={<h1>Stories</h1>} />
                 <Route path="personal-tasks" element={<AdminPersonalTasks />} />

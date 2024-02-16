@@ -22,4 +22,12 @@ const PageContent = styled.section`
     margin: 0 auto;
 `;
 
-export { AppLayout, AppContent, Page, PageContent };
+const ProfileWrapper = styled.main`
+    display: flex;
+    flex-direction: column;
+    max-width: 57rem;
+    margin: auto;
+    gap: var(--space-30);
+`;
+
+export { AppLayout, AppContent, Page, PageContent, ProfileWrapper };

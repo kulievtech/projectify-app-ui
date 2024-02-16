@@ -32,6 +32,7 @@ const AdminPlatform = () => {
                             imageUrl: "",
                             email: user?.email || ""
                         }}
+                        onClick={() => navigate("me")}
                     />
                     <SideBarLinks links={adminLinks} logOut={logOut} />
                 </SideBar>
