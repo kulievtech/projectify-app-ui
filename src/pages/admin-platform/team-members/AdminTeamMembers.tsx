@@ -16,10 +16,6 @@ const AdminTeamMembers = () => {
     const [showCreateTeamMemberModal, setShowCreateTeamMemberModal] =
         useState(false);
 
-    const [sortByActive, setSortByActive] = useState(false);
-    const [sortByInactive, setSortByInactive] = useState(false);
-    const [sortByDeactivated, setSortByDeactivated] = useState(false);
-
     const [status, setStatus] = useState<OptionValue>();
 
     const handleSetStatus = (value: Option) => {
