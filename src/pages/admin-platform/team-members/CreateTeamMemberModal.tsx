@@ -13,7 +13,7 @@ import {
 
 import { useStore } from "../../../hooks";
 import { Actions, AdminAddTeamMemberAction } from "../../../store";
-import { teamMemberService } from "../../../api";
+import { adminTeamMemberService } from "../../../api";
 type ModalProps = {
     show: boolean;
     closeModal: () => void;
@@ -94,7 +94,7 @@ const CreateTeamMemberModal: React.FC<ModalProps> = ({ show, closeModal }) => {
             position: position?.value as string
         };
         try {
-            teamMemberService
+            adminTeamMemberService
                 .create(input)
                 .then((data) => {
                     const action: AdminAddTeamMemberAction = {

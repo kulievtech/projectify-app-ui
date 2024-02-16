@@ -3,7 +3,7 @@ import { NoDataPlaceholder, Page, PageContent } from "../../components";
 import { CreateTeamMemberModal } from "./CreateTeamMemberModal";
 import noTeamMember from "../../../assets/illustrations/no-team-member.svg";
 import { useStore } from "../../../hooks";
-import { teamMemberService } from "../../../api";
+import { adminTeamMemberService } from "../../../api";
 import { Actions, AdminPopulateTeamMembersAction } from "../../../store";
 import toast from "react-hot-toast";
 import { PageHeader } from "../../components";
@@ -62,7 +62,7 @@ const AdminTeamMembers = () => {
     };
 
     useEffect(() => {
-        teamMemberService
+        adminTeamMemberService
             .getAll()
             .then((data) => {
                 const action: AdminPopulateTeamMembersAction = {

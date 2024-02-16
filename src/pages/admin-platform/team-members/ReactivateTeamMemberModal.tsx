@@ -1,5 +1,5 @@
 import toast from "react-hot-toast";
-import { teamMemberService } from "../../../api";
+import { adminTeamMemberService } from "../../../api";
 import { useStore } from "../../../hooks";
 import { Actions, AdminReactivateTeamMemberAction } from "../../../store";
 import { ConfirmationModal } from "../../components";
@@ -17,7 +17,7 @@ const ReactivateTeamMemberModal: React.FC<ReactivateTeamMemberModalProps> = ({
 }) => {
     const { dispatch } = useStore();
     const reactivateTeamMember = () => {
-        teamMemberService
+        adminTeamMemberService
             .reactivate(teamMemberId)
             .then((_) => {
                 const action: AdminReactivateTeamMemberAction = {

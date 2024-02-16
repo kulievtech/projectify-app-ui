@@ -9,7 +9,7 @@ import {
     Select
 } from "../../../design-system";
 import { useStore } from "../../../hooks";
-import { TeamMemberUpdateInput, teamMemberService } from "../../../api";
+import { TeamMemberUpdateInput, adminTeamMemberService } from "../../../api";
 import toast from "react-hot-toast";
 import { Actions, AdminUpdateTeamMemberAction } from "../../../store";
 import { positions } from "./CreateTeamMemberModal";
@@ -78,7 +78,7 @@ const EditTeamMemberModal: React.FC<EditTeamMemberModalProps> = ({
             joinDate: joinDate
         };
         setIsFormSubmitting(true);
-        teamMemberService
+        adminTeamMemberService
             .updateTeamMember(teamMemberId, updatedTeamMember)
             .then((_) => {
                 setIsFormSubmitting(false);

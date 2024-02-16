@@ -1,5 +1,5 @@
 import toast from "react-hot-toast";
-import { teamMemberService } from "../../../api";
+import { adminTeamMemberService } from "../../../api";
 import { useStore } from "../../../hooks";
 import { Actions, AdminRemoveTeamMemberAction } from "../../../store";
 import { ConfirmationModal } from "../../components";
@@ -17,7 +17,7 @@ const DeleteTeamMemberModal: React.FC<DeleteTeamMemberModalProps> = ({
 }) => {
     const { dispatch } = useStore();
     const deleteTeamMember = () => {
-        teamMemberService
+        adminTeamMemberService
             .delete(teamMemberId)
             .then((_) => {
                 const action: AdminRemoveTeamMemberAction = {
