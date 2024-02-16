@@ -80,6 +80,7 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
         action: TeamMemberActions
     ) => {
         setSelectedTeamMemberId(teamMemberId);
+
         if (action === "delete") {
             setShowDeleteTeamMemberModal(true);
         } else if (action === "deactivate") {
