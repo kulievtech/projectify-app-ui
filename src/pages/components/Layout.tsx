@@ -25,6 +25,8 @@ const PageContent = styled.section`
 const ProfileWrapper = styled.main`
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    height: 100%;
     max-width: 57rem;
     margin: auto;
     gap: var(--space-30);

@@ -1,9 +1,15 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+const ContainerWrapper = styled.main`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+`;
+
 const Container = styled.div`
     max-width: 80rem;
-    margin: var(--space-50) auto;
     padding: var(--space-20);
     background-color: #f9f9f9;
     border-radius: var(--space-10);
@@ -45,45 +51,47 @@ const StyledLink = styled(Link)`
 
 function SettingsPage() {
     return (
-        <Container>
-            <Heading>Settings</Heading>
-            <Section>
-                <SectionTitle>Profile Settings</SectionTitle>
-                <SectionContent>
-                    Manage your profile details, such as your name, email, and
-                    profile picture.
-                </SectionContent>
-                <SectionContent>
-                    <StyledLink to="/admin/platform/me">
-                        Go to Profile Settings
-                    </StyledLink>
-                </SectionContent>
-            </Section>
-            <Section>
-                <SectionTitle>Account Settings</SectionTitle>
-                <SectionContent>
-                    Update your account preferences, change your password, or
-                    manage connected accounts.
-                </SectionContent>
-                <SectionContent>
-                    <StyledLink to="/admin/platform/me">
-                        Go to Account Settings
-                    </StyledLink>
-                </SectionContent>
-            </Section>
-            <Section>
-                <SectionTitle>Notification Settings</SectionTitle>
-                <SectionContent>
-                    Customize your notification preferences to stay updated with
-                    important information.
-                </SectionContent>
-                <SectionContent>
-                    <StyledLink to="/admin/platform/me">
-                        Go to Notification Settings
-                    </StyledLink>
-                </SectionContent>
-            </Section>
-        </Container>
+        <ContainerWrapper>
+            <Container>
+                <Heading>Settings</Heading>
+                <Section>
+                    <SectionTitle>Profile Settings</SectionTitle>
+                    <SectionContent>
+                        Manage your profile details, such as your name, email,
+                        and profile picture.
+                    </SectionContent>
+                    <SectionContent>
+                        <StyledLink to="/admin/platform/me">
+                            Go to Profile Settings
+                        </StyledLink>
+                    </SectionContent>
+                </Section>
+                <Section>
+                    <SectionTitle>Account Settings</SectionTitle>
+                    <SectionContent>
+                        Update your account preferences, change your password,
+                        or manage connected accounts.
+                    </SectionContent>
+                    <SectionContent>
+                        <StyledLink to="/admin/platform/me">
+                            Go to Account Settings
+                        </StyledLink>
+                    </SectionContent>
+                </Section>
+                <Section>
+                    <SectionTitle>Notification Settings</SectionTitle>
+                    <SectionContent>
+                        Customize your notification preferences to stay updated
+                        with important information.
+                    </SectionContent>
+                    <SectionContent>
+                        <StyledLink to="/admin/platform/me">
+                            Go to Notification Settings
+                        </StyledLink>
+                    </SectionContent>
+                </Section>
+            </Container>
+        </ContainerWrapper>
     );
 }
 
