@@ -16,12 +16,12 @@ const Container = styled.div`
 
 const Text = styled.h1`
     font-family: "Arial", sans-serif;
-    font-size: 50px;
+    font-size: var(--space-50);
     color: #333;
 `;
 
 const Dots = styled.span`
-    font-size: 100px;
+    font-size: var(--space-100);
     color: #333;
     animation: ${blink} 1s infinite;
 `;

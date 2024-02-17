@@ -8,3 +8,5 @@ export * from "./KanbanCard";
 export * from "./ConfirmationModal";
 export * from "./PageHeader";
 export * from "./PageUnderConstruction";
+export * from "./SupportPage";
+export * from "./SettingsPage";

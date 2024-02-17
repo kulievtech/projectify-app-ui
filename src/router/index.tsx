@@ -24,7 +24,11 @@ import { ProtectedRoute } from "./ProtectedRoute";
 import { AdminPersonalTasks } from "../pages/admin-platform/personal-tasks/AdminPersonalTasks";
 import { AdminTeamMembers } from "../pages/admin-platform/team-members/AdminTeamMembers";
 import { TeamMemberPersonalTasks } from "../pages/team-member-platform/personal-tasks/TeamMemberPersonalTasks";
-import { PageUnderConstruction } from "../pages/components";
+import {
+    PageUnderConstruction,
+    SettingsPage,
+    SupportPage
+} from "../pages/components";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -80,8 +84,8 @@ export const router = createBrowserRouter(
                 <Route path="stories" element={<h1>Stories</h1>} />
                 <Route path="personal-tasks" element={<AdminPersonalTasks />} />
                 <Route path="team-members" element={<AdminTeamMembers />} />
-                <Route path="settings" element={<PageUnderConstruction />} />
-                <Route path="support" element={<PageUnderConstruction />} />
+                <Route path="settings" element={<SettingsPage />} />
+                <Route path="support" element={<SupportPage />} />
             </Route>
 
             <Route
