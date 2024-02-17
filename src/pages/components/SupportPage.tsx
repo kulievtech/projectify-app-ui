@@ -60,8 +60,8 @@ function SupportPage() {
                     <SupportContent>
                         If you require assistance, please contact us via email
                         at{" "}
-                        <SupportLink href="mailto:support@example.com">
-                            support@example.com{" "}
+                        <SupportLink href="mailto:projectifya@gmail.com">
+                            projectifya@gmail.com{" "}
                         </SupportLink>
                         or call us at{" "}
                         <SupportLink href="tel:+1234567890">
