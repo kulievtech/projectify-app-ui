@@ -2,7 +2,7 @@ import { Button, Input, Typography } from "../../../design-system";
 import { PasswordInputWithEye } from "../../components/PasswordInputWithEye";
 import { useState } from "react";
 import { ConfirmationModal, ProfileWrapper } from "../../components";
-import { useStore } from "../../../hooks";
+import { useFocus, useStore } from "../../../hooks";
 import { adminService, profileUpdateInput } from "../../../api";
 import toast from "react-hot-toast";
 import { Actions, UpdateUserAction } from "../../../store";
@@ -24,6 +24,8 @@ const AdminUser = () => {
     const [oldPassword, setOldPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [newPasswordConfirm, setNewPasswordConfirm] = useState("");
+
+    const focusRef = useFocus();
 
     const updateProfile = () => {
         const updatedProfile: profileUpdateInput = {
@@ -73,6 +75,7 @@ const AdminUser = () => {
                 onChange={(value: string) => {
                     setFirstName(value);
                 }}
+                inputRef={focusRef}
                 disabled={isFormSubmitting}
             />
             <Input
