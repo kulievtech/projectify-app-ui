@@ -74,11 +74,15 @@
 
 .select__search {
     margin-bottom: var(--space-4);
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
 
 .select__search input {
     padding: 0 var(--space-12);
-    width: 99%;
+    width: calc(100% - var(--space-2));
+    height: 3.2rem;
 }
 
 /* Select Item */
@@ -92,7 +96,7 @@
     padding: 0 var(--space-12);
     transition: all 0.3s;
     cursor: pointer;
-    width: 99%;
+    width: calc(100% - var(--space-2));
 }
 
 .select__item:not(:last-child) {
@@ -134,8 +138,28 @@
 /* Scroll Items */
 
 .select__items {
-    max-height: 16rem;
+    max-height: 13.4rem;
     overflow-y: auto;
+}
+
+.select-searchable .select__items {
+    max-height: 17.4rem;
+}
+
+.select-medium .select__items {
+    max-height: 15rem;
+}
+
+.select-medium.select-searchable .select__items {
+    max-height: 18.6rem;
+}
+
+.select-large .select__items {
+    max-height: 16.6rem;
+}
+
+.select-large.select-searchable .select__items {
+    max-height: 20.2rem;
 }
 
 .select__items::-webkit-scrollbar {
