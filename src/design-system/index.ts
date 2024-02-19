@@ -14,4 +14,7 @@ export * from "./Menu";
 export * from "./Select";
 export * from "./Checkbox";
 export * from "./Switch";
+export * from "./Progress";
+export * from "./Table";
+
 export * from "./utils";
