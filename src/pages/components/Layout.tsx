@@ -18,7 +18,6 @@ const Page = styled.main`
 `;
 
 const PageContent = styled.section`
-    width: 90%;
     margin: 0 auto;
 `;
 

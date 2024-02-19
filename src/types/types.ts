@@ -45,7 +45,7 @@ export interface TeamMember {
     lastName: string;
     position: string;
     email: string;
-    joinDate: Date;
+    joinDate: string;
 }
 
 export type GetMeResponseType = {

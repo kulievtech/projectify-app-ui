@@ -14,6 +14,7 @@ import toast from "react-hot-toast";
 import { Actions, AdminUpdateTeamMemberAction } from "../../../store";
 import { positions } from "./CreateTeamMemberModal";
 import { TeamMemberStatus } from "../../../types";
+import { formatISO, parseISO } from "date-fns";
 
 type EditTeamMemberModalProps = {
     show: boolean;
@@ -65,7 +66,7 @@ const EditTeamMemberModal: React.FC<EditTeamMemberModalProps> = ({
             setEmail(teamMember.email);
             setStatus(teamMember.status);
             setPosition(teamMember.position);
-            setJoinDate(teamMember.joinDate);
+            setJoinDate(parseISO(teamMember.joinDate));
         }
     }, [teamMemberId]);
 
@@ -75,7 +76,7 @@ const EditTeamMemberModal: React.FC<EditTeamMemberModalProps> = ({
             lastName: lastName,
             email: email,
             position: position,
-            joinDate: joinDate
+            joinDate: formatISO(joinDate!)
         };
         setIsFormSubmitting(true);
         adminTeamMemberService
@@ -91,7 +92,7 @@ const EditTeamMemberModal: React.FC<EditTeamMemberModalProps> = ({
                         lastName: lastName,
                         email: email,
                         position: position,
-                        joinDate: joinDate as Date
+                        joinDate: formatISO(joinDate!)
                     }
                 };
                 dispatch(action);

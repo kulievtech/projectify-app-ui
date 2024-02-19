@@ -15,7 +15,7 @@ export type TeamMemberUpdateInput = {
     lastName?: string;
     email?: string;
     position?: string;
-    joinDate?: Date;
+    joinDate?: string;
 };
 
 class AdminTeamMemberService {
