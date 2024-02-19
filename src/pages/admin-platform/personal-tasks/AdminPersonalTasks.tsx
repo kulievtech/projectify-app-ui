@@ -1,10 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-    NoDataPlaceholder,
-    Page,
-    PageContent,
-    PageHeader
-} from "../../components";
+import { NoDataPlaceholder, PageHeader } from "../../components";
 import { adminTasksService } from "../../../api";
 import { useStore } from "../../../hooks";
 import { Actions, PopulateTasksAction } from "../../../store";
@@ -49,7 +44,7 @@ const AdminPersonalTasks = () => {
     const groupedTasks = groupTasksByStatus(adminPersonalTasks);
 
     return (
-        <Page>
+        <>
             {!adminPersonalTasks.length ? (
                 <NoDataPlaceholder
                     illustrationUrl={noTask}
@@ -58,20 +53,20 @@ const AdminPersonalTasks = () => {
                     buttonAction={() => setShowCreateTaskModal(true)}
                 />
             ) : (
-                <PageContent>
+                <>
                     <PageHeader
                         pageTitle="Tasks"
                         actionButtonText="Create A Task"
                         actionButtonOnClick={() => setShowCreateTaskModal(true)}
                     />
                     <Kanban groupedTasks={groupedTasks} />
-                </PageContent>
+                </>
             )}
             <CreateTaskModal
                 show={showCreateTaskModal}
                 closeModal={() => setShowCreateTaskModal(false)}
             />
-        </Page>
+        </>
     );
 };
 

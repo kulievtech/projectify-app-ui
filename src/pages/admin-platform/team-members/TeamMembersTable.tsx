@@ -1,4 +1,5 @@
 import format from "date-fns/format";
+import styled from "styled-components";
 import {
     Badge,
     BadgeColors,
@@ -21,10 +22,15 @@ import { DeactivateTeamMemberModal } from "./DeactivateTeamMemberModal";
 import { ReactivateTeamMemberModal } from "./ReactivateTeamMemberModal";
 import { EditTeamMemberModal } from "./EditTeamMemberModal";
 import { parseISO } from "date-fns";
+import { Scrollable } from "../../components";
 
 type TeamMembersTableProps = {
     data: TeamMember[];
 };
+
+const TableContainer = styled(Scrollable)`
+    height: calc(100% - 13rem);
+`;
 
 enum TeamMemberActions {
     edit = "edit",
@@ -94,7 +100,7 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
     };
 
     return (
-        <>
+        <TableContainer>
             <Table>
                 <TableHead>
                     <TableRow columns={columns}>
@@ -205,7 +211,7 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
                 teamMemberId={selectedTeamMemberId}
                 closeModal={() => setShowUpdateTeamMemberModal(false)}
             />
-        </>
+        </TableContainer>
     );
 };
 

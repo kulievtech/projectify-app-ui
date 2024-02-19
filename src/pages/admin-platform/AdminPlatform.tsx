@@ -1,6 +1,6 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import { SideBar, SideBarLinks, Toaster } from "../../design-system";
-import { AppContent, AppLayout, SideBarUser } from "../components";
+import { AppLayout, AppPage, SideBarUser } from "../components";
 import { Actions } from "../../store/actions";
 import { useLocalStorage, useStore } from "../../hooks";
 import { adminLinks } from "./adminLinks";
@@ -36,9 +36,9 @@ const AdminPlatform = () => {
                     />
                     <SideBarLinks links={adminLinks} logOut={logOut} />
                 </SideBar>
-                <AppContent>
+                <AppPage>
                     <Outlet />
-                </AppContent>
+                </AppPage>
             </AppLayout>
             <Toaster />
         </>

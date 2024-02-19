@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NoDataPlaceholder, Page, PageContent } from "../../components";
+import { NoDataPlaceholder } from "../../components";
 import { CreateTeamMemberModal } from "./CreateTeamMemberModal";
 import noTeamMember from "../../../assets/illustrations/no-team-member.svg";
 import { useStore } from "../../../hooks";
@@ -84,7 +84,7 @@ const AdminTeamMembers = () => {
     const sortedTeamMembers = status ? handleSortByStatus(status) : teamMembers;
 
     return (
-        <Page>
+        <>
             {!teamMembers.length ? (
                 <NoDataPlaceholder
                     illustrationUrl={noTeamMember}
@@ -93,7 +93,7 @@ const AdminTeamMembers = () => {
                     buttonAction={() => setShowCreateTeamMemberModal(true)}
                 ></NoDataPlaceholder>
             ) : (
-                <PageContent>
+                <>
                     <PageHeader
                         pageTitle="Team Members"
                         actionButtonText="Create A Member"
@@ -106,13 +106,13 @@ const AdminTeamMembers = () => {
                         handleSetStatus={handleSetStatus}
                     />
                     <TeamMembersTable data={sortedTeamMembers} />
-                </PageContent>
+                </>
             )}
             <CreateTeamMemberModal
                 show={showCreateTeamMemberModal}
                 closeModal={() => setShowCreateTeamMemberModal(false)}
             />
-        </Page>
+        </>
     );
 };
 

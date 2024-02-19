@@ -1,24 +1,33 @@
 import styled from "styled-components";
 
 const AppLayout = styled.main`
-    display: grid;
-    grid-template-columns: 30.4rem 1fr;
+    display: flex;
 `;
 
-const AppContent = styled.section`
-    background-color: var(--jaguar-12);
+const AppPage = styled.section`
     height: 100vh;
+    width: 100%;
+    background-color: var(--jaguar-12);
     padding: var(--space-30);
 `;
 
-const Page = styled.main`
-    position: relative;
-    width: 100%;
-    height: 100%;
-`;
+export const Scrollable = styled.div`
+    overflow-y: auto;
 
-const PageContent = styled.section`
-    margin: 0 auto;
+    &::-webkit-scrollbar {
+        width: 0.4rem;
+        border-radius: var(--border-radius-8);
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+        border-radius: var(--border-radius-8);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--jaguar-100);
+        border-radius: var(--border-radius-8);
+    }
 `;
 
 const ProfileWrapper = styled.main`
@@ -31,4 +40,4 @@ const ProfileWrapper = styled.main`
     gap: var(--space-30);
 `;
 
-export { AppLayout, AppContent, Page, PageContent, ProfileWrapper };
+export { AppLayout, AppPage, ProfileWrapper };

@@ -1,5 +1,5 @@
 import { Outlet, useNavigate } from "react-router-dom";
-import { AppContent, AppLayout, SideBarUser } from "../components";
+import { AppPage, AppLayout, SideBarUser } from "../components";
 import { useLocalStorage, useStore } from "../../hooks";
 import { SideBar, SideBarLinks } from "../../design-system";
 import { teamMemberLinks } from "./teamMemberLinks";
@@ -35,9 +35,9 @@ const TeamMemberPlatform = () => {
                     />
                     <SideBarLinks links={teamMemberLinks} logOut={logOut} />
                 </SideBar>
-                <AppContent>
+                <AppPage>
                     <Outlet />
-                </AppContent>
+                </AppPage>
             </AppLayout>
             <Toaster />
         </>
