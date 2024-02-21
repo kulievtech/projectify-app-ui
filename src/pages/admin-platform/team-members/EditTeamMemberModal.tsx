@@ -113,24 +113,28 @@ const EditTeamMemberModal: React.FC<EditTeamMemberModalProps> = ({
             </ModalTitle>
             <Inputs>
                 <Input
+                    labelText="First Name"
                     value={firstName}
                     onChange={(value) => setFirstName(value)}
                     shape="rounded"
                     size="lg"
                 />
                 <Input
+                    labelText="Last Name"
                     value={lastName}
                     onChange={(value) => setLastName(value)}
                     shape="rounded"
                     size="lg"
                 />
                 <Input
+                    labelText="Email"
                     value={email}
                     onChange={(value) => setEmail(value)}
                     shape="rounded"
                     size="lg"
                 />
                 <Select
+                    labelText="Position"
                     options={positions}
                     onSelect={(option) => setPosition(option.label)}
                     value={position}
@@ -139,6 +143,7 @@ const EditTeamMemberModal: React.FC<EditTeamMemberModalProps> = ({
                     headerPlaceholder="Select Position"
                 />
                 <DatePickerV1
+                    labelText="Join Date"
                     inputSize="lg"
                     shape="rounded"
                     placeholder="Select Join Date"
