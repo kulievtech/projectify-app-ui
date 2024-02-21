@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Option, OptionValue, Select } from "../../../design-system";
-import { useState } from "react";
 
 const FiltersBase = styled.section`
     display: grid;
