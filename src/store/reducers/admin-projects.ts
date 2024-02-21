@@ -4,6 +4,7 @@ import {
     ActionType,
     Actions,
     AdminAddProjectAction,
+    AdminArchiveProjectAction,
     AdminPopulateProjectsAction
 } from "../actions";
 
@@ -20,6 +21,20 @@ const adminProjectsReducer = produce(
                 const payload =
                     action.payload as AdminPopulateProjectsAction["payload"];
                 return payload;
+            }
+            case Actions.ADMIN_ARCHIVE_PROJECT: {
+                const payload =
+                    action.payload as AdminArchiveProjectAction["payload"];
+
+                for (let i = 0; i < draft.length; i++) {
+                    const project = draft[i];
+
+                    if (project.id === payload.id) {
+                        project.status = "ARCHIVED";
+                        break;
+                    }
+                }
+                return draft;
             }
             default:
                 return draft;

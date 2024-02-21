@@ -19,6 +19,7 @@ import { Project } from "../../../types";
 import { useState } from "react";
 import { parseISO } from "date-fns";
 import { Scrollable } from "../../components";
+import { ArchiveProjectModal } from "./ArchiveProjectModal";
 
 type ProjectsTableProps = {
     data: Project[];
@@ -67,11 +68,31 @@ const mapsStatusToBadgeColors = {
 const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
     const [selectedProjectId, setSelectedProjectId] = useState("");
 
+    const [showArchiveProjectModal, setShowArchiveProjectModal] =
+        useState(false);
+
+    const [showDeleteProjectModal, setShowDeleteProjectModal] = useState(false);
+
+    const [showReactivateProjectModal, setShowReactivateProjectModal] =
+        useState(false);
+
+    const [showUpdateProjectModal, setShowUpdateProjectModal] = useState(false);
+
     const onSelectActionCellMenu = (
         projectId: string,
         action: ProjectActions
     ) => {
         setSelectedProjectId(projectId);
+
+        if (action === "delete") {
+            setShowDeleteProjectModal(true);
+        } else if (action === "archive") {
+            setShowArchiveProjectModal(true);
+        } else if (action === "reactivate") {
+            setShowReactivateProjectModal(true);
+        } else if (action === "edit") {
+            setShowUpdateProjectModal(true);
+        }
     };
 
     return (
@@ -150,6 +171,11 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
                     })}
                 </TableBody>
             </Table>
+            <ArchiveProjectModal
+                show={showArchiveProjectModal}
+                projectId={selectedProjectId}
+                closeModal={() => setShowArchiveProjectModal(false)}
+            />
         </TableContainer>
     );
 };

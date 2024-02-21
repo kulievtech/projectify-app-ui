@@ -1,4 +1,3 @@
-import { TeamMemberUpdateInput } from "../../api";
 import {
     AdminUser,
     Project,
@@ -26,7 +25,8 @@ export enum Actions {
     ADMIN_UPDATE_TEAM_MEMBER = "ADMIN_UPDATE_TEAM_MEMBER",
 
     ADMIN_ADD_PROJECT = "ADMIN_ADD_PROJECT",
-    ADMIN_POPULATE_PROJECTS = "ADMIN_POPULATE_PROJECTS"
+    ADMIN_POPULATE_PROJECTS = "ADMIN_POPULATE_PROJECTS",
+    ADMIN_ARCHIVE_PROJECT = "ADMIN_ARCHIVE_PROJECT"
 }
 
 export interface InitUserAction {
@@ -123,6 +123,13 @@ export type AdminPopulateProjectsAction = {
     payload: Project[];
 };
 
+export type AdminArchiveProjectAction = {
+    type: Actions.ADMIN_ARCHIVE_PROJECT;
+    payload: {
+        id: string;
+    };
+};
+
 export type ActionType =
     | InitUserAction
     | UpdateUserAction
@@ -139,4 +146,5 @@ export type ActionType =
     | AdminReactivateTeamMemberAction
     | AdminUpdateTeamMemberAction
     | AdminAddProjectAction
-    | AdminPopulateProjectsAction;
+    | AdminPopulateProjectsAction
+    | AdminArchiveProjectAction;
