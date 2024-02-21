@@ -7,6 +7,7 @@ import getDate from "date-fns/getDate";
 import "react-datepicker/dist/react-datepicker.css";
 import "./DatePicker.css";
 import { Icon } from "../Icon";
+import { Label } from "../Label";
 
 const inputSizeClassNames = {
     sm: "input-small",
@@ -34,6 +35,7 @@ interface DataPickerProps {
     disabled?: boolean;
     inputSize?: InputSize;
     shape?: "rounded" | "circle";
+    labelText?: string;
 }
 
 const DatePickerV1: React.FC<DataPickerProps> = ({
@@ -43,7 +45,8 @@ const DatePickerV1: React.FC<DataPickerProps> = ({
     placeholder,
     disabled,
     inputSize,
-    shape
+    shape,
+    labelText
 }) => {
     const handleOnChange = (date: Date) => {
         onChange(date);
@@ -76,25 +79,28 @@ const DatePickerV1: React.FC<DataPickerProps> = ({
         }`
     );
     return (
-        <ReactDatePicker
-            selected={selected}
-            onSelect={handleOnSelect}
-            onChange={handleOnChange}
-            className={finalInputClassNames}
-            placeholderText={placeholder}
-            disabled={disabled}
-            dayClassName={customizeDay}
-            renderDayContents={renderDayContents}
-            calendarClassName={finalCalendarClassNames}
-            showIcon
-            icon={
-                <Icon
-                    iconName="calendar"
-                    className="v1-date-picker__calendar-icon"
-                />
-            }
-            // toggleCalendarOnIconClick
-        />
+        <>
+            {labelText ? <Label disabled={disabled}>{labelText}</Label> : null}
+            <ReactDatePicker
+                selected={selected}
+                onSelect={handleOnSelect}
+                onChange={handleOnChange}
+                className={finalInputClassNames}
+                placeholderText={placeholder}
+                disabled={disabled}
+                dayClassName={customizeDay}
+                renderDayContents={renderDayContents}
+                calendarClassName={finalCalendarClassNames}
+                showIcon
+                icon={
+                    <Icon
+                        iconName="calendar"
+                        className="v1-date-picker__calendar-icon"
+                    />
+                }
+                // toggleCalendarOnIconClick
+            />
+        </>
     );
 };
 
