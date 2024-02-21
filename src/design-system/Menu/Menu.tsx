@@ -7,7 +7,8 @@ import { useCloseWhenClickOutside } from "../../hooks";
 
 const colorClassNames = {
     primary: "menu__option--primary",
-    danger: "menu__option--danger"
+    danger: "menu__option--danger",
+    secondary: "menu__option--secondary"
 };
 
 const Menu: React.FC<MenuProps> = ({

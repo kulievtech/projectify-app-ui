@@ -4,7 +4,7 @@ export interface MenuOption {
     label: string;
     iconName?: IconName;
     value: string;
-    color?: "primary" | "danger";
+    color?: "primary" | "danger" | "secondary";
 }
 
 export interface MenuProps {
