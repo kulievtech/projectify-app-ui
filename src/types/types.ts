@@ -47,6 +47,16 @@ export interface TeamMember {
     joinDate: string;
 }
 
+export type ProjectStatus = "ACTIVE" | "ARCHIVED";
+
+export interface Project {
+    id: string;
+    status: ProjectStatus;
+    name: string;
+    description: string;
+    dueDate: string;
+}
+
 export type GetMeResponseType = {
     data: TeamMemberUser;
 };
