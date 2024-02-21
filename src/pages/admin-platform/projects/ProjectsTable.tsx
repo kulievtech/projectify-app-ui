@@ -53,11 +53,11 @@ const options: MenuOption[] = [
 
 const allowedActions = {
     ACTIVE: [options[0], options[3]],
-    ARCHIVED: [options[0], options[2]],
+    ARCHIVED: [options[0], options[1], options[2]],
     DEACTIVATED: [options[0], options[1]]
 };
 
-const columns = ["12.5%", "12.5%", "20%", "20%", "15%", "15%", "5%"];
+const columns = ["12.5%", "15.5%", "10%", "20%", "12%", "25%", "5%"];
 const mapsStatusToBadgeColors = {
     ACTIVE: "violet",
     ARCHIVED: "gray"
