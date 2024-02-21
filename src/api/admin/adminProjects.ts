@@ -1,4 +1,4 @@
-import { Project } from "../../types";
+import { Project, ProjectContributor } from "../../types";
 
 type CreateInput = Omit<Project, "id" | "status">;
 
@@ -15,6 +15,16 @@ export type ProjectUpdateInput = {
     description?: string;
     dueDate?: string;
 };
+
+type AddContributorInput = Omit<
+    ProjectContributor,
+    "id" | "status" | "adminId"
+>;
+
+type AddContributorInputResponse = {
+    data: ProjectContributor;
+};
+
 class AdminProjectsService {
     url: string;
     constructor() {
@@ -148,6 +158,31 @@ class AdminProjectsService {
                 const data = await response.json();
                 throw new Error(data.message);
             }
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async addContributor(
+        input: AddContributorInput
+    ): Promise<AddContributorInputResponse> {
+        try {
+            const rawAuthToken = localStorage.getItem("authToken");
+            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+            const response = await fetch(`${this.url}/contributors/add`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: `Bearer ${authToken}`
+                },
+                body: JSON.stringify(input)
+            });
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+
+            return response.json();
         } catch (error) {
             throw error;
         }

@@ -1,6 +1,7 @@
 import {
     AdminUser,
     Project,
+    ProjectContributor,
     Task,
     TaskStatus,
     TeamMember,
@@ -29,7 +30,9 @@ export enum Actions {
     ADMIN_ARCHIVE_PROJECT = "ADMIN_ARCHIVE_PROJECT",
     ADMIN_REMOVE_PROJECT = "ADMIN_REMOVE_PROJECT",
     ADMIN_REACTIVATE_PROJECT = "ADMIN_REACTIVATE_PROJECT",
-    ADMIN_UPDATE_PROJECT = "ADMIN_UPDATE_PROJECT"
+    ADMIN_UPDATE_PROJECT = "ADMIN_UPDATE_PROJECT",
+
+    ADMIN_PROJECT_ADD_CONTRIBUTOR = "ADMIN_PROJECT_ADD_CONTRIBUTOR"
 }
 
 export interface InitUserAction {
@@ -152,6 +155,11 @@ export type AdminUpdateProjectAction = {
     payload: Project;
 };
 
+export type AdminAddContributorProjectAction = {
+    type: Actions.ADMIN_PROJECT_ADD_CONTRIBUTOR;
+    payload: ProjectContributor;
+};
+
 export type ActionType =
     | InitUserAction
     | UpdateUserAction
@@ -172,4 +180,5 @@ export type ActionType =
     | AdminArchiveProjectAction
     | AdminRemoveProjectAction
     | AdminReactivateProjectAction
-    | AdminUpdateProjectAction;
+    | AdminUpdateProjectAction
+    | AdminAddContributorProjectAction;

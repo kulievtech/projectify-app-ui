@@ -27,6 +27,7 @@ export interface TeamMemberUser extends User {
     adminId: string;
 }
 export type TaskStatus = "TODO" | "INPROGRESS" | "DONE";
+
 export interface Task {
     id: string;
     title: string;
@@ -55,6 +56,17 @@ export interface Project {
     name: string;
     description: string;
     dueDate: string;
+}
+
+export type ProjectContributorStatus = "ACTIVE" | "INACTIVE";
+
+export interface ProjectContributor {
+    id: string;
+    teamMemberId: string;
+    adminId: string;
+    projectId: string;
+    status: ProjectContributorStatus;
+    joinDate: string;
 }
 
 export type GetMeResponseType = {

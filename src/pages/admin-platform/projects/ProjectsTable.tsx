@@ -23,6 +23,8 @@ import { ArchiveProjectModal } from "./ArchiveProjectModal";
 import { DeleteProjectModal } from "./DeleteProjectModal";
 import { ReactivateProjectModal } from "./ReactivateProjectModal";
 import { EditProjectModal } from "./EditProjectModal";
+import { ProjectContributors } from "./project-team-members/ProjectContributors";
+import { AddContributorModal } from "./project-team-members/AddContributorModal";
 
 type ProjectsTableProps = {
     data: Project[];
@@ -62,6 +64,7 @@ const allowedActions = {
 };
 
 const columns = ["12.5%", "15.5%", "10%", "20%", "12%", "25%", "5%"];
+
 const mapsStatusToBadgeColors = {
     ACTIVE: "violet",
     ARCHIVED: "gray",
@@ -80,6 +83,8 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
         useState(false);
 
     const [showUpdateProjectModal, setShowUpdateProjectModal] = useState(false);
+    const [showCreateAddContributorModal, setShowCreateAddContributorModal] =
+        useState(false);
 
     const onSelectActionCellMenu = (
         projectId: string,
@@ -157,7 +162,17 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
                                         )}
                                     </Typography>
                                 </TableBodyCellBase>
-                                <TableBodyCellBase>Hello</TableBodyCellBase>
+                                <TableBodyCellBase>
+                                    <button
+                                        onClick={() =>
+                                            setShowCreateAddContributorModal(
+                                                true
+                                            )
+                                        }
+                                    >
+                                        Add Contributor
+                                    </button>
+                                </TableBodyCellBase>
                                 <TableBodyCellBase>
                                     <Menu
                                         options={allowedActions[project.status]}
@@ -193,6 +208,10 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
                 show={showUpdateProjectModal}
                 projectId={selectedProjectId}
                 closeModal={() => setShowUpdateProjectModal(false)}
+            />
+            <AddContributorModal
+                show={showCreateAddContributorModal}
+                closeModal={() => setShowCreateAddContributorModal(false)}
             />
         </TableContainer>
     );
