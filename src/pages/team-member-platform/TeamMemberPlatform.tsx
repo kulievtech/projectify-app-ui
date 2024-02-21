@@ -1,10 +1,9 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import { AppPage, AppLayout, SideBarUser } from "../components";
 import { useLocalStorage, useStore } from "../../hooks";
-import { SideBar, SideBarLinks } from "../../design-system";
+import { SideBar, SideBarLinks, Toaster } from "../../design-system";
 import { teamMemberLinks } from "./teamMemberLinks";
 import { Actions } from "../../store";
-import { Toaster } from "react-hot-toast";
 
 const TeamMemberPlatform = () => {
     const navigate = useNavigate();

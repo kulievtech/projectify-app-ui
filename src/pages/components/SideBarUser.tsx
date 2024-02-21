@@ -4,7 +4,6 @@ import { Avatar } from "../../design-system/Avatar";
 import { Icon, Typography } from "../../design-system";
 
 const UserBase = styled.div`
-    width: calc(100% - 1.6rem);
     margin: 0 auto;
     background-color: var(--jaguar-25);
     border-radius: var(--border-radius-16);
