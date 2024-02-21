@@ -139,8 +139,8 @@ export const router = createBrowserRouter(
                     element={<TeamMemberPersonalTasks />}
                 />
                 <Route path="team-members" element={<h1>Members</h1>} />
-                <Route path="settings" element={<PageUnderConstruction />} />
-                <Route path="support" element={<PageUnderConstruction />} />
+                <Route path="settings" element={<SettingsPage />} />
+                <Route path="support" element={<SupportPage />} />
             </Route>
         </>
     )

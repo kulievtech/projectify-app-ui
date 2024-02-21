@@ -7,7 +7,7 @@ import { Actions, ChangeTaskStatusAction } from "../../../store";
 import { teamMemberTasksService } from "../../../api";
 import { Typography } from "../../../design-system";
 import { TaskStatus } from "../../../types";
-import { KanbanCard } from "../../components";
+import { KanbanCard, KanbanCardBase, Scrollable } from "../../components";
 import { EditTaskModal } from "./EditTaskModal";
 import { DeleteTaskModal } from "./DeleteTaskModal";
 
@@ -31,19 +31,31 @@ const TasksColumns = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-30);
-    height: calc(100vh - 12.8rem);
+    height: calc(100% - 7rem);
 `;
 
 const TasksColumn = styled.div`
-    padding: 2.2rem 1rem 1rem 1rem;
+    height: 100%;
+    padding: var(--space-24) 0 var(--space-10) var(--space-10);
     background-color: var(--jaguar-25);
     border-radius: var(--border-radius-16);
     border: 0.15rem solid var(--jaguar-100);
+    overflow: auto;
 `;
 
 const TasksColumnTitle = styled(Typography)<{ color: string }>`
     margin-bottom: var(--space-16);
     color: ${(props) => props.color};
+`;
+
+const KanbanCards = styled(Scrollable)`
+    height: calc(
+        100% - 4rem
+    ); // Excluding Column Title Line-height + margin bottom of it
+
+    ${KanbanCardBase} {
+        width: calc(100% - var(--space-10));
+    }
 `;
 
 const Kanban: React.FC<KanbanProps> = ({ groupedTasks }) => {
@@ -101,31 +113,35 @@ const Kanban: React.FC<KanbanProps> = ({ groupedTasks }) => {
                                 <span>({groupedTasks[groupName].length})</span>
                             </TasksColumnTitle>
 
-                            {groupedTasks[groupName].map((task) => {
-                                return (
-                                    <KanbanCard
-                                        key={task.id}
-                                        task={task}
-                                        menuActions={[
-                                            {
-                                                label: "Edit",
-                                                value: "editTask",
-                                                color: "primary",
-                                                iconName: "edit"
-                                            },
-                                            {
-                                                label: "Delete",
-                                                value: "deleteTask",
-                                                color: "danger",
-                                                iconName: "delete"
-                                            }
-                                        ]}
-                                        onSelectMenuAction={
-                                            onSelectKanbanCardMenuAction
-                                        }
-                                    />
-                                );
-                            })}
+                            <KanbanCards>
+                                {groupedTasks[groupName]
+                                    .slice(0)
+                                    .map((task) => {
+                                        return (
+                                            <KanbanCard
+                                                key={task.id}
+                                                task={task}
+                                                menuActions={[
+                                                    {
+                                                        label: "Edit",
+                                                        value: "editTask",
+                                                        color: "primary",
+                                                        iconName: "edit"
+                                                    },
+                                                    {
+                                                        label: "Delete",
+                                                        value: "deleteTask",
+                                                        color: "danger",
+                                                        iconName: "delete"
+                                                    }
+                                                ]}
+                                                onSelectMenuAction={
+                                                    onSelectKanbanCardMenuAction
+                                                }
+                                            />
+                                        );
+                                    })}
+                            </KanbanCards>
                         </TasksColumn>
                     );
                 })}
