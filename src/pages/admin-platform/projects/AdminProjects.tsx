@@ -1,38 +1,56 @@
 import { useState } from "react";
-import styled from "styled-components";
-import { Input, Modal, Typography, Button } from "../../../design-system";
-import { NoDataPlaceholder } from "../../components";
+import { OptionValue, Option } from "../../../design-system";
+import { NoDataPlaceholder, PageHeader } from "../../components";
 import noProject from "../../../assets/illustrations/no-project.svg";
-
-const PageBase = styled.div`
-    position: relative;
-    width: 100%;
-    height: 100%;
-`;
-
-const CreateProjectModalTitle = styled(Typography)`
-    margin-bottom: var(--space-24);
-`;
-
-const Inputs = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-16);
-    margin-bottom: var(--space-24);
-`;
-
-const Buttons = styled.div`
-    display: flex;
-    gap: var(--space-10);
-`;
+import { ProjectFilters } from "./ProjectsFilters";
+import { ProjectsTable } from "./ProjectsTable";
+import { CreateProjectModal } from "./CreateProjectModal";
+import { useStore } from "../../../hooks";
+import { Project } from "../../../types";
 
 const AdminProjects = () => {
-    const [projects, setProject] = useState<string[]>([]);
-    const [showCreateProjectModal, setShowCreateProjectModal] =
-        useState<boolean>(false);
+    const [showCreateProjectModal, setShowCreateProjectModal] = useState(false);
+
+    const [status, setStatus] = useState<OptionValue>();
+
+    const handleSetStatus = (value: Option) => {
+        setStatus(value.value);
+    };
+
+    const {
+        state: { projects },
+        dispatch
+    } = useStore();
+
+    const handleSortByStatus = (status: OptionValue) => {
+        let sortedProjects: Project[] = [];
+
+        if (status === "ACTIVE") {
+            const activeProjects = projects.filter(
+                (project) => project.status === "ACTIVE"
+            );
+            const otherProjects = projects.filter(
+                (project) => project.status !== "ACTIVE"
+            );
+            sortedProjects = [...activeProjects, ...otherProjects];
+        } else if (status === "ARCHIVED") {
+            const archivedProjects = projects.filter(
+                (project) => project.status === "ARCHIVED"
+            );
+            const otherProjects = projects.filter(
+                (project) => project.status !== "ARCHIVED"
+            );
+            sortedProjects = [...archivedProjects, ...otherProjects];
+        } else if (status === "DEFAULT") {
+            return projects;
+        }
+        return sortedProjects;
+    };
+
+    const sortedProjects = status ? handleSortByStatus(status) : projects;
 
     return (
-        <PageBase>
+        <>
             {!projects.length ? (
                 <NoDataPlaceholder
                     illustrationUrl={noProject}
@@ -41,47 +59,26 @@ const AdminProjects = () => {
                     buttonAction={() => setShowCreateProjectModal(true)}
                 />
             ) : (
-                <h1>Projects</h1>
+                <>
+                    <PageHeader
+                        pageTitle="Projects"
+                        actionButtonText="Create A Project"
+                        actionButtonOnClick={() =>
+                            setShowCreateProjectModal(true)
+                        }
+                    />
+                    <ProjectFilters
+                        status={status}
+                        handleSetStatus={handleSetStatus}
+                    />
+                    <ProjectsTable data={sortedProjects} />
+                </>
             )}
-
-            <Modal show={showCreateProjectModal} position="center">
-                <CreateProjectModalTitle variant="paragraphLG" weight="medium">
-                    New Project
-                </CreateProjectModalTitle>
-                <Inputs>
-                    <Input
-                        placeholder="Name"
-                        value=""
-                        onChange={() => {}}
-                        shape="rounded"
-                        size="lg"
-                    />
-                    <Input
-                        type="textarea"
-                        placeholder="Description"
-                        value=""
-                        onChange={() => {}}
-                        shape="rounded"
-                        size="lg"
-                    />
-                </Inputs>
-                <Buttons>
-                    <Button
-                        color="secondary"
-                        size="lg"
-                        shape="rounded"
-                        variant="outlined"
-                        fullWidth
-                        onClick={() => setShowCreateProjectModal(false)}
-                    >
-                        Cancel
-                    </Button>
-                    <Button size="lg" shape="rounded" color="primary" fullWidth>
-                        Save
-                    </Button>
-                </Buttons>
-            </Modal>
-        </PageBase>
+            <CreateProjectModal
+                show={showCreateProjectModal}
+                closeModal={() => setShowCreateProjectModal(false)}
+            />
+        </>
     );
 };
 
