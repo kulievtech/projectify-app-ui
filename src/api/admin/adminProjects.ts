@@ -9,6 +9,12 @@ type CreateInputResponse = {
 type GetAllProjectsResponse = {
     data: Project[];
 };
+
+export type ProjectUpdateInput = {
+    name?: string;
+    description?: string;
+    dueDate?: string;
+};
 class AdminProjectsService {
     url: string;
     constructor() {
@@ -116,6 +122,28 @@ class AdminProjectsService {
                 }
             );
 
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async updateProject(projectId: string, input: ProjectUpdateInput) {
+        try {
+            const rawAuthToken = localStorage.getItem("authToken");
+            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+
+            const response = await fetch(`${this.url}/${projectId}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: `Bearer ${authToken}`
+                },
+                body: JSON.stringify(input)
+            });
             if (!response.ok) {
                 const data = await response.json();
                 throw new Error(data.message);

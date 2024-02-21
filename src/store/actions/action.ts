@@ -28,7 +28,8 @@ export enum Actions {
     ADMIN_POPULATE_PROJECTS = "ADMIN_POPULATE_PROJECTS",
     ADMIN_ARCHIVE_PROJECT = "ADMIN_ARCHIVE_PROJECT",
     ADMIN_REMOVE_PROJECT = "ADMIN_REMOVE_PROJECT",
-    ADMIN_REACTIVATE_PROJECT = "ADMIN_REACTIVATE_PROJECT"
+    ADMIN_REACTIVATE_PROJECT = "ADMIN_REACTIVATE_PROJECT",
+    ADMIN_UPDATE_PROJECT = "ADMIN_UPDATE_PROJECT"
 }
 
 export interface InitUserAction {
@@ -146,6 +147,11 @@ export type AdminReactivateProjectAction = {
     };
 };
 
+export type AdminUpdateProjectAction = {
+    type: Actions.ADMIN_UPDATE_PROJECT;
+    payload: Project;
+};
+
 export type ActionType =
     | InitUserAction
     | UpdateUserAction
@@ -165,4 +171,5 @@ export type ActionType =
     | AdminPopulateProjectsAction
     | AdminArchiveProjectAction
     | AdminRemoveProjectAction
-    | AdminReactivateProjectAction;
+    | AdminReactivateProjectAction
+    | AdminUpdateProjectAction;

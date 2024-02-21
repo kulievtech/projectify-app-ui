@@ -22,6 +22,7 @@ import { Scrollable } from "../../components";
 import { ArchiveProjectModal } from "./ArchiveProjectModal";
 import { DeleteProjectModal } from "./DeleteProjectModal";
 import { ReactivateProjectModal } from "./ReactivateProjectModal";
+import { EditProjectModal } from "./EditProjectModal";
 
 type ProjectsTableProps = {
     data: Project[];
@@ -187,6 +188,11 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
                 show={showReactivateProjectModal}
                 projectId={selectedProjectId}
                 closeModal={() => setShowReactivateProjectModal(false)}
+            />
+            <EditProjectModal
+                show={showUpdateProjectModal}
+                projectId={selectedProjectId}
+                closeModal={() => setShowUpdateProjectModal(false)}
             />
         </TableContainer>
     );

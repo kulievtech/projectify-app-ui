@@ -95,7 +95,7 @@ const AdminProjects = () => {
                 <>
                     <PageHeader
                         pageTitle="Projects"
-                        actionButtonText="New Project"
+                        actionButtonText="Create A Project"
                         actionButtonOnClick={() =>
                             setShowCreateProjectModal(true)
                         }
