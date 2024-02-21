@@ -6,6 +6,9 @@ type CreateInputResponse = {
     data: Project;
 };
 
+type GetAllProjectsResponse = {
+    data: Project[];
+};
 class AdminProjectsService {
     url: string;
     constructor() {
@@ -27,6 +30,26 @@ class AdminProjectsService {
                     authorization: `Bearer ${authToken}`
                 },
                 body: JSON.stringify(input)
+            });
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+
+            return response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async getAll(): Promise<GetAllProjectsResponse> {
+        try {
+            const rawAuthToken = localStorage.getItem("authToken");
+            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+            const response = await fetch(`${this.url}/`, {
+                headers: {
+                    authorization: `Bearer ${authToken}`
+                }
             });
             if (!response.ok) {
                 const data = await response.json();

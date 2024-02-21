@@ -25,7 +25,8 @@ export enum Actions {
     ADMIN_REACTIVATE_TEAM_MEMBER = "ADMIN_REACTIVATE_TEAM_MEMBER",
     ADMIN_UPDATE_TEAM_MEMBER = "ADMIN_UPDATE_TEAM_MEMBER",
 
-    ADMIN_ADD_PROJECT = "ADMIN_ADD_PROJECT"
+    ADMIN_ADD_PROJECT = "ADMIN_ADD_PROJECT",
+    ADMIN_POPULATE_PROJECTS = "ADMIN_POPULATE_PROJECTS"
 }
 
 export interface InitUserAction {
@@ -117,6 +118,11 @@ export type AdminAddProjectAction = {
     payload: Project;
 };
 
+export type AdminPopulateProjectsAction = {
+    type: Actions.ADMIN_POPULATE_PROJECTS;
+    payload: Project[];
+};
+
 export type ActionType =
     | InitUserAction
     | UpdateUserAction
@@ -132,4 +138,5 @@ export type ActionType =
     | AdminDeactivateTeamMemberAction
     | AdminReactivateTeamMemberAction
     | AdminUpdateTeamMemberAction
-    | AdminAddProjectAction;
+    | AdminAddProjectAction
+    | AdminPopulateProjectsAction;

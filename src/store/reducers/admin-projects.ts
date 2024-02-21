@@ -1,6 +1,11 @@
 import { produce } from "immer";
 import { ProjectState } from "../state";
-import { ActionType, Actions, AdminAddProjectAction } from "../actions";
+import {
+    ActionType,
+    Actions,
+    AdminAddProjectAction,
+    AdminPopulateProjectsAction
+} from "../actions";
 
 const adminProjectsReducer = produce(
     (draft: ProjectState, action: ActionType) => {
@@ -10,6 +15,11 @@ const adminProjectsReducer = produce(
                     action.payload as AdminAddProjectAction["payload"];
                 draft.push(payload);
                 return draft;
+            }
+            case Actions.ADMIN_POPULATE_PROJECTS: {
+                const payload =
+                    action.payload as AdminPopulateProjectsAction["payload"];
+                return payload;
             }
             default:
                 return draft;
