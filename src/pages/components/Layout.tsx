@@ -5,6 +5,7 @@ const AppLayout = styled.main`
 `;
 
 const AppPage = styled.section`
+    position: relative;
     height: 100vh;
     width: 100%;
     background-color: var(--jaguar-12);
