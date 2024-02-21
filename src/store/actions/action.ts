@@ -1,6 +1,7 @@
 import { TeamMemberUpdateInput } from "../../api";
 import {
     AdminUser,
+    Project,
     Task,
     TaskStatus,
     TeamMember,
@@ -22,7 +23,9 @@ export enum Actions {
     ADMIN_REMOVE_TEAM_MEMBER = "ADMIN_REMOVE_TEAM_MEMBER",
     ADMIN_DEACTIVATE_TEAM_MEMBER = "ADMIN_DEACTIVATE_TEAM_MEMBER",
     ADMIN_REACTIVATE_TEAM_MEMBER = "ADMIN_REACTIVATE_TEAM_MEMBER",
-    ADMIN_UPDATE_TEAM_MEMBER = "ADMIN_UPDATE_TEAM_MEMBER"
+    ADMIN_UPDATE_TEAM_MEMBER = "ADMIN_UPDATE_TEAM_MEMBER",
+
+    ADMIN_ADD_PROJECT = "ADMIN_ADD_PROJECT"
 }
 
 export interface InitUserAction {
@@ -109,6 +112,11 @@ export type AdminUpdateTeamMemberAction = {
     payload: TeamMember;
 };
 
+export type AdminAddProjectAction = {
+    type: Actions.ADMIN_ADD_PROJECT;
+    payload: Project;
+};
+
 export type ActionType =
     | InitUserAction
     | UpdateUserAction
@@ -123,4 +131,5 @@ export type ActionType =
     | AdminRemoveTeamMemberAction
     | AdminDeactivateTeamMemberAction
     | AdminReactivateTeamMemberAction
-    | AdminUpdateTeamMemberAction;
+    | AdminUpdateTeamMemberAction
+    | AdminAddProjectAction;
