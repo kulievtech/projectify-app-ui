@@ -46,6 +46,14 @@ const AdminProjects = () => {
                 (project) => project.status !== "ARCHIVED"
             );
             sortedProjects = [...archivedProjects, ...otherProjects];
+        } else if (status === "COMPLETED") {
+            const completedProjects = projects.filter(
+                (project) => project.status === "COMPLETED"
+            );
+            const otherProjects = projects.filter(
+                (project) => project.status !== "COMPLETED"
+            );
+            sortedProjects = [...completedProjects, ...otherProjects];
         } else if (status === "DEFAULT") {
             return projects;
         }
@@ -87,7 +95,7 @@ const AdminProjects = () => {
                 <>
                     <PageHeader
                         pageTitle="Projects"
-                        actionButtonText="Create A Project"
+                        actionButtonText="New Project"
                         actionButtonOnClick={() =>
                             setShowCreateProjectModal(true)
                         }

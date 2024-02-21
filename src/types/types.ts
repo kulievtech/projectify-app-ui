@@ -47,7 +47,7 @@ export interface TeamMember {
     joinDate: string;
 }
 
-export type ProjectStatus = "ACTIVE" | "ARCHIVED";
+export type ProjectStatus = "ACTIVE" | "ARCHIVED" | "COMPLETED";
 
 export interface Project {
     id: string;

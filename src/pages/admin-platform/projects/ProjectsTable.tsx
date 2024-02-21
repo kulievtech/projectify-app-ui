@@ -47,20 +47,21 @@ const options: MenuOption[] = [
         label: "Archive",
         iconName: "x-in-circle",
         value: "archive",
-        color: "danger"
+        color: "secondary"
     }
 ];
 
 const allowedActions = {
     ACTIVE: [options[0], options[3]],
     ARCHIVED: [options[0], options[1], options[2]],
-    DEACTIVATED: [options[0], options[1]]
+    COMPLETED: [options[2], options[3]]
 };
 
 const columns = ["12.5%", "15.5%", "10%", "20%", "12%", "25%", "5%"];
 const mapsStatusToBadgeColors = {
     ACTIVE: "violet",
-    ARCHIVED: "gray"
+    ARCHIVED: "gray",
+    COMPLETED: "green"
 };
 
 const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
