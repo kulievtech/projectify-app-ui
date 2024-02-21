@@ -6,6 +6,7 @@ import {
     AdminAddProjectAction,
     AdminArchiveProjectAction,
     AdminPopulateProjectsAction,
+    AdminReactivateProjectAction,
     AdminRemoveProjectAction
 } from "../actions";
 
@@ -42,6 +43,19 @@ const adminProjectsReducer = produce(
                     action.payload as AdminRemoveProjectAction["payload"];
 
                 return draft.filter((project) => project.id !== payload.id);
+            }
+            case Actions.ADMIN_REACTIVATE_PROJECT: {
+                const payload =
+                    action.payload as AdminReactivateProjectAction["payload"];
+                for (let i = 0; i < draft.length; i++) {
+                    const project = draft[i];
+
+                    if (project.id === payload.id) {
+                        project.status = "ACTIVE";
+                        break;
+                    }
+                }
+                return draft;
             }
             default:
                 return draft;

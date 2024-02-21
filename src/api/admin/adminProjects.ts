@@ -101,6 +101,29 @@ class AdminProjectsService {
             throw error;
         }
     }
+
+    async reactivate(projectId: string) {
+        const rawAuthToken = localStorage.getItem("authToken");
+        const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+        try {
+            const response = await fetch(
+                `${this.url}/${projectId}/reactivate`,
+                {
+                    method: "PATCH",
+                    headers: {
+                        authorization: `Bearer ${authToken}`
+                    }
+                }
+            );
+
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 export const adminProjectsService = new AdminProjectsService();
