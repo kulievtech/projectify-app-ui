@@ -12,6 +12,12 @@ type SignInInput = {
     password: string;
 };
 
+export type TeamMemberProfileUpdateInput = {
+    oldPassword?: string;
+    newPassword?: string;
+    newPasswordConfirm?: string;
+};
+
 class TeamMemberService {
     url: string;
     constructor() {
@@ -121,6 +127,29 @@ class TeamMemberService {
                 headers: {
                     authorization: `Bearer ${authToken}`
                 }
+            });
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+
+            return response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async updateMe(input: TeamMemberProfileUpdateInput) {
+        try {
+            const rawAuthToken = localStorage.getItem("authToken");
+            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+            const response = await fetch(`${this.url}/me`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: `Bearer ${authToken}`
+                },
+                body: JSON.stringify(input)
             });
             if (!response.ok) {
                 const data = await response.json();

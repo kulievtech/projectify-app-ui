@@ -31,6 +31,7 @@ const TeamMemberPlatform = () => {
                             imageUrl: "",
                             email: user?.email || ""
                         }}
+                        onClick={() => navigate("me")}
                     />
                     <SideBarLinks links={teamMemberLinks} logOut={logOut} />
                 </SideBar>

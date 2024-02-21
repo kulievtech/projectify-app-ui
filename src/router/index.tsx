@@ -29,6 +29,7 @@ import {
     SettingsPage,
     SupportPage
 } from "../pages/components";
+import { TeamMemberUser } from "../pages/team-member-platform/user/TeamMemberUser";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -133,12 +134,13 @@ export const router = createBrowserRouter(
                     />
                 }
             >
+                <Route path="me" element={<TeamMemberUser />} />
+                <Route path="projects" element={<h1>Projects</h1>} />
                 <Route path="stories" element={<h1>Stories</h1>} />
                 <Route
                     path="personal-tasks"
                     element={<TeamMemberPersonalTasks />}
                 />
-                <Route path="team-members" element={<h1>Members</h1>} />
                 <Route path="settings" element={<SettingsPage />} />
                 <Route path="support" element={<SupportPage />} />
             </Route>
