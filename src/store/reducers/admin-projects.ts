@@ -5,7 +5,8 @@ import {
     Actions,
     AdminAddProjectAction,
     AdminArchiveProjectAction,
-    AdminPopulateProjectsAction
+    AdminPopulateProjectsAction,
+    AdminRemoveProjectAction
 } from "../actions";
 
 const adminProjectsReducer = produce(
@@ -35,6 +36,12 @@ const adminProjectsReducer = produce(
                     }
                 }
                 return draft;
+            }
+            case Actions.ADMIN_REMOVE_PROJECT: {
+                const payload =
+                    action.payload as AdminRemoveProjectAction["payload"];
+
+                return draft.filter((project) => project.id !== payload.id);
             }
             default:
                 return draft;

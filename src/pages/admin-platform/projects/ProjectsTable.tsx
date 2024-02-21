@@ -20,6 +20,7 @@ import { useState } from "react";
 import { parseISO } from "date-fns";
 import { Scrollable } from "../../components";
 import { ArchiveProjectModal } from "./ArchiveProjectModal";
+import { DeleteProjectModal } from "./DeleteProjectModal";
 
 type ProjectsTableProps = {
     data: Project[];
@@ -175,6 +176,11 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
                 show={showArchiveProjectModal}
                 projectId={selectedProjectId}
                 closeModal={() => setShowArchiveProjectModal(false)}
+            />
+            <DeleteProjectModal
+                show={showDeleteProjectModal}
+                projectId={selectedProjectId}
+                closeModal={() => setShowDeleteProjectModal(false)}
             />
         </TableContainer>
     );
