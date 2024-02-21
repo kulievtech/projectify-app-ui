@@ -16,8 +16,8 @@ const FiltersBase = styled.section`
 
 const statusOptions = [
     { label: "Active", value: "ACTIVE" },
-    { label: "Inactive", value: "INACTIVE" },
-    { label: "Deactivated", value: "DEACTIVATED" },
+    { label: "ARCHIVED", value: "ARCHIVED" },
+    { label: "Completed", value: "COMPLETED" },
     { label: "Default", value: "DEFAULT" }
 ];
 

@@ -6,18 +6,11 @@ import {
     Modal,
     Input,
     DatePickerV1,
-    Button,
-    Select,
-    Option
+    Button
 } from "../../../design-system";
 
 import { useStore } from "../../../hooks";
-import {
-    Actions,
-    AdminAddProjectAction,
-    AdminAddTeamMemberAction
-} from "../../../store";
-import { adminTeamMemberService } from "../../../api";
+import { Actions, AdminAddProjectAction } from "../../../store";
 import { formatISO } from "date-fns";
 import { adminProjectsService } from "../../../api/admin/adminProjects";
 type ModalProps = {
