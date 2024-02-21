@@ -23,7 +23,7 @@ const Select: React.FC<SelectProps> = (props) => {
         options,
         value,
         onSelect,
-        label,
+        labelText,
         headerPlaceholder,
         size,
         shape,
@@ -81,7 +81,7 @@ const Select: React.FC<SelectProps> = (props) => {
 
     return (
         <div className={finalClassName} ref={selectRef}>
-            {label && <Label>{label}</Label>}
+            {labelText && <Label>{labelText}</Label>}
             <Button
                 size={size}
                 shape={shape}
