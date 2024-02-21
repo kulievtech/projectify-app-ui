@@ -111,7 +111,10 @@ const CreateTeamMemberModal: React.FC<ModalProps> = ({ show, closeModal }) => {
                     const err = e as Error;
                     toast.error(err.message);
                 });
-        } catch (error) {}
+        } catch (e) {
+            const error = e as Error;
+            toast.error(error.message);
+        }
     };
 
     return (
