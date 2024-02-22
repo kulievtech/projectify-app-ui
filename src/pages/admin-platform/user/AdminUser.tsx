@@ -2,10 +2,11 @@ import { Button, Input, Typography } from "../../../design-system";
 import { PasswordInputWithEye } from "../../components/PasswordInputWithEye";
 import { useState } from "react";
 import { ConfirmationModal, ProfileWrapper } from "../../components";
-import { useFocus, useStore } from "../../../hooks";
+import { useFocus, useLocalStorage, useStore } from "../../../hooks";
 import { adminService, profileUpdateInput } from "../../../api";
 import toast from "react-hot-toast";
 import { Actions, UpdateUserAction } from "../../../store";
+import { useNavigate } from "react-router-dom";
 
 const AdminUser = () => {
     const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
@@ -14,6 +15,9 @@ const AdminUser = () => {
         state: { user },
         dispatch
     } = useStore();
+
+    const { removeItem } = useLocalStorage();
+    const navigate = useNavigate();
 
     const [firstName, setFirstName] = useState(user?.firstName);
     const [lastName, setLastName] = useState(user?.lastName);
@@ -51,7 +55,21 @@ const AdminUser = () => {
                 };
                 dispatch(action);
                 setShowUpdateProfile(false);
-                toast.success("Profile has been successfully updated");
+
+                if (newPassword) {
+                    toast.success(
+                        "Profile and Password has been successfully updated, you will be logged out!"
+                    );
+
+                    setTimeout(() => {
+                        removeItem("authToken");
+                        removeItem("userRole");
+                        dispatch({ type: Actions.RESET_STATE });
+                        navigate("/admin/login");
+                    }, 5000);
+                } else {
+                    toast.success("Profile has been successfully updated");
+                }
             })
             .catch((e) => {
                 const err = e as Error;

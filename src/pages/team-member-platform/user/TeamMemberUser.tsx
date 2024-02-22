@@ -5,8 +5,8 @@ import { ConfirmationModal, ProfileWrapper } from "../../components";
 import { useFocus, useLocalStorage, useStore } from "../../../hooks";
 import { TeamMemberProfileUpdateInput, teamMemberService } from "../../../api";
 import toast from "react-hot-toast";
-import { Actions } from "../../../store";
 import { useNavigate } from "react-router-dom";
+import { Actions } from "../../../store";
 
 const TeamMemberUser = () => {
     const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
@@ -37,10 +37,13 @@ const TeamMemberUser = () => {
                 toast.success(
                     "Password has been successfully updated, you will be logged out!"
                 );
-                // removeItem("authToken");
-                // removeItem("userRole");
-                // dispatch({ type: Actions.RESET_STATE });
-                // navigate("/team-member/login");
+
+                setTimeout(() => {
+                    removeItem("authToken");
+                    removeItem("userRole");
+                    dispatch({ type: Actions.RESET_STATE });
+                    navigate("/team-member/login");
+                }, 5000);
             })
             .catch((e) => {
                 const err = e as Error;

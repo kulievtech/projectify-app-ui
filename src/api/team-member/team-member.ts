@@ -1,5 +1,4 @@
 import { GetMeResponseType } from "../../types";
-import { TeamMember, TeamMemberUser } from "../../types";
 
 type SignUpInput = {
     email: string;
@@ -13,9 +12,9 @@ type SignInInput = {
 };
 
 export type TeamMemberProfileUpdateInput = {
-    oldPassword?: string;
-    newPassword?: string;
-    newPasswordConfirm?: string;
+    oldPassword: string;
+    newPassword: string;
+    newPasswordConfirm: string;
 };
 
 class TeamMemberService {
@@ -83,7 +82,6 @@ class TeamMemberService {
                 const data = await response.json();
                 throw new Error(data.message);
             }
-
             return response.json();
         } catch (error) {
             throw error;
@@ -96,7 +94,6 @@ class TeamMemberService {
         passwordResetToken: string
     ) {
         try {
-            console.log(this.url);
             const response = await fetch(`${this.url}/reset-password`, {
                 method: "PATCH",
                 headers: {
@@ -155,8 +152,6 @@ class TeamMemberService {
                 const data = await response.json();
                 throw new Error(data.message);
             }
-
-            return response.json();
         } catch (error) {
             throw error;
         }
