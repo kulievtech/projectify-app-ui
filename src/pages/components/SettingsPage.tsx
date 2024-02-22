@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -49,7 +50,11 @@ const StyledLink = styled(Link)`
     }
 `;
 
-function SettingsPage() {
+type userRole = {
+    role: string;
+};
+
+const SettingsPage: React.FC<userRole> = ({ role }) => {
     return (
         <ContainerWrapper>
             <Container>
@@ -61,7 +66,7 @@ function SettingsPage() {
                         and profile picture.
                     </SectionContent>
                     <SectionContent>
-                        <StyledLink to="/admin/platform/me">
+                        <StyledLink to={`/${role}/platform/me`}>
                             Go to Profile Settings
                         </StyledLink>
                     </SectionContent>
@@ -73,7 +78,7 @@ function SettingsPage() {
                         or manage connected accounts.
                     </SectionContent>
                     <SectionContent>
-                        <StyledLink to="/admin/platform/me">
+                        <StyledLink to={`/${role}/platform/me`}>
                             Go to Account Settings
                         </StyledLink>
                     </SectionContent>
@@ -85,7 +90,7 @@ function SettingsPage() {
                         with important information.
                     </SectionContent>
                     <SectionContent>
-                        <StyledLink to="/admin/platform/me">
+                        <StyledLink to={`/${role}/platform/me`}>
                             Go to Notification Settings
                         </StyledLink>
                     </SectionContent>
@@ -93,6 +98,6 @@ function SettingsPage() {
             </Container>
         </ContainerWrapper>
     );
-}
+};
 
 export { SettingsPage };

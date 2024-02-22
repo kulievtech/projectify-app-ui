@@ -85,7 +85,10 @@ export const router = createBrowserRouter(
                 <Route path="stories" element={<h1>Stories</h1>} />
                 <Route path="personal-tasks" element={<AdminPersonalTasks />} />
                 <Route path="team-members" element={<AdminTeamMembers />} />
-                <Route path="settings" element={<SettingsPage />} />
+                <Route
+                    path="settings"
+                    element={<SettingsPage role="admin" />}
+                />
                 <Route path="support" element={<SupportPage />} />
             </Route>
 
@@ -141,7 +144,10 @@ export const router = createBrowserRouter(
                     path="personal-tasks"
                     element={<TeamMemberPersonalTasks />}
                 />
-                <Route path="settings" element={<SettingsPage />} />
+                <Route
+                    path="settings"
+                    element={<SettingsPage role="team-member" />}
+                />
                 <Route path="support" element={<SupportPage />} />
             </Route>
         </>
