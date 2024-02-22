@@ -56,7 +56,7 @@ const AdminResetPassword = () => {
             toast.success(response.message);
             setTimeout(() => {
                 navigate("/admin/login");
-            }, 4000);
+            }, 5000);
         } catch (error) {
             if (error instanceof Error) {
                 toast.error(error.message);

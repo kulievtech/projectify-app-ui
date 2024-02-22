@@ -75,7 +75,7 @@ const TeamMemberCreatePassword = () => {
 
             setTimeout(() => {
                 navigate("/team-member/login");
-            }, 3000);
+            }, 5000);
         } catch (error) {
             if (error instanceof Error) {
                 setIsFormSubmitting(false);
