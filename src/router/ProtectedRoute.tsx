@@ -59,7 +59,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
     if (!isAuthTokenExists) {
         const navigateTo =
             userType === UserRole.admin
-                ? "../admin/sign-in"
+                ? "../admin/login"
                 : "../team-member/login";
         return <Navigate to={navigateTo} />;
     }
