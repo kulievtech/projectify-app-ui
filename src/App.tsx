@@ -50,13 +50,6 @@ const App = () => {
             <Link to="team-member/platform/personal-tasks">
                 Team Member Personal Tasks
             </Link>
-            <DatePickerV1
-                selected={date}
-                onChange={(date) => setDate(date)}
-                placeholder="Select Deadline"
-                shape="rounded"
-                inputSize="lg"
-            />
             <Select
                 options={[
                     { label: "Option1", value: "option1" },

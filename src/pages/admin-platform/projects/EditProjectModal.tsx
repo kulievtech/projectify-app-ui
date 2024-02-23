@@ -117,14 +117,6 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
                     shape="rounded"
                     size="lg"
                 />
-                <DatePickerV1
-                    labelText="Due Date"
-                    inputSize="lg"
-                    shape="rounded"
-                    placeholder="Select Due Date"
-                    selected={dueDate}
-                    onChange={(date) => setDueDate(date)}
-                />
             </Inputs>
             <Buttons>
                 <Button
