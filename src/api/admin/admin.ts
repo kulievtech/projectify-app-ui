@@ -1,4 +1,4 @@
-import { GetMeResponseType } from "../../types";
+import { AdminUser } from "../../types";
 
 type SignUpInput = {
     firstName: string;
@@ -25,6 +25,10 @@ export type profileUpdateInput = {
     oldPassword?: string;
     newPassword?: string;
     newPasswordConfirm?: string;
+};
+
+export type GetMeResponseType = {
+    data: AdminUser;
 };
 
 class Admin {

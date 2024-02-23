@@ -1,4 +1,4 @@
-import { GetMeResponseType } from "../../types";
+import { TeamMemberUser } from "../../types";
 
 type SignUpInput = {
     email: string;
@@ -15,6 +15,10 @@ export type TeamMemberProfileUpdateInput = {
     oldPassword: string;
     newPassword: string;
     newPasswordConfirm: string;
+};
+
+export type GetMeAPIResponse = {
+    data: TeamMemberUser;
 };
 
 class TeamMemberService {
@@ -116,7 +120,7 @@ class TeamMemberService {
         }
     }
 
-    async getMe(): Promise<GetMeResponseType> {
+    async getMe(): Promise<GetMeAPIResponse> {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";

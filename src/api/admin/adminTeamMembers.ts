@@ -1,24 +1,8 @@
 import {
     AdminTeamMemberStatusChange,
     TeamMember,
-    TeamMemberUpdate,
-    TeamMemberUser
+    TeamMemberUpdate
 } from "../../types";
-
-export type GetMeAPIResponse = {
-    data: TeamMemberUser;
-};
-
-interface CreatePasswordInput {
-    password: string;
-    passwordConfirm: string;
-    email: string;
-}
-
-type SignInInput = {
-    email: string;
-    password: string;
-};
 
 type CreateInput = Omit<TeamMember, "id" | "status">;
 

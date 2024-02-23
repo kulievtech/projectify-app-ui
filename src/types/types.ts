@@ -90,7 +90,3 @@ export interface ProjectContributor {
     status: ProjectContributorStatus;
     joinDate: string;
 }
-
-export type GetMeResponseType = {
-    data: TeamMemberUser;
-};
