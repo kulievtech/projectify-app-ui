@@ -163,3 +163,8 @@
 .date_picker-label {
     margin-bottom: -0.4rem;
 }
+
+.react-datepicker__input-container.react-datepicker__view-calendar-icon:hover
+    svg {
+    fill: var(--primary-500);
+}
