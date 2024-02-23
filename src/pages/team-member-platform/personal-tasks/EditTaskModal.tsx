@@ -99,6 +99,7 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
                 };
                 dispatch(action);
                 closeModal();
+                toast.success("Task has been successfully updated!");
             })
             .catch((e) => {
                 const err = e as Error;

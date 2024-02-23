@@ -85,6 +85,7 @@ const Kanban: React.FC<KanbanProps> = ({ groupedTasks }) => {
                     }
                 };
                 dispatch(action);
+                toast.success("Task status has been updated!");
             })
             .catch((e) => {
                 toast.error("Something went wrong! Try Later.");

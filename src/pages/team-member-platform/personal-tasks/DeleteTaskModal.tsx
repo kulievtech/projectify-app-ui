@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { teamMemberTasksService } from "../../../api";
 import { useStore } from "../../../hooks";
 import { Actions, RemoveTaskAction } from "../../../store";
@@ -25,8 +26,12 @@ const DeleteTaskModal: React.FC<DeleteTaskModalProps> = ({
                 };
                 dispatch(action);
                 closeModal();
+                toast.success("Task has been successfully deleted!");
             })
-            .catch((e) => {});
+            .catch((e) => {
+                const error = e as Error;
+                toast.error(error.message);
+            });
     };
     return (
         <ConfirmationModal
