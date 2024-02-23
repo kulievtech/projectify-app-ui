@@ -70,8 +70,8 @@ class AdminPersonalTasks {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
 
-            const response = await fetch(`${this.url}/tasks/${taskId}/delete`, {
-                method: "PATCH",
+            const response = await fetch(`${this.url}/tasks/${taskId}`, {
+                method: "DELETE",
                 headers: {
                     authorization: `Bearer ${authToken}`
                 }
