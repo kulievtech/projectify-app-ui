@@ -10,3 +10,4 @@ export * from "./PageHeader";
 export * from "./PageUnderConstruction";
 export * from "./SupportPage";
 export * from "./SettingsPage";
+export * from "./PageFilters";
