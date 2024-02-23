@@ -81,7 +81,7 @@ const Select: React.FC<SelectProps> = (props) => {
 
     return (
         <div className={finalClassName} ref={selectRef}>
-            {labelText && <Label>{labelText}</Label>}
+            {labelText && <Label className="select__label">{labelText}</Label>}
             <Button
                 size={size}
                 shape={shape}

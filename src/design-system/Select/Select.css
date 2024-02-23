@@ -193,3 +193,8 @@
     background: var(--jaguar-100);
     border-radius: var(--border-radius-8);
 }
+
+.select__label {
+    display: inline-block;
+    margin-bottom: var(--space-10);
+}

@@ -115,12 +115,14 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
             </EditTaskModalTitle>
             <Inputs>
                 <Input
+                    labelText="Task Name"
                     value={taskTitle}
                     onChange={(value) => setTaskTitle(value)}
                     shape="rounded"
                     size="lg"
                 />
                 <Input
+                    labelText="Task Description"
                     type="textarea"
                     value={taskDescription}
                     onChange={(value) => {
@@ -130,6 +132,7 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
                     size="lg"
                 />
                 <DatePickerV1
+                    labelText="Due Date"
                     inputSize="lg"
                     shape="rounded"
                     placeholder="Due Date"
@@ -137,6 +140,7 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
                     onChange={(date) => setTaskDue(date)}
                 />
                 <Select
+                    labelText="Status"
                     options={statusOptions}
                     value={selectedStatus?.value}
                     onSelect={(option) => setSelectedStatus(option)}
