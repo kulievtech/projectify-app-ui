@@ -40,7 +40,7 @@ const TeamMemberFilters: React.FC<TeamMemberFiltersProps> = ({
             <Input
                 value={searchText}
                 onChange={setSearchText}
-                placeholder="Search..."
+                placeholder="Search ..."
                 shape="rounded"
                 size="md"
                 className="search"
