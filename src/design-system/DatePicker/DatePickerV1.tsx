@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactDatePicker, { ReactDatePickerProps } from "react-datepicker";
 import { InputSize } from "../Input";
 import { trimWhiteSpaces } from "../utils";
@@ -80,7 +80,11 @@ const DatePickerV1: React.FC<DataPickerProps> = ({
     );
     return (
         <>
-            {labelText ? <Label disabled={disabled}>{labelText}</Label> : null}
+            {labelText ? (
+                <Label className="date_picker-label" disabled={disabled}>
+                    {labelText}
+                </Label>
+            ) : null}
             <ReactDatePicker
                 selected={selected}
                 onSelect={handleOnSelect}

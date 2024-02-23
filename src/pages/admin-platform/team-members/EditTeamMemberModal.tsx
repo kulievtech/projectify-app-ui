@@ -104,6 +104,7 @@ const EditTeamMemberModal: React.FC<ModalProps> = ({
             </ModalTitle>
             <Inputs>
                 <Input
+                    labelText="First Name"
                     type="text"
                     placeholder="First Name"
                     value={firstName}
@@ -112,6 +113,7 @@ const EditTeamMemberModal: React.FC<ModalProps> = ({
                     size="lg"
                 />
                 <Input
+                    labelText="Last Name"
                     type="text"
                     placeholder="Last Name"
                     value={lastName}
@@ -121,6 +123,7 @@ const EditTeamMemberModal: React.FC<ModalProps> = ({
                 />
 
                 <Input
+                    labelText="Position"
                     type="text"
                     placeholder="Position"
                     value={position}
@@ -130,6 +133,7 @@ const EditTeamMemberModal: React.FC<ModalProps> = ({
                 />
 
                 <DatePickerV1
+                    labelText="Join Date"
                     inputSize="lg"
                     shape="rounded"
                     placeholder="Join Date"
