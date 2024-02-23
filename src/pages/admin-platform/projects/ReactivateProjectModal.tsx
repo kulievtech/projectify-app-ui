@@ -1,10 +1,6 @@
 import toast from "react-hot-toast";
 import { useStore } from "../../../hooks";
-import {
-    Actions,
-    AdminReactivateProjectAction,
-    AdminReactivateTeamMemberAction
-} from "../../../store";
+import { Actions, AdminReactivateProjectAction } from "../../../store";
 import { ConfirmationModal } from "../../components";
 import { adminProjectsService } from "../../../api/admin/adminProjects";
 

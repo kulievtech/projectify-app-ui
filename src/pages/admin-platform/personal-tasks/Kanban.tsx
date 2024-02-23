@@ -21,10 +21,17 @@ enum StatusToTitle {
     DONE = "Done"
 }
 
-enum StatusToColor {
+enum StatusToColumnTitleColor {
     TODO = "var(--jaguar-500)",
     INPROGRESS = "var(--sunglow-700)",
     DONE = "var(--green-500)"
+}
+
+enum StatusToColumnBackground {
+    TODO = "gray",
+    INPROGRESS = "orange",
+    DONE = "green",
+    BLOCKED = "red"
 }
 
 const TasksColumns = styled.div`
@@ -37,10 +44,10 @@ const TasksColumns = styled.div`
 const TasksColumn = styled.div`
     height: 100%;
     padding: var(--space-24) 0 var(--space-10) var(--space-10);
-    background-color: var(--jaguar-25);
     border-radius: var(--border-radius-16);
     border: 0.15rem solid var(--jaguar-100);
     overflow: auto;
+    background-color: var(--jaguar-25);
 `;
 
 const TasksColumnTitle = styled(Typography)<{ color: string }>`
@@ -59,10 +66,8 @@ const KanbanCards = styled(Scrollable)`
 `;
 
 const Kanban: React.FC<KanbanProps> = ({ groupedTasks }) => {
-    const [showEditTaskModal, setShowEditTaskModal] = useState<boolean>(false);
-    const [showDeleteTaskModal, setShowDeleteTaskModal] =
-        useState<boolean>(false);
-
+    const [showEditTaskModal, setShowEditTaskModal] = useState(false);
+    const [showDeleteTaskModal, setShowDeleteTaskModal] = useState(false);
     const [selectedTaskId, setSelectedTaskId] = useState("");
 
     const { dispatch } = useStore();
@@ -107,7 +112,11 @@ const Kanban: React.FC<KanbanProps> = ({ groupedTasks }) => {
                             <TasksColumnTitle
                                 variant="paragraphSM"
                                 weight="semibold"
-                                color={StatusToColor[groupName as TaskStatus]}
+                                color={
+                                    StatusToColumnTitleColor[
+                                        groupName as TaskStatus
+                                    ]
+                                }
                             >
                                 {StatusToTitle[groupName as TaskStatus]}{" "}
                                 <span>({groupedTasks[groupName].length})</span>
@@ -150,6 +159,7 @@ const Kanban: React.FC<KanbanProps> = ({ groupedTasks }) => {
                 closeModal={() => setShowEditTaskModal(false)}
                 taskId={selectedTaskId}
             />
+
             <DeleteTaskModal
                 show={showDeleteTaskModal}
                 closeModal={() => setShowDeleteTaskModal(false)}

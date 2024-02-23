@@ -14,7 +14,8 @@ import {
 import { useStore } from "../../../hooks";
 import { Actions, AdminAddTeamMemberAction } from "../../../store";
 import { adminTeamMemberService } from "../../../api";
-import { formatISO } from "date-fns";
+import { toIso8601 } from "../../../utils";
+
 type ModalProps = {
     show: boolean;
     closeModal: () => void;
@@ -36,7 +37,7 @@ const Buttons = styled.div`
     gap: var(--space-10);
 `;
 
-export const positions: Option[] = [
+const positions: Option[] = [
     { value: "Frontend Engineer", label: "Frontend Engineer" },
     { value: "Backend Engineer", label: "Backend Engineer" },
     { value: "Fullstack Engineer", label: "Fullstack Engineer" },
@@ -58,7 +59,7 @@ const CreateTeamMemberModal: React.FC<ModalProps> = ({ show, closeModal }) => {
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [position, setPosition] = useState<Option>();
-    const [joinDate, setJoinDate] = useState<Date>();
+    const [joinDate, setJoinDate] = useState<Date | null>();
 
     const { dispatch } = useStore();
 
@@ -91,7 +92,7 @@ const CreateTeamMemberModal: React.FC<ModalProps> = ({ show, closeModal }) => {
             firstName,
             lastName,
             email,
-            joinDate: formatISO(joinDate!),
+            joinDate: toIso8601(joinDate!),
             position: position?.value as string
         };
         try {
@@ -111,10 +112,7 @@ const CreateTeamMemberModal: React.FC<ModalProps> = ({ show, closeModal }) => {
                     const err = e as Error;
                     toast.error(err.message);
                 });
-        } catch (e) {
-            const error = e as Error;
-            toast.error(error.message);
-        }
+        } catch (error) {}
     };
 
     return (
@@ -139,6 +137,7 @@ const CreateTeamMemberModal: React.FC<ModalProps> = ({ show, closeModal }) => {
                     shape="rounded"
                     size="lg"
                 />
+
                 <Select
                     options={positions}
                     onSelect={handleOnSelectPosition}

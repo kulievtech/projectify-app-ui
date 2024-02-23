@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import { NoDataPlaceholder, PageHeader } from "../../components";
 import { adminTasksService } from "../../../api";
 import { useStore } from "../../../hooks";
@@ -8,12 +9,12 @@ import { CreateTaskModal } from "./CreateTaskModel";
 import { Kanban } from "./Kanban";
 
 import noTask from "../../../assets/illustrations/no-task.svg";
+import toast from "react-hot-toast";
 
 const AdminPersonalTasks = () => {
     const [isTasksFetching, setIsTasksFetching] = useState(true);
 
-    const [showCreateTaskModal, setShowCreateTaskModal] =
-        useState<boolean>(false);
+    const [showCreateTaskModal, setShowCreateTaskModal] = useState(false);
 
     const {
         state: { adminPersonalTasks },
@@ -31,9 +32,10 @@ const AdminPersonalTasks = () => {
                 };
                 dispatch(action);
             })
-            .catch((error) => {
+            .catch((e) => {
+                const err = e as Error;
                 setIsTasksFetching(false);
-                console.log(error);
+                toast.error(err.message);
             });
     }, []);
 
@@ -41,11 +43,13 @@ const AdminPersonalTasks = () => {
         return null;
     }
 
-    const groupedTasks = groupTasksByStatus(adminPersonalTasks);
+    const tasksArray = Object.values(adminPersonalTasks);
+
+    const groupedTasks = groupTasksByStatus(tasksArray);
 
     return (
         <>
-            {!adminPersonalTasks.length ? (
+            {!tasksArray.length ? (
                 <NoDataPlaceholder
                     illustrationUrl={noTask}
                     text="You don’t have any tasks yet!"

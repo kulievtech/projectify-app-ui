@@ -9,16 +9,17 @@ import {
     Button
 } from "../../../design-system";
 
-import { TaskCreateInput, teamMemberTasksService } from "../../../api";
+import { teamMemberTasksService } from "../../../api";
 import { useStore } from "../../../hooks";
 import { Actions, AddTaskAction } from "../../../store";
+import { toIso8601 } from "../../../utils";
 
 type CreateTaskModalProps = {
     show: boolean;
     closeModal: () => void;
 };
 
-const CreateTaskModalTitle = styled(Typography)`
+const ModalTitle = styled(Typography)`
     margin-bottom: var(--space-24);
 `;
 
@@ -38,19 +39,20 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
     show,
     closeModal
 }) => {
-    const [taskDue, setTaskDue] = useState<Date>();
-    const [taskTitle, setTaskTitle] = useState<string>("");
-    const [taskDescription, setTaskDescription] = useState<string>("");
+    const [taskDue, setTaskDue] = useState<Date | null>();
+    const [taskTitle, setTaskTitle] = useState("");
+    const [taskDescription, setTaskDescription] = useState("");
     const [isFormSubmitting, setIsFormSubmitting] = useState(false);
 
     const { dispatch } = useStore();
 
     const createTask = () => {
         setIsFormSubmitting(true);
-        const input: TaskCreateInput = {
+
+        const input = {
             title: taskTitle,
             description: taskDescription,
-            due: taskDue!
+            due: toIso8601(taskDue!)
         };
 
         teamMemberTasksService
@@ -81,9 +83,9 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
 
     return (
         <Modal show={show} position="center">
-            <CreateTaskModalTitle variant="paragraphLG" weight="medium">
+            <ModalTitle variant="paragraphLG" weight="medium">
                 New Task
-            </CreateTaskModalTitle>
+            </ModalTitle>
             <Inputs>
                 <Input
                     placeholder="Task Name"

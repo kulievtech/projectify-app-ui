@@ -1,21 +1,14 @@
-import { Task, TaskStatus } from "../../types";
+import { Task, TaskUpdate } from "../../types";
 
-export type TaskCreateInput = Omit<Task, "id" | "status">;
+type CreateInput = Omit<Task, "id" | "status">;
 
-export type TaskUpdateInput = {
-    title?: string;
-    description?: string;
-    due?: Date;
-    status?: TaskStatus;
-};
-
-interface GetAllTasksResponse {
+interface GetAllAPIResponse {
     data: {
         tasks: Task[];
     };
 }
 
-interface TaskCreateResponse {
+interface CreateAPIResponse {
     data: Task;
 }
 
@@ -29,7 +22,7 @@ class AdminPersonalTasks {
         }/admins/me`;
     }
 
-    async createTask(input: TaskCreateInput): Promise<TaskCreateResponse> {
+    async createTask(input: CreateInput): Promise<CreateAPIResponse> {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
@@ -52,7 +45,7 @@ class AdminPersonalTasks {
         }
     }
 
-    async getTasks(): Promise<GetAllTasksResponse> {
+    async getTasks(): Promise<GetAllAPIResponse> {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
@@ -77,8 +70,8 @@ class AdminPersonalTasks {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
 
-            const response = await fetch(`${this.url}/tasks/${taskId}`, {
-                method: "DELETE",
+            const response = await fetch(`${this.url}/tasks/${taskId}/delete`, {
+                method: "PATCH",
                 headers: {
                     authorization: `Bearer ${authToken}`
                 }
@@ -92,7 +85,7 @@ class AdminPersonalTasks {
         }
     }
 
-    async updateTask(taskId: string, input: TaskUpdateInput) {
+    async updateTask(taskId: string, input: TaskUpdate) {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";

@@ -6,8 +6,7 @@ import {
     AdminPopulateTeamMembersAction,
     AdminAddTeamMemberAction,
     AdminRemoveTeamMemberAction,
-    AdminDeactivateTeamMemberAction,
-    AdminReactivateTeamMemberAction,
+    AdminChangeTeamMemberStatusAction,
     AdminUpdateTeamMemberAction
 } from "../actions";
 
@@ -17,60 +16,49 @@ const adminTeamMembersReducer = produce(
             case Actions.ADMIN_ADD_TEAM_MEMBER: {
                 const payload =
                     action.payload as AdminAddTeamMemberAction["payload"];
-                draft.push(payload);
+                draft[payload.id] = payload;
                 return draft;
             }
             case Actions.ADMIN_POPULATE_TEAM_MEMBERS: {
                 const payload =
                     action.payload as AdminPopulateTeamMembersAction["payload"];
-                return payload;
+                return payload.reduce((acc: TeamMemberState, teamMember) => {
+                    acc[teamMember.id] = teamMember;
+                    return acc;
+                }, {});
             }
             case Actions.ADMIN_REMOVE_TEAM_MEMBER: {
                 const payload =
                     action.payload as AdminRemoveTeamMemberAction["payload"];
 
-                return draft.filter(
-                    (teamMember) => teamMember.id !== payload.id
-                );
-            }
-            case Actions.ADMIN_DEACTIVATE_TEAM_MEMBER: {
-                const payload =
-                    action.payload as AdminDeactivateTeamMemberAction["payload"];
-
-                for (let i = 0; i < draft.length; i++) {
-                    const teamMember = draft[i];
-
-                    if (teamMember.id === payload.id) {
-                        teamMember.status = "DEACTIVATED";
-                        break;
-                    }
-                }
+                delete draft[payload.id];
                 return draft;
             }
-            case Actions.ADMIN_REACTIVATE_TEAM_MEMBER: {
-                const payload =
-                    action.payload as AdminReactivateTeamMemberAction["payload"];
-                for (let i = 0; i < draft.length; i++) {
-                    const teamMember = draft[i];
 
-                    if (teamMember.id === payload.id) {
-                        teamMember.status = "ACTIVE";
-                        break;
-                    }
+            case Actions.ADMIN_CHANGE_TEAM_MEMBER_STATUS: {
+                const payload =
+                    action.payload as AdminChangeTeamMemberStatusAction["payload"];
+                const teamMember = draft[payload.id];
+
+                if (teamMember) {
+                    teamMember.status = payload.status;
                 }
+
                 return draft;
             }
+
             case Actions.ADMIN_UPDATE_TEAM_MEMBER: {
                 const payload =
                     action.payload as AdminUpdateTeamMemberAction["payload"];
+                const { id, data } = payload;
+                const teamMember = draft[id];
 
-                for (let i = 0; i < draft.length; i++) {
-                    const teamMember = draft[i];
-
-                    if (teamMember.id === payload.id) {
-                        draft[i] = payload;
-                        break;
-                    }
+                if (teamMember) {
+                    teamMember.firstName =
+                        data.firstName || teamMember.firstName;
+                    teamMember.lastName = data.lastName || teamMember.lastName;
+                    teamMember.position = data.position || teamMember.position;
+                    teamMember.joinDate = data.joinDate || teamMember.joinDate;
                 }
                 return draft;
             }

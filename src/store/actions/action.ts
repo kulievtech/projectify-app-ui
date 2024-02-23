@@ -4,7 +4,10 @@ import {
     ProjectContributor,
     Task,
     TaskStatus,
+    TaskUpdate,
     TeamMember,
+    TeamMemberStatus,
+    TeamMemberUpdate,
     TeamMemberUser
 } from "../../types";
 
@@ -21,8 +24,7 @@ export enum Actions {
     ADMIN_ADD_TEAM_MEMBER = "ADMIN_ADD_TEAM_MEMBER",
     ADMIN_POPULATE_TEAM_MEMBERS = "ADMIN_POPULATE_TEAM_MEMBERS",
     ADMIN_REMOVE_TEAM_MEMBER = "ADMIN_REMOVE_TEAM_MEMBER",
-    ADMIN_DEACTIVATE_TEAM_MEMBER = "ADMIN_DEACTIVATE_TEAM_MEMBER",
-    ADMIN_REACTIVATE_TEAM_MEMBER = "ADMIN_REACTIVATE_TEAM_MEMBER",
+    ADMIN_CHANGE_TEAM_MEMBER_STATUS = "ADMIN_CHANGE_TEAM_MEMBER_STATUS",
     ADMIN_UPDATE_TEAM_MEMBER = "ADMIN_UPDATE_TEAM_MEMBER",
 
     ADMIN_ADD_PROJECT = "ADMIN_ADD_PROJECT",
@@ -39,7 +41,9 @@ export interface InitUserAction {
     type: Actions;
     payload: AdminUser | TeamMemberUser;
 }
-
+export interface ResetStateAction {
+    type: Actions.RESET_STATE;
+}
 export interface UpdateUserAction {
     type: Actions;
     payload: {
@@ -47,10 +51,6 @@ export interface UpdateUserAction {
         lastName: string;
         preferredFirstName?: string;
     };
-}
-
-export interface ResetStateAction {
-    type: Actions.RESET_STATE;
 }
 
 export interface PopulateTasksAction {
@@ -73,7 +73,10 @@ export type ChangeTaskStatusAction = {
 
 export type UpdateTaskAction = {
     type: Actions.UPDATE_TASK;
-    payload: Task;
+    payload: {
+        id: string;
+        data: TaskUpdate;
+    };
 };
 
 export type RemoveTaskAction = {
@@ -100,23 +103,20 @@ export type AdminRemoveTeamMemberAction = {
     };
 };
 
-export type AdminDeactivateTeamMemberAction = {
-    type: Actions.ADMIN_DEACTIVATE_TEAM_MEMBER;
+export type AdminChangeTeamMemberStatusAction = {
+    type: Actions.ADMIN_CHANGE_TEAM_MEMBER_STATUS;
     payload: {
         id: string;
-    };
-};
-
-export type AdminReactivateTeamMemberAction = {
-    type: Actions.ADMIN_REACTIVATE_TEAM_MEMBER;
-    payload: {
-        id: string;
+        status: TeamMemberStatus;
     };
 };
 
 export type AdminUpdateTeamMemberAction = {
     type: Actions.ADMIN_UPDATE_TEAM_MEMBER;
-    payload: TeamMember;
+    payload: {
+        id: string;
+        data: TeamMemberUpdate;
+    };
 };
 
 export type AdminAddProjectAction = {
@@ -172,8 +172,7 @@ export type ActionType =
     | AdminAddTeamMemberAction
     | AdminPopulateTeamMembersAction
     | AdminRemoveTeamMemberAction
-    | AdminDeactivateTeamMemberAction
-    | AdminReactivateTeamMemberAction
+    | AdminChangeTeamMemberStatusAction
     | AdminUpdateTeamMemberAction
     | AdminAddProjectAction
     | AdminPopulateProjectsAction

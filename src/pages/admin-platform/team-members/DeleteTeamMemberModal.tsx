@@ -36,7 +36,7 @@ const DeleteTeamMemberModal: React.FC<DeleteTeamMemberModalProps> = ({
     };
     return (
         <ConfirmationModal
-            confirmationMessage="Are you sure you want to delete this team member?"
+            confirmationMessage="Are you sure you want to delete a team member?"
             show={show}
             cancel={closeModal}
             onConfirm={deleteTeamMember}

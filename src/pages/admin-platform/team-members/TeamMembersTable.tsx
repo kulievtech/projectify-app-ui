@@ -1,27 +1,29 @@
-import format from "date-fns/format";
+import { useState } from "react";
 import styled from "styled-components";
+import format from "date-fns/format";
 import {
     Badge,
     BadgeColors,
     Menu,
     MenuOption,
-    Typography
-} from "../../../design-system";
-import {
+    Typography,
     Table,
     TableBody,
-    TableBodyCellBase,
+    TableBodyCell,
     TableHead,
     TableHeadCell,
     TableRow
-} from "../../../design-system/Table";
-import { TeamMember } from "../../../types";
-import { useState } from "react";
+} from "../../../design-system";
+
+import {
+    TeamMember,
+    AdminTeamMemberActions,
+    AdminTeamMemberStatusChange
+} from "../../../types";
 import { DeleteTeamMemberModal } from "./DeleteTeamMemberModal";
-import { DeactivateTeamMemberModal } from "./DeactivateTeamMemberModal";
-import { ReactivateTeamMemberModal } from "./ReactivateTeamMemberModal";
+import { ChangeTeamMemberStatusModal } from "./ChangeTeamMemberStatusModal";
 import { EditTeamMemberModal } from "./EditTeamMemberModal";
-import { parseISO } from "date-fns";
+import { toDateObj } from "../../../utils";
 import { Scrollable } from "../../components";
 
 type TeamMembersTableProps = {
@@ -32,12 +34,6 @@ const TableContainer = styled(Scrollable)`
     height: calc(100% - 13rem);
 `;
 
-enum TeamMemberActions {
-    edit = "edit",
-    delete = "delete",
-    reactivate = "reactivate",
-    deactivate = "deactivate"
-}
 const options: MenuOption[] = [
     { label: "Edit", iconName: "edit", value: "edit", color: "primary" },
     {
@@ -72,30 +68,30 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
     const [selectedTeamMemberId, setSelectedTeamMemberId] = useState("");
     const [showDeleteTeamMemberModal, setShowDeleteTeamMemberModal] =
         useState(false);
-
-    const [showDeactivateTeamMemberModal, setShowDeactivateTeamMemberModal] =
-        useState(false);
-
-    const [showReactivateTeamMemberModal, setShowReactivateTeamMemberModal] =
-        useState(false);
-
-    const [showUpdateTeamMemberModal, setShowUpdateTeamMemberModal] =
+    const [changeStatus, setChangeStatus] =
+        useState<AdminTeamMemberStatusChange>();
+    const [
+        showChangeTeamMemberStatusModal,
+        setShowChangeTeamMemberStatusModal
+    ] = useState(false);
+    const [showEditTeamMemberModal, setShowEditTeamMemberModal] =
         useState(false);
 
     const onSelectActionCellMenu = (
         teamMemberId: string,
-        action: TeamMemberActions
+        action: AdminTeamMemberActions
     ) => {
         setSelectedTeamMemberId(teamMemberId);
-
-        if (action === "delete") {
+        if (action === AdminTeamMemberActions.delete) {
             setShowDeleteTeamMemberModal(true);
-        } else if (action === "deactivate") {
-            setShowDeactivateTeamMemberModal(true);
-        } else if (action === "reactivate") {
-            setShowReactivateTeamMemberModal(true);
-        } else if (action === "edit") {
-            setShowUpdateTeamMemberModal(true);
+        } else if (
+            action === AdminTeamMemberActions.deactivate ||
+            action === AdminTeamMemberActions.reactivate
+        ) {
+            setChangeStatus(action);
+            setShowChangeTeamMemberStatusModal(true);
+        } else if (action === AdminTeamMemberActions.edit) {
+            setShowEditTeamMemberModal(true);
         }
     };
 
@@ -117,50 +113,50 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
                     {data.map((teamMember) => {
                         return (
                             <TableRow key={teamMember.id} columns={columns}>
-                                <TableBodyCellBase>
+                                <TableBodyCell>
                                     <Typography
                                         variant="paragraphSM"
                                         weight="medium"
                                     >
                                         {teamMember.firstName}
                                     </Typography>
-                                </TableBodyCellBase>
-                                <TableBodyCellBase>
+                                </TableBodyCell>
+                                <TableBodyCell>
                                     <Typography
                                         variant="paragraphSM"
                                         weight="medium"
                                     >
                                         {teamMember.lastName}
                                     </Typography>
-                                </TableBodyCellBase>
-                                <TableBodyCellBase>
+                                </TableBodyCell>
+                                <TableBodyCell>
                                     <Typography
                                         variant="paragraphSM"
                                         weight="medium"
                                     >
                                         {teamMember.position}
                                     </Typography>
-                                </TableBodyCellBase>
-                                <TableBodyCellBase>
+                                </TableBodyCell>
+                                <TableBodyCell>
                                     <Typography
                                         variant="paragraphSM"
                                         weight="medium"
                                     >
                                         {teamMember.email}
                                     </Typography>
-                                </TableBodyCellBase>
-                                <TableBodyCellBase>
+                                </TableBodyCell>
+                                <TableBodyCell>
                                     <Typography
                                         variant="paragraphSM"
                                         weight="medium"
                                     >
                                         {format(
-                                            parseISO(teamMember.joinDate),
+                                            toDateObj(teamMember.joinDate),
                                             "MMM d, yyyy"
                                         )}
                                     </Typography>
-                                </TableBodyCellBase>
-                                <TableBodyCellBase>
+                                </TableBodyCell>
+                                <TableBodyCell>
                                     <Badge
                                         color={
                                             mapsStatusToBadgeColors[
@@ -172,8 +168,8 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
                                         shape="rounded"
                                         status
                                     />
-                                </TableBodyCellBase>
-                                <TableBodyCellBase>
+                                </TableBodyCell>
+                                <TableBodyCell>
                                     <Menu
                                         options={
                                             allowedActions[teamMember.status]
@@ -181,11 +177,11 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
                                         onSelect={(value) =>
                                             onSelectActionCellMenu(
                                                 teamMember.id,
-                                                value as TeamMemberActions
+                                                value as AdminTeamMemberActions
                                             )
                                         }
                                     />
-                                </TableBodyCellBase>
+                                </TableBodyCell>
                             </TableRow>
                         );
                     })}
@@ -196,20 +192,16 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
                 teamMemberId={selectedTeamMemberId}
                 closeModal={() => setShowDeleteTeamMemberModal(false)}
             />
-            <DeactivateTeamMemberModal
-                show={showDeactivateTeamMemberModal}
+            <ChangeTeamMemberStatusModal
+                show={showChangeTeamMemberStatusModal}
                 teamMemberId={selectedTeamMemberId}
-                closeModal={() => setShowDeactivateTeamMemberModal(false)}
-            />
-            <ReactivateTeamMemberModal
-                show={showReactivateTeamMemberModal}
-                teamMemberId={selectedTeamMemberId}
-                closeModal={() => setShowReactivateTeamMemberModal(false)}
+                closeModal={() => setShowChangeTeamMemberStatusModal(false)}
+                changeStatus={changeStatus!}
             />
             <EditTeamMemberModal
-                show={showUpdateTeamMemberModal}
+                show={showEditTeamMemberModal}
                 teamMemberId={selectedTeamMemberId}
-                closeModal={() => setShowUpdateTeamMemberModal(false)}
+                closeModal={() => setShowEditTeamMemberModal(false)}
             />
         </TableContainer>
     );

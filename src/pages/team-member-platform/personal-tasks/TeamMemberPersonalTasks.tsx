@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
+
 import { NoDataPlaceholder, PageHeader } from "../../components";
-import noTask from "../../../assets/illustrations/no-task.svg";
 import { teamMemberTasksService } from "../../../api";
 import { useStore } from "../../../hooks";
 import { Actions, PopulateTasksAction } from "../../../store";
@@ -9,14 +8,16 @@ import { groupTasksByStatus } from "../../../utils";
 import { CreateTaskModal } from "./CreateTaskModel";
 import { Kanban } from "./Kanban";
 
+import noTask from "../../../assets/illustrations/no-task.svg";
+import toast from "react-hot-toast";
+
 const TeamMemberPersonalTasks = () => {
     const [isTasksFetching, setIsTasksFetching] = useState(true);
 
-    const [showCreateTaskModal, setShowCreateTaskModal] =
-        useState<boolean>(false);
+    const [showCreateTaskModal, setShowCreateTaskModal] = useState(false);
 
     const {
-        state: { teamMemberPersonalTasks },
+        state: { adminPersonalTasks },
         dispatch
     } = useStore();
 
@@ -31,9 +32,10 @@ const TeamMemberPersonalTasks = () => {
                 };
                 dispatch(action);
             })
-            .catch((error) => {
+            .catch((e) => {
+                const err = e as Error;
                 setIsTasksFetching(false);
-                console.log(error);
+                toast.error(err.message);
             });
     }, []);
 
@@ -41,11 +43,13 @@ const TeamMemberPersonalTasks = () => {
         return null;
     }
 
-    const groupedTasks = groupTasksByStatus(teamMemberPersonalTasks);
+    const tasksArray = Object.values(adminPersonalTasks);
+
+    const groupedTasks = groupTasksByStatus(tasksArray);
 
     return (
         <>
-            {!teamMemberPersonalTasks.length ? (
+            {!tasksArray.length ? (
                 <NoDataPlaceholder
                     illustrationUrl={noTask}
                     text="You don’t have any tasks yet!"

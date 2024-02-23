@@ -1,21 +1,33 @@
-import { TeamMember } from "../../types";
+import {
+    AdminTeamMemberStatusChange,
+    TeamMember,
+    TeamMemberUpdate,
+    TeamMemberUser
+} from "../../types";
+
+export type GetMeAPIResponse = {
+    data: TeamMemberUser;
+};
+
+interface CreatePasswordInput {
+    password: string;
+    passwordConfirm: string;
+    email: string;
+}
+
+type SignInInput = {
+    email: string;
+    password: string;
+};
 
 type CreateInput = Omit<TeamMember, "id" | "status">;
 
-type CreateInputResponse = {
+type CreateAPIResponse = {
     data: TeamMember;
 };
 
-type GetAllTeamMembersResponse = {
+type GetAllAPIResponse = {
     data: TeamMember[];
-};
-
-export type TeamMemberUpdateInput = {
-    firstName?: string;
-    lastName?: string;
-    email?: string;
-    position?: string;
-    joinDate?: string;
 };
 
 class AdminTeamMemberService {
@@ -28,7 +40,7 @@ class AdminTeamMemberService {
         }/team-members`;
     }
 
-    async create(input: CreateInput): Promise<CreateInputResponse> {
+    async create(input: CreateInput): Promise<CreateAPIResponse> {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
@@ -51,7 +63,7 @@ class AdminTeamMemberService {
         }
     }
 
-    async getAll(): Promise<GetAllTeamMembersResponse> {
+    async getAll(): Promise<GetAllAPIResponse> {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
@@ -91,12 +103,15 @@ class AdminTeamMemberService {
         }
     }
 
-    async deactivate(teamMemberId: string) {
+    async changeStatus(
+        teamMemberId: string,
+        changeStatus: AdminTeamMemberStatusChange
+    ) {
         const rawAuthToken = localStorage.getItem("authToken");
         const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
         try {
             const response = await fetch(
-                `${this.url}/${teamMemberId}/deactivate`,
+                `${this.url}/${teamMemberId}/${changeStatus}`,
                 {
                     method: "PATCH",
                     headers: {
@@ -114,42 +129,20 @@ class AdminTeamMemberService {
         }
     }
 
-    async reactivate(teamMemberId: string) {
+    async update(teamMemberId: string, updateData: TeamMemberUpdate) {
         const rawAuthToken = localStorage.getItem("authToken");
         const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+
         try {
-            const response = await fetch(
-                `${this.url}/${teamMemberId}/reactivate`,
-                {
-                    method: "PATCH",
-                    headers: {
-                        authorization: `Bearer ${authToken}`
-                    }
-                }
-            );
-
-            if (!response.ok) {
-                const data = await response.json();
-                throw new Error(data.message);
-            }
-        } catch (error) {
-            throw error;
-        }
-    }
-
-    async updateTeamMember(teamMemberId: string, input: TeamMemberUpdateInput) {
-        try {
-            const rawAuthToken = localStorage.getItem("authToken");
-            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
-
             const response = await fetch(`${this.url}/${teamMemberId}/update`, {
                 method: "PATCH",
                 headers: {
-                    "Content-Type": "application/json",
-                    authorization: `Bearer ${authToken}`
+                    authorization: `Bearer ${authToken}`,
+                    "Content-Type": "application/json"
                 },
-                body: JSON.stringify(input)
+                body: JSON.stringify(updateData)
             });
+
             if (!response.ok) {
                 const data = await response.json();
                 throw new Error(data.message);

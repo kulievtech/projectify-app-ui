@@ -1,19 +1,22 @@
+import { useState } from "react";
 import styled, { css } from "styled-components";
+import { format } from "date-fns";
 import { KanbanCardProps } from "./types";
 import { Badge, Bar, Menu, Typography } from "../../../design-system";
-import { format } from "date-fns";
-import { useState } from "react";
+import { toDateObj } from "../../../utils";
 
 export const KanbanCardBase = styled.div<{ $isDragging: boolean }>`
     background-color: var(--white);
     padding: var(--space-16);
     border-radius: var(--border-radius-16);
     box-shadow: var(--shadow-xs);
+
     display: flex;
     flex-direction: column;
     gap: var(--space-12);
 
     transition: opacity 0.5s;
+
     ${(props) =>
         props.$isDragging &&
         css`
@@ -31,15 +34,15 @@ const KanbanCardHeader = styled.div`
     align-items: center;
 `;
 
-const KanbanTitle = styled(Typography)`
+const TaskTitle = styled(Typography)`
     margin-bottom: var(--space-4);
 `;
 
-const KanbanDescription = styled(Typography)`
+const TaskDescription = styled(Typography)`
     color: var(--jaguar-500);
 `;
 
-const KanbanDue = styled(Badge)`
+const TaskDue = styled(Badge)`
     align-self: flex-end;
 `;
 
@@ -59,7 +62,7 @@ const KanbanCard: React.FC<KanbanCardProps> = ({
     menuActions,
     onSelectMenuAction
 }) => {
-    const [isDragging, setIsDragging] = useState<boolean>(false);
+    const [isDragging, setIsDragging] = useState(false);
 
     const onDragStart = (e: React.DragEvent<HTMLDivElement>) => {
         setIsDragging(true);
@@ -81,21 +84,20 @@ const KanbanCard: React.FC<KanbanCardProps> = ({
             onDragEnd={onDragEnd}
             $isDragging={isDragging}
         >
-            {" "}
             <KanbanCardHeader>
                 <Bar color={StatusToColor[task.status]} />
                 <Menu options={menuActions} onSelect={handleOnSelectMenuItem} />
             </KanbanCardHeader>
             <div>
-                <KanbanTitle variant="paragraphLG" weight="semibold">
+                <TaskTitle variant="paragraphLG" weight="semibold">
                     {task?.title}
-                </KanbanTitle>
-                <KanbanDescription variant="subtitleLG" weight="medium">
+                </TaskTitle>
+                <TaskDescription variant="subtitleLG" weight="medium">
                     {task?.description}
-                </KanbanDescription>
+                </TaskDescription>
             </div>
-            <KanbanDue
-                label={format(task.due, "MMMM d")}
+            <TaskDue
+                label={format(toDateObj(task.due), "MMMM d")}
                 color={StatusToColor[task.status]}
                 iconName={StatusToIcon[task.status]}
                 variant="contained"
