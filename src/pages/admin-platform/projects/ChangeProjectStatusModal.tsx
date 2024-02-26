@@ -24,7 +24,7 @@ const generateMessages = (status: ProjectStatus) => {
     }
 
     messages.confirmation = `Are you sure you want to ${actionVerb} the project?`;
-    messages.success = `Team Member has been successfully ${actionVerb}d`;
+    messages.success = `Team Member has been successfully ${actionVerb}D`;
 
     return messages;
 };
