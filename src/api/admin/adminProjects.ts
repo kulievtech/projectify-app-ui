@@ -1,31 +1,16 @@
-import { Project, ProjectContributor } from "../../types";
+import { Project, ProjectStatus, ProjectWithContributors } from "../../types";
 
-type CreateInput = Omit<Project, "id" | "status">;
+type CreateInput = Omit<Project, "id" | "status" | "progress">;
 
-type CreateInputResponse = {
+type CreateAPIResponse = {
     data: Project;
 };
 
-type GetAllProjectsResponse = {
-    data: Project[];
+type GetAllAPIResponse = {
+    data: ProjectWithContributors[];
 };
 
-export type ProjectUpdateInput = {
-    name?: string;
-    description?: string;
-    dueDate?: string;
-};
-
-type AddContributorInput = Omit<
-    ProjectContributor,
-    "id" | "status" | "adminId"
->;
-
-type AddContributorInputResponse = {
-    data: ProjectContributor;
-};
-
-class AdminProjectsService {
+class ProjectService {
     url: string;
     constructor() {
         this.url = `${
@@ -35,15 +20,15 @@ class AdminProjectsService {
         }/projects`;
     }
 
-    async create(input: CreateInput): Promise<CreateInputResponse> {
+    async create(input: CreateInput): Promise<CreateAPIResponse> {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
-            const response = await fetch(`${this.url}`, {
+            const response = await fetch(`${this.url}/`, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json",
-                    authorization: `Bearer ${authToken}`
+                    authorization: `Bearer ${authToken}`,
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify(input)
             });
@@ -51,14 +36,13 @@ class AdminProjectsService {
                 const data = await response.json();
                 throw new Error(data.message);
             }
-
             return response.json();
         } catch (error) {
             throw error;
         }
     }
 
-    async getAll(): Promise<GetAllProjectsResponse> {
+    async getAll(): Promise<GetAllAPIResponse> {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
@@ -78,57 +62,19 @@ class AdminProjectsService {
         }
     }
 
-    async archive(projectId: string) {
-        const rawAuthToken = localStorage.getItem("authToken");
-        const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+    async changeStatus(projectId: string, status: ProjectStatus) {
         try {
-            const response = await fetch(`${this.url}/${projectId}/archive`, {
-                method: "PATCH",
-                headers: {
-                    authorization: `Bearer ${authToken}`
-                }
-            });
-
-            if (!response.ok) {
-                const data = await response.json();
-                throw new Error(data.message);
-            }
-        } catch (error) {
-            throw error;
-        }
-    }
-
-    async delete(projectId: string) {
-        const rawAuthToken = localStorage.getItem("authToken");
-        const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
-        try {
-            const response = await fetch(`${this.url}/${projectId}`, {
-                method: "DELETE",
-                headers: {
-                    authorization: `Bearer ${authToken}`
-                }
-            });
-
-            if (!response.ok) {
-                const data = await response.json();
-                throw new Error(data.message);
-            }
-        } catch (error) {
-            throw error;
-        }
-    }
-
-    async reactivate(projectId: string) {
-        const rawAuthToken = localStorage.getItem("authToken");
-        const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
-        try {
+            const rawAuthToken = localStorage.getItem("authToken");
+            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
             const response = await fetch(
-                `${this.url}/${projectId}/reactivate`,
+                `${this.url}/${projectId}/change-status`,
                 {
                     method: "PATCH",
                     headers: {
-                        authorization: `Bearer ${authToken}`
-                    }
+                        authorization: `Bearer ${authToken}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ status })
                 }
             );
 
@@ -140,53 +86,6 @@ class AdminProjectsService {
             throw error;
         }
     }
-
-    async updateProject(projectId: string, input: ProjectUpdateInput) {
-        try {
-            const rawAuthToken = localStorage.getItem("authToken");
-            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
-
-            const response = await fetch(`${this.url}/${projectId}`, {
-                method: "PATCH",
-                headers: {
-                    "Content-Type": "application/json",
-                    authorization: `Bearer ${authToken}`
-                },
-                body: JSON.stringify(input)
-            });
-            if (!response.ok) {
-                const data = await response.json();
-                throw new Error(data.message);
-            }
-        } catch (error) {
-            throw error;
-        }
-    }
-
-    async addContributor(
-        input: AddContributorInput
-    ): Promise<AddContributorInputResponse> {
-        try {
-            const rawAuthToken = localStorage.getItem("authToken");
-            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
-            const response = await fetch(`${this.url}/contributors/add`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    authorization: `Bearer ${authToken}`
-                },
-                body: JSON.stringify(input)
-            });
-            if (!response.ok) {
-                const data = await response.json();
-                throw new Error(data.message);
-            }
-
-            return response.json();
-        } catch (error) {
-            throw error;
-        }
-    }
 }
 
-export const adminProjectsService = new AdminProjectsService();
+export const adminProjectService = new ProjectService();

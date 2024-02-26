@@ -1,219 +1,240 @@
-import format from "date-fns/format";
 import styled from "styled-components";
 import {
     Badge,
-    BadgeColors,
     Menu,
     MenuOption,
-    Typography
-} from "../../../design-system";
-import {
+    Typography,
     Table,
     TableBody,
-    TableBodyCellBase,
+    TableBodyCell,
     TableHead,
     TableHeadCell,
-    TableRow
-} from "../../../design-system/Table";
-import { Project } from "../../../types";
-import { useState } from "react";
-import { parseISO } from "date-fns";
+    TableRow,
+    LinearProgress
+} from "../../../design-system";
 import { Scrollable } from "../../components";
-import { ArchiveProjectModal } from "./ArchiveProjectModal";
-import { DeleteProjectModal } from "./DeleteProjectModal";
-import { ReactivateProjectModal } from "./ReactivateProjectModal";
-import { EditProjectModal } from "./EditProjectModal";
-import { ProjectContributors } from "./project-team-members/ProjectContributors";
-import { AddContributorModal } from "./project-team-members/AddContributorModal";
+import { ProjectStatus, ProjectWithContributors } from "../../../types";
+import { formatAsMMMddYYYY, formatDeadline } from "../../../utils";
+import { useState } from "react";
+import { ChangeProjectStatusModal } from "./ChangeProjectStatusModal";
 
 type ProjectsTableProps = {
-    data: Project[];
+    data: ProjectWithContributors[];
 };
+
+const renderDeadline = (isoDate: string) => {
+    const formattedDeadline = formatDeadline(isoDate);
+    let className = "";
+    if (formattedDeadline.includes("left")) {
+        className = "red";
+    } else {
+        className = "green";
+    }
+
+    return (
+        <Deadline variant="paragraphSM" weight="medium" className={className}>
+            {formattedDeadline}
+        </Deadline>
+    );
+};
+const statuses = ["ACTIVE", "COMPLETED", "ARCHIVED", "ONHOLD"];
+const options: MenuOption[] = [
+    { label: "Edit", iconName: "edit", value: "edit", color: "primary" },
+    {
+        label: "Reactivate",
+        iconName: "play-in-circle",
+        value: statuses[0],
+        color: "primary"
+    },
+    {
+        label: "Complete",
+        iconName: "check-in-circle",
+        value: statuses[1],
+        color: "primary"
+    },
+    {
+        label: "Archive",
+        iconName: "archive",
+        value: statuses[2],
+        color: "danger"
+    },
+    {
+        label: "Put On Hold",
+        iconName: "pause-in-circle",
+        value: statuses[3],
+        color: "danger"
+    }
+];
+
+const allowedActions = {
+    ACTIVE: [options[0], options[2], options[3], options[4]],
+    ARCHIVED: [options[0], options[1], options[2], options[4]],
+    ONHOLD: [options[0], options[1], options[2], options[3]],
+    COMPLETED: [options[0], options[1], options[3], options[4]]
+};
+
+const columns = ["20%", "10%", "20%", "15%", "15%", "10%", "10%"];
+enum StatusToBadgeColors {
+    ACTIVE = "violet",
+    ARCHIVED = "gray",
+    COMPLETED = "green",
+    ONHOLD = "red"
+}
 
 const TableContainer = styled(Scrollable)`
     height: calc(100% - 13rem);
 `;
 
-enum ProjectActions {
-    edit = "edit",
-    delete = "delete",
-    reactivate = "reactivate",
-    archive = "archive"
-}
-const options: MenuOption[] = [
-    { label: "Edit", iconName: "edit", value: "edit", color: "primary" },
-    {
-        label: "Reactivate",
-        iconName: "check-in-circle",
-        value: "reactivate",
-        color: "primary"
-    },
-    { label: "Delete", iconName: "delete", value: "delete", color: "danger" },
-    {
-        label: "Archive",
-        iconName: "x-in-circle",
-        value: "archive",
-        color: "secondary"
+const ProjectDescription = styled(Typography)`
+    color: var(--jaguar-500);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+`;
+
+const AboutProject = styled.div`
+    width: 90%;
+`;
+
+const ProgressWrapper = styled.div`
+    width: 80%;
+`;
+
+const Deadline = styled(Typography)`
+    &.green {
+        color: var(--green-600);
     }
-];
 
-const allowedActions = {
-    ACTIVE: [options[0], options[3]],
-    ARCHIVED: [options[0], options[1], options[2]],
-    COMPLETED: [options[2], options[3]]
-};
-
-const columns = ["12.5%", "15.5%", "10%", "20%", "12%", "25%", "5%"];
-
-const mapsStatusToBadgeColors = {
-    ACTIVE: "violet",
-    ARCHIVED: "gray",
-    COMPLETED: "green"
-};
+    &.red {
+        color: var(--red-orange-600);
+    }
+`;
 
 const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
     const [selectedProjectId, setSelectedProjectId] = useState("");
-
-    const [showArchiveProjectModal, setShowArchiveProjectModal] =
+    const [changeStatusTo, setChangeStatusTo] = useState<ProjectStatus>();
+    const [showChangeProjectStatusModal, setShowChangeProjectStatusModal] =
         useState(false);
 
-    const [showDeleteProjectModal, setShowDeleteProjectModal] = useState(false);
-
-    const [showReactivateProjectModal, setShowReactivateProjectModal] =
-        useState(false);
-
-    const [showUpdateProjectModal, setShowUpdateProjectModal] = useState(false);
-    const [showCreateAddContributorModal, setShowCreateAddContributorModal] =
-        useState(false);
-
-    const onSelectActionCellMenu = (
+    const handleOnSelectCellMenu = (
         projectId: string,
-        action: ProjectActions
+        value: ProjectStatus
     ) => {
         setSelectedProjectId(projectId);
-
-        if (action === "delete") {
-            setShowDeleteProjectModal(true);
-        } else if (action === "archive") {
-            setShowArchiveProjectModal(true);
-        } else if (action === "reactivate") {
-            setShowReactivateProjectModal(true);
-        } else if (action === "edit") {
-            setShowUpdateProjectModal(true);
+        if (statuses.includes(value)) {
+            setShowChangeProjectStatusModal(true);
+            setChangeStatusTo(value);
         }
     };
-
     return (
-        <TableContainer>
-            <Table>
-                <TableHead>
-                    <TableRow columns={columns}>
-                        <TableHeadCell>Name</TableHeadCell>
-                        <TableHeadCell>Description</TableHeadCell>
-                        <TableHeadCell>Status</TableHeadCell>
-                        <TableHeadCell>Progress</TableHeadCell>
-                        <TableHeadCell>Due Date</TableHeadCell>
-                        <TableHeadCell>Team Members</TableHeadCell>
-                        <TableHeadCell> </TableHeadCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {data.map((project) => {
-                        return (
-                            <TableRow key={project.id} columns={columns}>
-                                <TableBodyCellBase>
-                                    <Typography
-                                        variant="paragraphSM"
-                                        weight="medium"
-                                    >
-                                        {project.name}
-                                    </Typography>
-                                </TableBodyCellBase>
-                                <TableBodyCellBase>
-                                    <Typography
-                                        variant="paragraphSM"
-                                        weight="medium"
-                                    >
-                                        {project.description}
-                                    </Typography>
-                                </TableBodyCellBase>
-                                <TableBodyCellBase>
-                                    <Badge
-                                        color={
-                                            mapsStatusToBadgeColors[
-                                                project.status
-                                            ] as BadgeColors
-                                        }
-                                        label={project.status}
-                                        variant="outlined"
-                                        shape="rounded"
-                                        status
-                                    />
-                                </TableBodyCellBase>
-                                <TableBodyCellBase>Hello</TableBodyCellBase>
-                                <TableBodyCellBase>
-                                    <Typography
-                                        variant="paragraphSM"
-                                        weight="medium"
-                                    >
-                                        {format(
-                                            parseISO(project.dueDate),
-                                            "MMM d, yyyy"
-                                        )}
-                                    </Typography>
-                                </TableBodyCellBase>
-                                <TableBodyCellBase>
-                                    <button
-                                        onClick={() =>
-                                            setShowCreateAddContributorModal(
-                                                true
-                                            )
-                                        }
-                                    >
-                                        Add Contributor
-                                    </button>
-                                </TableBodyCellBase>
-                                <TableBodyCellBase>
-                                    <Menu
-                                        options={allowedActions[project.status]}
-                                        onSelect={(value) =>
-                                            onSelectActionCellMenu(
-                                                project.id,
-                                                value as ProjectActions
-                                            )
-                                        }
-                                    />
-                                </TableBodyCellBase>
-                            </TableRow>
-                        );
-                    })}
-                </TableBody>
-            </Table>
-            <ArchiveProjectModal
-                show={showArchiveProjectModal}
+        <>
+            <TableContainer>
+                <Table>
+                    <TableHead>
+                        <TableRow columns={columns}>
+                            <TableHeadCell>About</TableHeadCell>
+                            <TableHeadCell>Status</TableHeadCell>
+                            <TableHeadCell>Progress</TableHeadCell>
+                            <TableHeadCell>Start Date</TableHeadCell>
+                            <TableHeadCell>Deadline</TableHeadCell>
+                            <TableHeadCell>Contributors</TableHeadCell>
+                            <TableHeadCell> </TableHeadCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {data.map((project) => {
+                            console.log(project);
+                            return (
+                                <TableRow key={project.id} columns={columns}>
+                                    <TableBodyCell>
+                                        <AboutProject>
+                                            <Typography
+                                                variant="paragraphSM"
+                                                weight="medium"
+                                            >
+                                                {project.name}
+                                            </Typography>
+                                            <ProjectDescription
+                                                variant="subtitleSM"
+                                                weight="medium"
+                                            >
+                                                {project.description}
+                                            </ProjectDescription>
+                                        </AboutProject>
+                                    </TableBodyCell>
+                                    <TableBodyCell>
+                                        <Badge
+                                            label={project.status}
+                                            color={
+                                                StatusToBadgeColors[
+                                                    project.status
+                                                ]
+                                            }
+                                            variant="outlined"
+                                            shape="rounded"
+                                        />
+                                    </TableBodyCell>
+                                    <TableBodyCell>
+                                        <ProgressWrapper>
+                                            <LinearProgress
+                                                value={project.progress}
+                                                color="blue"
+                                                shape="rounded"
+                                            />
+                                        </ProgressWrapper>
+                                    </TableBodyCell>
+                                    <TableBodyCell>
+                                        <Typography
+                                            variant="paragraphSM"
+                                            weight="medium"
+                                        >
+                                            {formatAsMMMddYYYY(
+                                                project.startDate
+                                            )}
+                                        </Typography>
+                                    </TableBodyCell>
+                                    <TableBodyCell>
+                                        <Typography
+                                            variant="paragraphSM"
+                                            weight="medium"
+                                        >
+                                            {renderDeadline(project.endDate)}
+                                        </Typography>
+                                    </TableBodyCell>
+                                    <TableBodyCell>
+                                        <Typography
+                                            variant="paragraphSM"
+                                            weight="medium"
+                                        >
+                                            {project.contributors?.length || 0}
+                                        </Typography>
+                                    </TableBodyCell>
+                                    <TableBodyCell>
+                                        <Menu
+                                            options={
+                                                allowedActions[project.status]
+                                            }
+                                            onSelect={(value) =>
+                                                handleOnSelectCellMenu(
+                                                    project.id,
+                                                    value as ProjectStatus
+                                                )
+                                            }
+                                        />
+                                    </TableBodyCell>
+                                </TableRow>
+                            );
+                        })}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            <ChangeProjectStatusModal
+                show={showChangeProjectStatusModal}
+                changeStatusTo={changeStatusTo!}
                 projectId={selectedProjectId}
-                closeModal={() => setShowArchiveProjectModal(false)}
+                closeModal={() => setShowChangeProjectStatusModal(false)}
             />
-            <DeleteProjectModal
-                show={showDeleteProjectModal}
-                projectId={selectedProjectId}
-                closeModal={() => setShowDeleteProjectModal(false)}
-            />
-            <ReactivateProjectModal
-                show={showReactivateProjectModal}
-                projectId={selectedProjectId}
-                closeModal={() => setShowReactivateProjectModal(false)}
-            />
-            <EditProjectModal
-                show={showUpdateProjectModal}
-                projectId={selectedProjectId}
-                closeModal={() => setShowUpdateProjectModal(false)}
-            />
-            <AddContributorModal
-                show={showCreateAddContributorModal}
-                closeModal={() => setShowCreateAddContributorModal(false)}
-            />
-        </TableContainer>
+        </>
     );
 };
 

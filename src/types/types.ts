@@ -70,23 +70,26 @@ export interface TeamMemberUpdate {
     joinDate?: string;
 }
 
-export type ProjectStatus = "ACTIVE" | "ARCHIVED" | "COMPLETED";
-
-export interface Project {
-    id: string;
-    status: ProjectStatus;
-    name: string;
-    description: string;
-    dueDate: string;
-}
-
-export type ProjectContributorStatus = "ACTIVE" | "INACTIVE";
+export type ProjectStatus = "ACTIVE" | "ONHOLD" | "ARCHIVED" | "COMPLETED";
+type ContributorStatus = "ACTIVE" | "INACTIVE";
 
 export interface ProjectContributor {
     id: string;
-    teamMemberId: string;
-    adminId: string;
-    projectId: string;
-    status: ProjectContributorStatus;
-    joinDate: string;
+    firstName: string;
+    lastName: string;
+    joinedAt: string;
+    status: ContributorStatus;
+}
+export interface Project {
+    id: string;
+    name: string;
+    description: string;
+    status: ProjectStatus;
+    progress: number;
+    startDate: string;
+    endDate: string;
+}
+
+export interface ProjectWithContributors extends Project {
+    contributors?: ProjectContributor[];
 }

@@ -1,19 +1,21 @@
-import { useState } from "react";
 import styled from "styled-components";
 import toast from "react-hot-toast";
-import {
-    Typography,
-    Modal,
-    Input,
-    DatePickerV1,
-    Button
-} from "../../../design-system";
 
+import {
+    Input,
+    Button,
+    Typography,
+    DatePickerV1,
+    Modal,
+    DatePickerOnChangeDateType
+} from "../../../design-system";
+import { useState } from "react";
+import { toIso8601 } from "../../../utils";
 import { useStore } from "../../../hooks";
-import { Actions, AdminAddProjectAction } from "../../../store";
-import { formatISO } from "date-fns";
-import { adminProjectsService } from "../../../api/admin/adminProjects";
-type ModalProps = {
+import { Actions, AddProjectAction } from "../../../store";
+import { adminProjectService } from "../../../api/admin/adminProjects";
+
+type CreateProjectModalProps = {
     show: boolean;
     closeModal: () => void;
 };
@@ -34,61 +36,71 @@ const Buttons = styled.div`
     gap: var(--space-10);
 `;
 
-const CreateProjectModal: React.FC<ModalProps> = ({ show, closeModal }) => {
+const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
+    show,
+    closeModal
+}) => {
+    const [startDate, setStartDate] = useState<Date | null>();
+    const [endDate, setEndDate] = useState<Date | null>();
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
-    const [dueDate, setDueDate] = useState<Date>();
 
     const { dispatch } = useStore();
 
-    const handleOnChangeName = (value: string) => {
+    const onChangeDatePicker = (dates: DatePickerOnChangeDateType) => {
+        if (Array.isArray(dates)) {
+            console.log(dates);
+            const [start, end] = dates;
+            setStartDate(start);
+            setEndDate(end);
+        }
+    };
+
+    const onChangeName = (value: string) => {
         setName(value);
     };
 
-    const handleOnChangeDescription = (value: string) => {
+    const onChangeDescription = (value: string) => {
         setDescription(value);
     };
 
-    const handleOnSelectDueDate = (value: Date) => {
-        setDueDate(value);
-    };
-
-    const resetFields = () => {
+    const clearFields = () => {
         setName("");
         setDescription("");
+        setStartDate(null);
+        setEndDate(null);
+    };
 
-        setDueDate(undefined);
+    const cancel = () => {
+        clearFields();
+        closeModal();
     };
 
     const createProject = () => {
         const input = {
             name,
             description,
-            dueDate: formatISO(dueDate!)
+            startDate: toIso8601(startDate!),
+            endDate: toIso8601(endDate!)
         };
-        try {
-            adminProjectsService
-                .create(input)
-                .then((data) => {
-                    const action: AdminAddProjectAction = {
-                        type: Actions.ADMIN_ADD_PROJECT,
-                        payload: data.data
-                    };
-                    dispatch(action);
-                    resetFields();
-                    closeModal();
-                    toast.success("Project has been successfully created.");
-                })
-                .catch((e) => {
-                    const err = e as Error;
-                    toast.error(err.message);
-                });
-        } catch (e) {
-            const error = e as Error;
-            toast.error(error.message);
-        }
-    };
 
+        adminProjectService
+            .create(input)
+            .then((data) => {
+                const action: AddProjectAction = {
+                    type: Actions.ADD_PROJECT,
+                    payload: data.data
+                };
+                dispatch(action);
+                clearFields();
+                closeModal();
+                toast.success("Project has been successfully created"!);
+            })
+            .catch((e) => {
+                const err = e as Error;
+                toast.error(err.message);
+            });
+    };
     return (
         <Modal show={show} position="center">
             <ModalTitle variant="paragraphLG" weight="medium">
@@ -96,10 +108,9 @@ const CreateProjectModal: React.FC<ModalProps> = ({ show, closeModal }) => {
             </ModalTitle>
             <Inputs>
                 <Input
-                    type="text"
                     placeholder="Project Name"
                     value={name}
-                    onChange={handleOnChangeName}
+                    onChange={onChangeName}
                     shape="rounded"
                     size="lg"
                 />
@@ -107,17 +118,18 @@ const CreateProjectModal: React.FC<ModalProps> = ({ show, closeModal }) => {
                     type="textarea"
                     placeholder="Project Description"
                     value={description}
-                    onChange={handleOnChangeDescription}
+                    onChange={onChangeDescription}
                     shape="rounded"
                     size="lg"
                 />
-
                 <DatePickerV1
                     inputSize="lg"
                     shape="rounded"
-                    placeholder="Due Date"
-                    selected={dueDate}
-                    onChange={handleOnSelectDueDate}
+                    placeholder="Star Date - End Date"
+                    onChange={onChangeDatePicker}
+                    selectsRange={true}
+                    startDate={startDate}
+                    endDate={endDate}
                 />
             </Inputs>
             <Buttons>
@@ -127,7 +139,7 @@ const CreateProjectModal: React.FC<ModalProps> = ({ show, closeModal }) => {
                     shape="rounded"
                     variant="outlined"
                     fullWidth
-                    onClick={closeModal}
+                    onClick={cancel}
                 >
                     Cancel
                 </Button>

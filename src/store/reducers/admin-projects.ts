@@ -1,79 +1,41 @@
 import { produce } from "immer";
-import { ProjectState } from "../state";
 import {
     ActionType,
     Actions,
-    AdminAddProjectAction,
-    AdminArchiveProjectAction,
-    AdminPopulateProjectsAction,
-    AdminReactivateProjectAction,
-    AdminRemoveProjectAction,
-    AdminUpdateProjectAction
+    AddProjectAction,
+    ChangeProjectStatusAction,
+    PopulateProjectsAction
 } from "../actions";
+import { ProjectState } from "../state";
 
 const adminProjectsReducer = produce(
     (draft: ProjectState, action: ActionType) => {
         switch (action.type) {
-            case Actions.ADMIN_ADD_PROJECT: {
-                const payload =
-                    action.payload as AdminAddProjectAction["payload"];
-                draft.push(payload);
+            case Actions.ADD_PROJECT: {
+                const payload = action.payload as AddProjectAction["payload"];
+                draft[payload.id] = payload;
                 return draft;
             }
-            case Actions.ADMIN_POPULATE_PROJECTS: {
+
+            case Actions.POPULATE_PROJECTS: {
                 const payload =
-                    action.payload as AdminPopulateProjectsAction["payload"];
-                return payload;
+                    action.payload as PopulateProjectsAction["payload"];
+                return payload.reduce((acc: ProjectState, project) => {
+                    acc[project.id] = project;
+                    return acc;
+                }, {});
             }
-            case Actions.ADMIN_ARCHIVE_PROJECT: {
+
+            case Actions.CHANGE_PROJECT_STATUS: {
                 const payload =
-                    action.payload as AdminArchiveProjectAction["payload"];
-
-                for (let i = 0; i < draft.length; i++) {
-                    const project = draft[i];
-
-                    if (project.id === payload.id) {
-                        project.status = "ARCHIVED";
-                        break;
-                    }
+                    action.payload as ChangeProjectStatusAction["payload"];
+                const project = draft[payload.id];
+                if (project) {
+                    project.status = payload.status;
                 }
+
                 return draft;
             }
-            case Actions.ADMIN_REMOVE_PROJECT: {
-                const payload =
-                    action.payload as AdminRemoveProjectAction["payload"];
-
-                return draft.filter((project) => project.id !== payload.id);
-            }
-            case Actions.ADMIN_REACTIVATE_PROJECT: {
-                const payload =
-                    action.payload as AdminReactivateProjectAction["payload"];
-                for (let i = 0; i < draft.length; i++) {
-                    const project = draft[i];
-
-                    if (project.id === payload.id) {
-                        project.status = "ACTIVE";
-                        break;
-                    }
-                }
-                return draft;
-            }
-            case Actions.ADMIN_UPDATE_PROJECT: {
-                const payload =
-                    action.payload as AdminUpdateProjectAction["payload"];
-
-                for (let i = 0; i < draft.length; i++) {
-                    const project = draft[i];
-
-                    if (project.id === payload.id) {
-                        draft[i] = payload;
-                        break;
-                    }
-                }
-                return draft;
-            }
-            default:
-                return draft;
         }
     }
 );

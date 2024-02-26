@@ -24,11 +24,7 @@ import { ProtectedRoute } from "./ProtectedRoute";
 import { AdminPersonalTasks } from "../pages/admin-platform/personal-tasks/AdminPersonalTasks";
 import { AdminTeamMembers } from "../pages/admin-platform/team-members/AdminTeamMembers";
 import { TeamMemberPersonalTasks } from "../pages/team-member-platform/personal-tasks/TeamMemberPersonalTasks";
-import {
-    PageUnderConstruction,
-    SettingsPage,
-    SupportPage
-} from "../pages/components";
+import { SettingsPage, SupportPage } from "../pages/components";
 import { TeamMemberUser } from "../pages/team-member-platform/user/TeamMemberUser";
 
 export const router = createBrowserRouter(

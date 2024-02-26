@@ -1,57 +1,58 @@
 import styled from "styled-components";
-import { Option, OptionValue, Select } from "../../../design-system";
+import { Option, Select } from "../../../design-system";
+import { PageFilters } from "../../components";
 
-const FiltersBase = styled.section`
-    display: grid;
-    grid-template-columns: 20rem 1fr 20rem;
-    align-items: center;
-    margin-bottom: var(--space-20);
-    .filter-by-project {
-        grid-column: 1 / 2;
-    }
-    .filter-by-status {
-        grid-column: 3 / 4;
-    }
-`;
+type ProjectsFiltersProps = {
+    selectedStatus: string;
+    setSelectedStatus: (option: Option) => void;
+    sortedBy: string;
+    setSortedBy: (option: Option) => void;
+};
 
 const statusOptions = [
     { label: "Active", value: "ACTIVE" },
-    { label: "ARCHIVED", value: "ARCHIVED" },
     { label: "Completed", value: "COMPLETED" },
-    { label: "Default", value: "DEFAULT" }
+    { label: "Archived", value: "ARCHIVED" },
+    { label: "On Hold", value: "ONHOLD" }
 ];
 
-type TeamMemberFiltersProps = {
-    status: OptionValue | undefined;
-    handleSetStatus: (value: Option) => void;
-};
+const sortOptions = [
+    { label: "Deadline", value: "deadline" },
+    { label: "Progress", value: "progress" }
+];
+const Filters = styled(PageFilters)`
+    .status-filter {
+        margin-right: auto;
+    }
+`;
 
-const ProjectFilters: React.FC<TeamMemberFiltersProps> = ({
-    status,
-    handleSetStatus
+const ProjectsFilters: React.FC<ProjectsFiltersProps> = ({
+    selectedStatus,
+    setSelectedStatus,
+    sortedBy,
+    setSortedBy
 }) => {
     return (
-        <FiltersBase>
+        <Filters>
             <Select
-                value=""
-                onSelect={() => {}}
-                options={[]}
-                shape="rounded"
-                size="md"
-                headerPlaceholder="By Project"
-                className="filter-by-project"
-            />
-            <Select
-                value={status}
-                onSelect={handleSetStatus}
+                value={selectedStatus}
+                onSelect={setSelectedStatus}
                 options={statusOptions}
                 shape="rounded"
                 size="md"
-                headerPlaceholder="By Status"
-                className="filter-by-status"
+                headerPlaceholder="Filter By Status"
+                className="status-filter"
             />
-        </FiltersBase>
+            <Select
+                value={sortedBy}
+                onSelect={setSortedBy}
+                options={sortOptions}
+                shape="rounded"
+                size="md"
+                headerPlaceholder="Sort By"
+            />
+        </Filters>
     );
 };
 
-export { ProjectFilters };
+export { ProjectsFilters };

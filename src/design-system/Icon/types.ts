@@ -26,7 +26,10 @@ export type IconName =
     | "check-in-circle-sharp-filled"
     | "check-in-circle-sharp-filled"
     | "check-in-circle"
-    | "x-in-circle";
+    | "x-in-circle"
+    | "archive"
+    | "pause-in-circle"
+    | "play-in-circle";
 
 export type IconProps = {
     iconName: IconName;
