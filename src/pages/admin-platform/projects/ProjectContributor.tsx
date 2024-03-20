@@ -23,6 +23,7 @@ const ProjectContributorBase = styled.div<{ layout: ProjectContributorLayout }>`
     ${(props) =>
         props.layout === "sideBySide" &&
         css`
+            align-items: center;
             gap: var(--space-12);
         `}
     ${(props) =>
