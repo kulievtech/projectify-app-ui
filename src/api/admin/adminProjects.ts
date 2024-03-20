@@ -2,6 +2,8 @@ import {
     Project,
     ProjectStatus,
     ProjectUpdate,
+    ProjectContributor,
+    ProjectContributors,
     ProjectWithContributors
 } from "../../types";
 
@@ -13,6 +15,10 @@ type CreateAPIResponse = {
 
 type GetAllAPIResponse = {
     data: ProjectWithContributors[];
+};
+
+type GetContributorsAPIResponse = {
+    data: ProjectContributors;
 };
 
 class ProjectService {
@@ -109,6 +115,31 @@ class ProjectService {
                 const data = await response.json();
                 throw new Error(data.message);
             }
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async getContributors(
+        projectId: string
+    ): Promise<GetContributorsAPIResponse> {
+        try {
+            const rawAuthToken = localStorage.getItem("authToken");
+            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+
+            const response = await fetch(
+                `${this.url}/${projectId}/contributors`,
+                {
+                    headers: {
+                        authorization: `Bearer ${authToken}`
+                    }
+                }
+            );
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+            return response.json();
         } catch (error) {
             throw error;
         }

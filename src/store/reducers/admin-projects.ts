@@ -5,16 +5,19 @@ import {
     AddProjectAction,
     ChangeProjectStatusAction,
     PopulateProjectsAction,
-    UpdateProjectAction
+    UpdateProjectAction,
+    UpdateProjectContributorsNumberAction,
+    PopulateProjectContributorsAction
 } from "../actions";
 import { ProjectState } from "../state";
+import { act } from "react-dom/test-utils";
 
 const adminProjectsReducer = produce(
     (draft: ProjectState, action: ActionType) => {
         switch (action.type) {
             case Actions.ADD_PROJECT: {
                 const payload = action.payload as AddProjectAction["payload"];
-                draft[payload.id] = payload;
+                draft[payload.id] = { ...payload, numberOfContributors: 0 };
                 return draft;
             }
 
@@ -45,6 +48,28 @@ const adminProjectsReducer = produce(
                     ...draft[payload.id],
                     ...payload.data
                 };
+                return draft;
+            }
+            case Actions.UPDATE_PROJECT_CONTRIBUTORS_NUMBER: {
+                const payload =
+                    action.payload as UpdateProjectContributorsNumberAction["payload"];
+
+                if (payload.data.operation === "SUBTRACT") {
+                    draft[payload.id].numberOfContributors -=
+                        payload.data.quantity;
+                } else if (payload.data.operation === "ADD") {
+                    draft[payload.id].numberOfContributors +=
+                        payload.data.quantity;
+                }
+
+                return draft;
+            }
+
+            case Actions.POPULATE_PROJECT_CONTRIBUTORS: {
+                const payload =
+                    action.payload as PopulateProjectContributorsAction["payload"];
+                draft[payload.id].contributors = payload.data;
+
                 return draft;
             }
         }

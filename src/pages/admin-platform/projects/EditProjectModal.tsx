@@ -42,15 +42,16 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
     closeModal,
     projectId
 }) => {
+    const { state, dispatch } = useStore();
+
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [startDate, setStartDate] = useState<Date | null>();
     const [endDate, setEndDate] = useState<Date | null>();
-    const { state } = useStore();
+    const { projects } = state;
+    const project = projects[projectId];
 
     useEffect(() => {
-        const { projects } = state;
-        const project = projects[projectId];
         if (project) {
             setName(project.name);
             setDescription(project.description);
@@ -58,8 +59,6 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
             setEndDate(toDateObj(project.endDate));
         }
     }, [projectId]);
-
-    const { dispatch } = useStore();
 
     const onChangeName = (value: string) => {
         setName(value);
@@ -77,7 +76,15 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
         setEndDate(date);
     };
 
-    const cancel = () => {
+    const clearFields = () => {
+        setName("");
+        setDescription("");
+        setStartDate(null);
+        setEndDate(null);
+    };
+
+    const done = () => {
+        clearFields();
         closeModal();
     };
 
@@ -105,7 +112,7 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
                     }
                 };
                 dispatch(action);
-                closeModal();
+                done();
                 toast.success("Project has been successfully updated"!);
             })
             .catch((e) => {
@@ -156,7 +163,7 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
                     shape="rounded"
                     variant="outlined"
                     fullWidth
-                    onClick={cancel}
+                    onClick={done}
                 >
                     Cancel
                 </Button>

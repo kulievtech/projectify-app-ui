@@ -18,10 +18,13 @@ import { ProjectStatus, ProjectWithContributors } from "../../../types";
 import { formatAsMMMddYYYY, formatDeadline } from "../../../utils";
 import { ChangeProjectStatusModal } from "./ChangeProjectStatusModal";
 import { EditProjectModal } from "./EditProjectModal";
+import { ManageContributorsModal } from "./ManageContributorsModal";
 
 type ProjectsTableProps = {
     data: ProjectWithContributors[];
 };
+
+type ActionsOnProject = ProjectStatus | "edit" | "contributors";
 
 const renderDeadline = (isoDate: string) => {
     const formattedDeadline = formatDeadline(isoDate);
@@ -64,11 +67,17 @@ const options: MenuOption[] = [
         iconName: "pause-in-circle",
         value: statuses[3],
         color: "danger"
+    },
+    {
+        label: "Manage Contributors",
+        iconName: "members",
+        value: "contributors",
+        color: "primary"
     }
 ];
 
 const allowedActions = {
-    ACTIVE: [options[0], options[2], options[3], options[4]],
+    ACTIVE: [options[5], options[0], options[2], options[3], options[4]],
     ARCHIVED: [options[0], options[1], options[2], options[4]],
     ONHOLD: [options[0], options[1], options[2], options[3]],
     COMPLETED: [options[0], options[1], options[3], options[4]]
@@ -117,10 +126,12 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
     const [showChangeProjectStatusModal, setShowChangeProjectStatusModal] =
         useState(false);
     const [showEditProjectModal, setShowEditProjectModal] = useState(false);
+    const [showManageContributorsModel, setShowManageContributorsModal] =
+        useState(false);
 
     const handleOnSelectCellMenu = (
         projectId: string,
-        value: ProjectStatus | "edit"
+        value: ActionsOnProject
     ) => {
         setSelectedProjectId(projectId);
         if (statuses.includes(value)) {
@@ -129,6 +140,8 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
             return;
         } else if (value === "edit") {
             setShowEditProjectModal(true);
+        } else if (value === "contributors") {
+            setShowManageContributorsModal(true);
         }
     };
     return (
@@ -198,19 +211,14 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
                                         </Typography>
                                     </TableBodyCell>
                                     <TableBodyCell>
-                                        <Typography
-                                            variant="paragraphSM"
-                                            weight="medium"
-                                        >
-                                            {renderDeadline(project.endDate)}
-                                        </Typography>
+                                        {renderDeadline(project.endDate)}
                                     </TableBodyCell>
                                     <TableBodyCell>
                                         <Typography
                                             variant="paragraphSM"
                                             weight="medium"
                                         >
-                                            {project.contributors?.length || 0}
+                                            {project.numberOfContributors || 0}
                                         </Typography>
                                     </TableBodyCell>
                                     <TableBodyCell>
@@ -221,7 +229,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
                                             onSelect={(value) =>
                                                 handleOnSelectCellMenu(
                                                     project.id,
-                                                    value as ProjectStatus
+                                                    value as ActionsOnProject
                                                 )
                                             }
                                         />
@@ -242,6 +250,11 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
                 show={showEditProjectModal}
                 closeModal={() => setShowEditProjectModal(false)}
                 projectId={selectedProjectId}
+            />
+            <ManageContributorsModal
+                show={showManageContributorsModel}
+                projectId={selectedProjectId}
+                closeModal={() => setShowManageContributorsModal(false)}
             />
         </>
     );
