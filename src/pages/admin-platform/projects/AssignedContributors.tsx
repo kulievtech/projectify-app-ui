@@ -3,6 +3,7 @@ import { ProjectContributor as ProjectContributorType } from "../../../types";
 import {
     Badge,
     BadgeColors,
+    Button,
     Icon,
     Switch,
     Typography
@@ -63,6 +64,19 @@ const JoinedAt = styled(Typography)`
     color: var(--jaguar-500);
 `;
 
+const AddButtonWrapper = styled.div`
+    height: 7.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    bottom: 0;
+`;
+
+const Contributors = styled(Scrollable)`
+    height: calc(100% - 6rem - 7.2rem);
+`;
+
 const AssignedContributors: React.FC<Props> = ({
     projectId,
     contributors,
@@ -76,7 +90,7 @@ const AssignedContributors: React.FC<Props> = ({
                 </Typography>
                 <Icon iconName="x" onClick={closeModal} />
             </Header>
-            <Scrollable>
+            <Contributors>
                 {contributors &&
                     contributors.map((contributor) => {
                         return (
@@ -121,7 +135,12 @@ const AssignedContributors: React.FC<Props> = ({
                             </ContributorBase>
                         );
                     })}
-            </Scrollable>
+            </Contributors>
+            <AddButtonWrapper>
+                <Button variant="contained" shape="rounded" color="primary">
+                    Add Contributor
+                </Button>
+            </AddButtonWrapper>
         </>
     );
 };
