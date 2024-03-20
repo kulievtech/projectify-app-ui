@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 import { NoDataPlaceholder, PageHeader } from "../../components";
 import toast from "react-hot-toast";
 import { Option } from "../../../design-system";
@@ -11,6 +10,7 @@ import { ProjectStatus } from "../../../types";
 import noProject from "../../../assets/illustrations/no-project.svg";
 import { ProjectsTable } from "./ProjectsTable";
 import { adminProjectService } from "../../../api/admin/adminProjects";
+import { EditProjectModal } from "./EditProjectModal";
 
 const AdminProjects = () => {
     const [showCreateProjectModal, setShowCreateProjectModal] = useState(false);
