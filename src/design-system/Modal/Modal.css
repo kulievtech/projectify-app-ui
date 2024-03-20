@@ -29,4 +29,5 @@
 
 .modal-overlay--right .modal {
     border-radius: 0;
+    width: 40rem;
 }
