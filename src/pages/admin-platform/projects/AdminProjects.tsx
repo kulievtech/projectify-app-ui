@@ -15,7 +15,7 @@ import { EditProjectModal } from "./EditProjectModal";
 const AdminProjects = () => {
     const [showCreateProjectModal, setShowCreateProjectModal] = useState(false);
     const [isProjectsFetching, setIsProjectsFetching] = useState(true);
-    const [statusFilter, setStatusFilter] = useState("");
+    const [statusFilter, setStatusFilter] = useState("all");
     const [sortedBy, setSortedBy] = useState("");
     const {
         state: { projects },
@@ -50,6 +50,12 @@ const AdminProjects = () => {
 
     const projectsArr = Object.values(projects);
 
+    const filterProjects = (value: string) => {
+        if (value === "all") return projectsArr;
+        return projectsArr.filter((project) => project.status === value);
+    };
+    const filteredProjects = filterProjects(statusFilter);
+
     return (
         <>
             {!projectsArr.length ? (
@@ -74,7 +80,7 @@ const AdminProjects = () => {
                         selectedStatus={statusFilter}
                         setSelectedStatus={handleSetStatusFilter}
                     />
-                    <ProjectsTable data={projectsArr} />
+                    <ProjectsTable data={filteredProjects} />
                 </>
             )}
             <CreateProjectModal
