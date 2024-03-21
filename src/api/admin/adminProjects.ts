@@ -4,7 +4,8 @@ import {
     ProjectUpdate,
     ProjectContributor,
     ProjectContributors,
-    ProjectWithContributors
+    ProjectWithContributors,
+    ContributorStatus
 } from "../../types";
 
 type CreateInput = Omit<Project, "id" | "status" | "progress">;
@@ -140,6 +141,35 @@ class ProjectService {
                 throw new Error(data.message);
             }
             return response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async changeContributorStatus(
+        projectId: string,
+        teamMemberId: string,
+        status: ContributorStatus
+    ) {
+        try {
+            const rawAuthToken = localStorage.getItem("authToken");
+            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+
+            const response = await fetch(
+                `${this.url}/${projectId}/contributors/${teamMemberId}/change-status`,
+                {
+                    method: "PATCH",
+                    headers: {
+                        authorization: `Bearer ${authToken}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ status })
+                }
+            );
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
         } catch (error) {
             throw error;
         }

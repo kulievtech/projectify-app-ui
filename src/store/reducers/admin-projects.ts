@@ -7,7 +7,7 @@ import {
     AdminPopulateProjectContributorsAction,
     AdminPopulateProjectsAction,
     AdminUpdateProjectAction,
-    AdminUpdateProjectContributorsNumberAction
+    AdminUpdateProjectContributorStatus
 } from "../actions";
 import { ProjectState } from "../state";
 import { act } from "react-dom/test-utils";
@@ -55,22 +55,34 @@ const adminProjectsReducer = produce(
                 return draft;
             }
 
-            case Actions.ADMIN_UPDATE_PROJECT_CONTRIBUTORS_NUMBER: {
-                const payload =
-                    action.payload as AdminUpdateProjectContributorsNumberAction["payload"];
-
-                draft[payload.id] = {
-                    ...draft[payload.id],
-                    ...payload.data
-                };
-                return draft;
-            }
-
             case Actions.ADMIN_POPULATE_PROJECT_CONTRIBUTORS: {
                 const payload =
                     action.payload as AdminPopulateProjectContributorsAction["payload"];
-
                 draft[payload.id].contributors = payload.data;
+
+                return draft;
+            }
+
+            case Actions.ADMIN_UPDATE_PROJECT_CONTRIBUTOR_STATUS: {
+                const { id, status, teamMemberId } =
+                    action.payload as AdminUpdateProjectContributorStatus["payload"];
+                const contributors =
+                    draft[id].contributors?.assignedContributors;
+
+                if (contributors?.length) {
+                    for (let i = 0; i < contributors.length; i++) {
+                        const contributor = contributors[i];
+                        if (contributor.id === teamMemberId) {
+                            contributor.status = status;
+                            if (status === "ACTIVE") {
+                                draft[id].numberOfContributors += 1;
+                            } else {
+                                draft[id].numberOfContributors -= 1;
+                            }
+                            break;
+                        }
+                    }
+                }
 
                 return draft;
             }
