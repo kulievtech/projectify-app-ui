@@ -101,7 +101,6 @@ const AssignedContributors: React.FC<Props> = ({
     const { dispatch } = useStore();
 
     const changeStatus = (value: boolean, teamMemberId: string) => {
-        console.log(value);
         const status = SwitchStateToStatus[`${value}`] as ContributorStatus;
         adminProjectService
             .changeContributorStatus(projectId, teamMemberId, status)

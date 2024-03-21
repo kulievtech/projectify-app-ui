@@ -49,7 +49,6 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
 
     const onChangeDatePicker = (dates: DatePickerOnChangeDateType) => {
         if (Array.isArray(dates)) {
-            console.log(dates);
             const [start, end] = dates;
             setStartDate(start);
             setEndDate(end);

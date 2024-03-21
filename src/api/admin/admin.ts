@@ -107,7 +107,6 @@ class Admin {
         passwordResetToken: string
     ) {
         try {
-            console.log(this.url);
             const response = await fetch(`${this.url}/reset-password`, {
                 method: "PATCH",
                 headers: {
