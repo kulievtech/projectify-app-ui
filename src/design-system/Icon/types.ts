@@ -29,6 +29,7 @@ export type IconName =
     | "check-in-circle"
     | "x-in-circle"
     | "archive"
+    | "arrow-left"
     | "pause-in-circle"
     | "play-in-circle";
 
