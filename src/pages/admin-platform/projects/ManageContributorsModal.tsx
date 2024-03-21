@@ -49,24 +49,27 @@ const ManageContributorsModal: React.FC<Props> = ({
 
     if (!projectId) return null;
 
+    const notAssignedContributors = Object.values(
+        state.projects[projectId].contributors.notAssignedContributors
+    );
+
+    const assignedContributors = Object.values(
+        state.projects[projectId].contributors.assignedContributors
+    );
+
     return (
         <Modal show={show} position="right">
             {showNotAssignedContributors ? (
                 <NotAssignedContributors
-                    notAssignedContributors={
-                        state.projects[projectId].contributors
-                            ?.notAssignedContributors
-                    }
+                    notAssignedContributors={notAssignedContributors}
                     goBack={() => setShowNotAssignedContributors(false)}
+                    projectId={projectId}
                 />
             ) : (
                 <AssignedContributors
                     projectId={projectId}
                     closeModal={closeModal}
-                    contributors={
-                        state.projects[projectId].contributors
-                            ?.assignedContributors
-                    }
+                    contributors={assignedContributors}
                     showNotAssignedContributors={() =>
                         setShowNotAssignedContributors(true)
                     }
