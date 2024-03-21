@@ -54,6 +54,7 @@ const Switch: React.FC<ToggleProps> = ({
                 onChange={handleOnChange}
                 id={id}
                 disabled={disabled}
+                checked={checked}
             />
             <div className={trackClassNames}>
                 <div className="switch__thumb">
