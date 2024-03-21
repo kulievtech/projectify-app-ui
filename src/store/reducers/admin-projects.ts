@@ -30,6 +30,7 @@ const adminProjectsReducer = produce(
                         notAssignedContributors: {}
                     }
                 };
+
                 return draft;
             }
 
@@ -53,21 +54,17 @@ const adminProjectsReducer = produce(
                 if (project) {
                     project.status = payload.status;
                 }
+
                 return draft;
             }
 
             case Actions.ADMIN_UPDATE_PROJECT: {
                 const payload =
                     action.payload as AdminUpdateProjectAction["payload"];
-                const project = draft[payload.id];
-                if (project) {
-                    draft[payload.id] = {
-                        ...draft[payload.id],
-                        ...payload.data
-                    };
-                    return draft;
-                }
-
+                draft[payload.id] = {
+                    ...draft[payload.id],
+                    ...payload.data
+                };
                 return draft;
             }
 
@@ -98,6 +95,7 @@ const adminProjectsReducer = produce(
                             {}
                         )
                 };
+
                 return draft;
             }
 

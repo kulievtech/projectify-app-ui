@@ -21,13 +21,14 @@ const ProjectContributorBase = styled.div<{
     $layout: ProjectContributorLayout;
 }>`
     display: flex;
-    align-items: center;
+
     ${(props) =>
         props.$layout === "sideBySide" &&
         css`
             align-items: center;
             gap: var(--space-12);
         `}
+
     ${(props) =>
         props.$layout === "stack" &&
         css`
